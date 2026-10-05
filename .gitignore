@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# manual Figma exports (only the checklist is tracked)
+/design-refs/*
+!/design-refs/EXPORT_CHECKLIST.md
