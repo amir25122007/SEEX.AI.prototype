@@ -1,0 +1,325 @@
+/*
+ * Features bento — Figma "Main page v3" › Frame 267 (1394:3355), 1280×838.
+ * Absolute coordinates are Figma px relative to the section / card padding box.
+ */
+
+.section {
+  position: relative; /* no z-index: the screen-blended glows must reach the page background */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 40px;
+  margin-top: var(--section-gap); /* Scenarios ends at y=1765, Features starts at y=1845 */
+}
+
+/* ---------- Background glows (1394:3356) ---------------------------------
+ * Exported SVGs (blur bleed included), rotated -3.61° around the centre of
+ * their Figma bounding boxes: (1157.70, 396.19) for the outer two,
+ * (1157.07, 386.26) for the inner one.
+ */
+
+.glow {
+  position: absolute;
+  max-width: none;
+  transform: rotate(-3.61deg);
+  pointer-events: none;
+}
+
+.glowBack {
+  left: 238.24px;
+  top: -364.14px;
+  width: 1838.92px;
+  height: 1520.65px;
+}
+
+.glowMid {
+  left: 427.58px;
+  top: -214.58px;
+  width: 1460.24px;
+  height: 1221.53px;
+  mix-blend-mode: screen;
+}
+
+.glowFront {
+  left: 596.4px;
+  top: -94.84px;
+  width: 1121.33px;
+  height: 962.196px;
+  mix-blend-mode: screen;
+}
+
+/* ---------- Header (1394:3360) ------------------------------------------- */
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 86px;
+}
+
+/* ---------- Grid (1394:3372) --------------------------------------------- */
+
+.grid {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 628px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ---------- Shared pieces ------------------------------------------------ */
+
+/* "tag" — IBM Plex Mono Medium 12, ls 6 %, glass pill. */
+.tag {
+  display: flex;
+  flex-shrink: 0;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  padding: 8px 14px;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  border-radius: 999px;
+  background: rgb(16 16 16 / 0.32);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.72px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-white);
+}
+
+.textGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--color-white);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-druk);
+  font-weight: 500;
+  line-height: 1.35;
+  text-transform: uppercase;
+  white-space: pre-line;
+}
+
+.title22 {
+  font-size: 22px;
+}
+
+.title20 {
+  font-size: 20px;
+}
+
+.text {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 1.35;
+  white-space: pre-line;
+}
+
+.arrow {
+  flex-shrink: 0;
+}
+
+/* ---------- Image card (1394:3373) --------------------------------------- */
+
+.imageCard {
+  position: relative;
+  flex-shrink: 0;
+  width: 628px;
+  height: 524px;
+  border-radius: var(--radius-feature);
+  background: var(--gradient-orange-button);
+}
+
+/* Photo export (1394:3375) already contains Figma's Bloom shader. */
+.imagePhoto,
+.imageOverlay {
+  position: absolute;
+  left: 7px;
+  top: 6px;
+  width: 614px;
+  height: 512px;
+  border-radius: 25px;
+}
+
+.imageOverlay {
+  padding: 20px;
+  background: linear-gradient(180deg, rgb(20 10 5 / 0) 32%, rgb(13 8 5 / 0.95) 100%);
+}
+
+.imageStack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 335px;
+  width: 573px;
+}
+
+.imageText {
+  display: flex;
+  align-items: flex-end;
+  gap: 39px;
+  width: 100%;
+}
+
+/* ---------- Video card (1394:3387) --------------------------------------- */
+
+.videoCard {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 280px;
+  border-radius: var(--radius-feature);
+  background: rgb(16 16 16 / 0.38);
+}
+
+.videoContent {
+  position: absolute;
+  left: calc(50% + 0.5px);
+  top: calc(50% + 0.5px);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transform: translate(-50%, -50%);
+}
+
+.videoInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 69px;
+  width: 284px;
+}
+
+.videoPreview {
+  position: relative;
+  flex-shrink: 0;
+  width: 283px;
+  height: 253px;
+}
+
+.videoImage {
+  border-radius: 25px;
+}
+
+/* "click" 1394:3403 — decorative play badge. */
+.play {
+  position: absolute;
+  left: 115px;
+  top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 55.385px;
+  background: var(--gradient-orange-button);
+}
+
+/* ---------- Small cards (1394:3407, 1394:3422) --------------------------- */
+
+.smallCard {
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  width: 302px;
+  height: 220px;
+  border: 1px solid rgb(255 120 55 / 0.3);
+  border-radius: var(--radius-feature);
+  background: linear-gradient(180deg, #0b0706 0%, #130a07 55%, #211009 100%);
+  box-shadow: var(--shadow-card);
+}
+
+/* glow 268.06×242 at 16,17 + export bleed (-30.15 % / -27.22 %). */
+.cardGlow {
+  position: absolute;
+  left: -56.97px;
+  top: -55.96px;
+  width: 414.006px;
+  height: 374.542px;
+  max-width: none;
+  pointer-events: none;
+}
+
+.textsContent {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 0.5px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 43px;
+  width: 268px;
+  transform: translate(-50%, -50%);
+}
+
+.textsRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 37px;
+  width: 100%;
+}
+
+.textsGroup {
+  flex-shrink: 0;
+  width: 177px;
+  height: 84px;
+}
+
+.toolsContent {
+  position: absolute;
+  left: 16px;
+  top: calc(50% + 0.5px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  width: 268px;
+  transform: translateY(-50%);
+}
+
+/* Overlapping model badges (1394:3429): 45.91 circles at x 0 / 29 / 55. */
+.tools {
+  position: relative;
+  width: 100.913px;
+  height: 45.913px;
+}
+
+.tool {
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  width: 45.913px;
+  height: 45.913px;
+  border: 1px solid rgb(255 255 255 / 0.6);
+  border-radius: 50%;
+  background: var(--gradient-orange-button);
+}
+
+.toolImage {
+  position: absolute;
+  left: 3.87px;
+  top: 3.87px;
+  width: 35.479px;
+  height: 35.479px;
+  object-fit: cover;
+}

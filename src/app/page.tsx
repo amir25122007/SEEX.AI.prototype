@@ -1,3 +1,4 @@
+import { FeaturesBento } from "@/components/landing/FeaturesBento";
 import { Hero } from "@/components/landing/Hero";
 import { Scenarios } from "@/components/landing/Scenarios";
 
@@ -7,6 +8,7 @@ export default function Home() {
     <main className="overflow-x-clip">
       <Hero />
       <Scenarios />
+      <FeaturesBento />
     </main>
   );
 }
