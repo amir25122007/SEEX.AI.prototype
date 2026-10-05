@@ -1,0 +1,287 @@
+/*
+ * Floating hero cards. Geometry comes from src/data/heroCards.ts.
+ * Inner sizes are multiples of a per-card unit (--u) measured in Figma,
+ * so each card keeps the exact proportions of its Figma instance.
+ */
+
+.card {
+  position: absolute;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Inside stroke drawn above the content, like Figma's INSIDE stroke. */
+.strokeInside::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border: var(--stroke-w) solid var(--color-lime);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.strokeOutside {
+  outline: var(--stroke-w) solid var(--color-lime);
+}
+
+.cover {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Figma CROP: full width, vertically shifted. */
+.crop {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  max-width: none;
+  height: auto;
+}
+
+/* ---------- App cards ---------------------------------------------------- */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--u);
+}
+
+.appShade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgb(10 4 2 / 0) 0%,
+    rgb(10 4 2 / 0.3) 45%,
+    rgb(10 4 2 / 0.92) 100%
+  );
+}
+
+.topRow,
+.bottom {
+  position: relative;
+  z-index: 2;
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--u) * 0.4);
+}
+
+.badges {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.3);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: calc(var(--u) * 0.25) calc(var(--u) * 0.6);
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: calc(var(--u) * 0.6);
+  font-weight: 600;
+  line-height: calc(var(--u) * 0.8);
+  letter-spacing: calc(var(--u) * 0.025);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pillLime {
+  background: var(--color-lime);
+  color: var(--color-ink);
+}
+
+.pillGlass {
+  background: rgb(255 255 255 / 0.16);
+  box-shadow: inset 0 0 0 calc(var(--u) * 0.05) rgb(255 255 255 / 0.34);
+  color: var(--color-white);
+}
+
+.pillGlassDark {
+  background: rgb(0 0 0 / 0.16);
+  box-shadow: inset 0 0 0 calc(var(--u) * 0.05) rgb(255 255 255 / 0.34);
+  color: var(--color-white);
+}
+
+.frost {
+  backdrop-filter: blur(calc(var(--u) * 0.1));
+  -webkit-backdrop-filter: blur(calc(var(--u) * 0.1));
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 0.4);
+}
+
+.title {
+  font-family: var(--font-druk);
+  font-weight: 500;
+  font-size: calc(var(--u) * 0.9);
+  line-height: calc(var(--u) * 1.1);
+  letter-spacing: calc(var(--u) * -0.01);
+  text-transform: uppercase;
+  color: var(--color-lime);
+}
+
+.description {
+  font-family: var(--font-sans);
+  font-size: calc(var(--u) * 0.7);
+  line-height: var(--u);
+  color: var(--color-white);
+  white-space: pre-line;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--u) * 0.6);
+  height: calc(var(--u) * 2);
+}
+
+.meta {
+  font-family: var(--font-sans);
+  font-size: calc(var(--u) * 0.6);
+  font-weight: 600;
+  line-height: calc(var(--u) * 0.8);
+  letter-spacing: calc(var(--u) * 0.025);
+  text-transform: uppercase;
+  color: #ffe0c8;
+  white-space: nowrap;
+}
+
+.open {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--u) * 2);
+  height: calc(var(--u) * 2);
+  border-radius: 9999px;
+  background: var(--color-lime);
+  box-shadow: 0 0 calc(var(--u) * 0.9) rgb(194 240 74 / 0.45);
+  color: var(--color-ink);
+}
+
+.open svg {
+  width: calc(var(--u) * 0.5);
+  height: calc(var(--u) * 0.5);
+}
+
+/* ---------- Presentation variant ---------------------------------------- */
+
+.presentation .bottom {
+  gap: calc(var(--u) * 0.6);
+}
+
+.presentation .title {
+  font-size: calc(var(--u) * 1.4);
+  line-height: calc(var(--u) * 1.6);
+  letter-spacing: calc(var(--u) * -0.025);
+}
+
+.presentation .description {
+  max-width: calc(var(--u) * 26);
+  font-size: calc(var(--u) * 0.8);
+  line-height: calc(var(--u) * 1.2);
+}
+
+.presentation .metaRow {
+  height: calc(var(--u) * 2.2);
+}
+
+.chips {
+  display: flex;
+  gap: calc(var(--u) * 0.3);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.4);
+  height: calc(var(--u) * 2.2);
+  padding: 0 calc(var(--u) * 0.8) 0 var(--u);
+  border-radius: 9999px;
+  background: var(--color-lime);
+  box-shadow: 0 0 calc(var(--u) * 0.9) rgb(194 240 74 / 0.45);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: calc(var(--u) * 0.7);
+  font-weight: 600;
+  line-height: calc(var(--u) * 0.9);
+  letter-spacing: calc(var(--u) * 0.03);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cta svg {
+  width: calc(var(--u) * 0.45);
+  height: calc(var(--u) * 0.45);
+}
+
+/* ---------- Photo cards -------------------------------------------------- */
+
+.scrim {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgb(0 0 0 / var(--scrim-from)) 0%, rgb(0 0 0 / var(--scrim-to)) 100%);
+}
+
+.photoText {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.photoPill {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  padding: calc(var(--u) / 6) calc(var(--u) / 2);
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: var(--u);
+  line-height: calc(var(--u) * 1.083);
+  white-space: nowrap;
+}
+
+.photoTitle {
+  font-family: var(--font-druk);
+  font-weight: 500;
+  font-size: calc(var(--u) * 1.207);
+  line-height: normal;
+  color: var(--color-lime);
+}
+
+.photoTitleUnbounded {
+  font-family: var(--font-unbounded);
+  font-weight: 800;
+  font-size: calc(var(--u) * 1.078);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--color-lime);
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.photoDescription {
+  font-family: var(--font-sans);
+  font-size: var(--u);
+  line-height: calc(var(--u) * 1.083);
+  color: var(--color-white);
+  white-space: pre-line;
+}

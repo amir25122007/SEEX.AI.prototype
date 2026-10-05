@@ -1,0 +1,244 @@
+/*
+ * Hero composition — Figma "Main page v3" › heroWrap (1404:3413) › hero block (1394:4162).
+ * Coordinates are Figma hero-block pixels. Layer blur R → CSS blur(R / 2)
+ * (verified against Figma's SVG export: blur 180 → stdDeviation 90).
+ */
+
+.hero {
+  position: relative;
+  height: 1040px;
+  /* The hero block is 1500px tall and fades into #101010 under the next section. */
+  overflow-x: clip;
+  overflow-y: visible;
+  isolation: isolate;
+}
+
+/* Full-bleed base so the gradient also fills windows wider than 1440. */
+.base {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1500px;
+  /* Figma: linear #FF4B00 0 → #FF6A00 0.5 → #E91518 1, transform mapped to 63deg over 1440×1500. */
+  background:
+    linear-gradient(rgb(16 16 16 / 0.03), rgb(16 16 16 / 0.03)),
+    linear-gradient(63deg, #ff4b00 11.9%, #ff6a00 54.2%, #e91518 96.6%);
+  pointer-events: none;
+}
+
+/* 1440×1500 design canvas, centred; clips like the Figma hero block. */
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1440px;
+  height: 1500px;
+  margin-left: -720px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.layer {
+  position: absolute;
+  pointer-events: none;
+}
+
+.ellipse {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Ellipse 1394:4163 / 1394:4164 — #6B1A05 55 %, blur 180. */
+.glowLeft {
+  left: -260px;
+  top: 700px;
+  width: 760px;
+  height: 520px;
+  background: rgb(107 26 5 / 0.55);
+  filter: blur(90px);
+}
+
+.glowRight {
+  left: 940px;
+  top: 720px;
+  width: 800px;
+  height: 540px;
+  background: rgb(107 26 5 / 0.55);
+  filter: blur(90px);
+}
+
+/* Side rectangles 1394:4166 / 1394:4165 — #401A00 45 → 15 → 0 %, SCREEN, blur 25 / 24. */
+.sideLeft,
+.sideRight {
+  top: 0;
+  width: 547px;
+  height: 1500px;
+  background: linear-gradient(
+    90deg,
+    rgb(64 26 0 / 0.45) 0%,
+    rgb(64 26 0 / 0.15) 55%,
+    rgb(64 26 0 / 0) 100%
+  );
+  mix-blend-mode: screen;
+}
+
+.sideLeft {
+  left: 0;
+  filter: blur(12.5px);
+}
+
+.sideRight {
+  left: 1440px;
+  filter: blur(12px);
+}
+
+/* "SEEX" watermark 1394:4167 — Archivo ExtraLight 353.92, ls 6 %, gradient fill @ 50 %. */
+.watermark {
+  position: absolute;
+  left: 231px;
+  top: 795px;
+  width: 961px;
+  height: 385px;
+  margin: 0;
+  font-family: var(--font-archivo);
+  font-size: 353.92px;
+  font-weight: 200;
+  line-height: 385px;
+  letter-spacing: 0.06em;
+  text-align: center;
+  white-space: nowrap;
+  background: linear-gradient(180deg, rgb(248 170 0 / 0.5) 0%, rgb(252 195 155 / 0.5) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  user-select: none;
+}
+
+/* Character 1394:4315 — 482×557 at 479,122; CROP of the 941×1672 source (y 8 % → 73 %). */
+.character {
+  position: absolute;
+  left: 479px;
+  top: 122px;
+  width: 482px;
+  height: 557px;
+  overflow: hidden;
+}
+
+.characterImage {
+  position: absolute;
+  left: 0;
+  top: -12.31%; /* -(0.08 / 0.65) of the frame height */
+  width: 100%;
+  max-width: none;
+  height: auto;
+}
+
+/* Lower domes — emberHaze, hotRim, lightHaze, burgundyDome, darkDome. */
+.ember {
+  left: -580px;
+  top: 870px;
+  width: 2600px;
+  height: 900px;
+  background: rgb(233 21 24 / 0.25);
+  filter: blur(95px);
+}
+
+.hotRim {
+  left: -380px;
+  top: 900px;
+  width: 2200px;
+  height: 900px;
+  background: rgb(255 122 26 / 0.6);
+  filter: blur(60px);
+}
+
+.lightHaze {
+  left: -380px;
+  top: 940px;
+  width: 2200px;
+  height: 900px;
+  background: rgb(255 214 188 / 0.2);
+  filter: blur(55px);
+}
+
+.burgundy {
+  left: -330px;
+  top: 1030px;
+  width: 2100px;
+  height: 900px;
+  background: rgb(58 12 12 / 0.9);
+  filter: blur(65px);
+}
+
+.darkDome {
+  left: -280px;
+  top: 1075px;
+  width: 2000px;
+  height: 900px;
+  background: #101010;
+  filter: blur(75px);
+}
+
+/* transitionFade 1407:3418 — full-bleed so wide windows also end in #101010. */
+.fade {
+  position: absolute;
+  inset-inline: 0;
+  top: 1220px;
+  height: 280px;
+  background: linear-gradient(180deg, rgb(16 16 16 / 0) 0%, #101010 65%, #101010 100%);
+  pointer-events: none;
+}
+
+/* Rectangle 37 1394:4360 — contrast band behind the title, black 31 %, blur 100. */
+.titleBand {
+  left: 0;
+  top: 439px;
+  width: 1442px;
+  height: 192px;
+  background: rgb(0 0 0 / 0.31);
+  filter: blur(50px);
+}
+
+/* Title 1394:4375 — Neuropol, ls 10 %, 2px outside stroke + drop shadow. */
+.title {
+  position: absolute;
+  inset-inline: 0;
+  top: 439px;
+  margin: 0;
+  font-family: var(--font-neuropol);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  filter: drop-shadow(0 5.36px 2.78px rgb(0 0 0 / 0.49));
+  pointer-events: auto;
+}
+
+.titleLine {
+  display: block;
+  line-height: 1.2;
+  /* Outside stroke of the same colour = 4px centred stroke (inner half hidden by the fill). */
+  -webkit-text-stroke: 4px currentColor;
+}
+
+.titleLime {
+  height: 90px;
+  font-size: 75px;
+  color: var(--color-lime);
+}
+
+.titleWhite {
+  height: 95px;
+  font-size: 79.39px;
+  color: var(--color-white);
+}
+
+/* composerShell 1394:4333 — centred, top 653.1. */
+.composer {
+  position: absolute;
+  left: 352.5px;
+  top: 653.1px;
+  pointer-events: auto;
+}

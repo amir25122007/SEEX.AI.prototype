@@ -1,0 +1,158 @@
+/*
+ * "Готовые сценарии" — Figma "Main page v3" › templates block (1394:3439), 1280×645.
+ * Card geometry comes from src/data/scenarios.ts.
+ */
+
+.section {
+  position: relative;
+  margin-top: var(--section-gap); /* hero ends at y=1040, section starts at y=1120 */
+}
+
+/* glowLayer 1398:3417 — exported SVG (2360×1190), placed at -80,-260 minus its filter bleed. */
+.glow {
+  position: absolute;
+  left: -520px;
+  top: -270px;
+  width: 2360px;
+  height: 1190px;
+  max-width: none;
+  pointer-events: none;
+}
+
+/* ---------- Carousel ------------------------------------------------------ */
+
+.carousel {
+  position: relative;
+}
+
+/* Row 1 1394:3448 — 5 cards (1606.6px) centred in 1280px, so it overflows both sides. */
+.row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 12px;
+  height: 394px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: row-in 240ms ease-out;
+}
+
+@keyframes row-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.arrow {
+  position: absolute;
+  top: 169px;
+}
+
+.arrowPrev {
+  left: -48px;
+}
+
+.arrowNext {
+  left: 1272px;
+}
+
+/* Pagination 1394:3496 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 100px;
+  background: rgb(255 255 255 / 0.28);
+  transition:
+    width 200ms ease-out,
+    background-color 200ms ease-out;
+}
+
+.dotActive {
+  width: 26px;
+  background: var(--color-orange);
+}
+
+/* ---------- Card (Preview 1394:3449 …) ----------------------------------- */
+
+.card {
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 3px solid var(--color-lime);
+  border-radius: var(--radius-card);
+}
+
+.cover {
+  object-fit: cover;
+}
+
+/* Figma CROP: full width, stretched height, shifted up. */
+.crop {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  max-width: none;
+}
+
+.scrim {
+  position: absolute;
+  background: linear-gradient(180deg, rgb(0 0 0 / var(--scrim-from)) 0%, rgb(0 0 0 / var(--scrim-to)) 100%);
+}
+
+.text {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+/* "Link row" pill — SF Pro 17.4 / 18.85 (Inter on the web). */
+.pill {
+  padding: 2.9px 8.7px;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 17.4px;
+  line-height: 18.85px;
+  white-space: nowrap;
+}
+
+.textGroup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Druk Text Wide Cyr Medium 21, line-height normal. */
+.title {
+  width: 100%;
+  margin: 0;
+  font-family: var(--font-druk);
+  font-size: 21px;
+  font-weight: 500;
+  line-height: normal;
+  color: var(--color-lime);
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.description {
+  width: 100%;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 17.4px;
+  line-height: 18.85px;
+  color: var(--color-white);
+  white-space: pre-line;
+}

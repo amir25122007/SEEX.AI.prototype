@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+/*
+ * SeexAI desktop landing — design tokens.
+ * Source of truth: Figma "Main page v3" (node 1394:3268), 1440px.
+ * Only recurring values live here; one-off glow colours stay next to their section.
+ */
+
+/* ---------------------------------------------------------------------------
+ * Local brand fonts (licensed files are not in the repo yet).
+ * Drop the files into /public/fonts with exactly these names and every
+ * component using `font-druk` / `font-neuropol` picks them up automatically.
+ * Browsers only request a face when an element actually uses it.
+ * ------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Druk Text Wide Cyr";
+  src: url("/fonts/DrukTextWideCyr-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neuropol";
+  src: url("/fonts/Neuropol-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme static {
+  /* Colors ---------------------------------------------------------------- */
+  --color-page: #101010; /* page background below the hero */
+  --color-ink: #0a0805; /* text on lime, deepest surface */
+  --color-lime: #c2ef4b; /* brand accent */
+  --color-orange: #ff6a00; /* second heading line, active states */
+  --color-red: #e91518; /* hot end of orange gradients */
+  --color-white: #ffffff;
+  --color-mute: #b8aea4;
+  --color-soft: #8a8078; /* placeholders, secondary text */
+
+  --color-surface: #16110d;
+  --color-surface-2: #1e1813;
+  --color-surface-3: #241c16;
+
+  /* Muted white text (Figma uses 82 / 50 / 42 % white) */
+  --color-text-muted: rgb(255 255 255 / 0.82);
+  --color-text-subtle: rgb(255 255 255 / 0.5);
+  --color-text-faint: rgb(255 255 255 / 0.42);
+
+  /* Glass & borders */
+  --color-glass: rgb(255 255 255 / 0.05); /* header fill */
+  --color-glass-strong: rgb(255 255 255 / 0.16); /* prompt composer shell */
+  --color-glass-dark: rgb(13 8 5 / 0.6); /* dark glass cards (#0D0805 58–62 %) */
+  --color-border-glass: rgb(255 255 255 / 0.09); /* header stroke */
+  --color-border-subtle: rgb(255 255 255 / 0.18); /* tags */
+  --color-border-strong: rgb(255 255 255 / 0.4); /* audience cards */
+  --color-border-orange: rgb(255 106 0 / 0.35); /* FAQ rows */
+
+  /* Fonts ----------------------------------------------------------------- */
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  --font-sans: var(--font-inter), system-ui, sans-serif; /* replaces SF Pro */
+  --font-archivo: var(--font-archivo-google), system-ui, sans-serif;
+  --font-unbounded: var(--font-unbounded-google), system-ui, sans-serif;
+  --font-druk: "Druk Text Wide Cyr", sans-serif;
+  --font-neuropol: "Neuropol", sans-serif;
+
+  /* Type scale (Figma values: size / line-height / letter-spacing) --------- */
+  --text-display-60: 60px;
+  --text-display-60--line-height: 1.1;
+  --text-display-60-tight: 60px;
+  --text-display-60-tight--line-height: 1.06;
+  --text-display-56: 56px;
+  --text-display-56--line-height: 1.04;
+  --text-display-41: 41px;
+  --text-display-41--line-height: 1.1;
+  --text-body-18: 18px;
+  --text-body-18--line-height: 1.35;
+  --text-body-16: 16px;
+  --text-body-16--line-height: 1.35;
+  --text-nav-18: 18px;
+  --text-nav-18--line-height: 1.35;
+  --text-nav-18--letter-spacing: 0.02em;
+
+  /* Radius ---------------------------------------------------------------- */
+  --radius-faq: 14px;
+  --radius-callout: 18.96px;
+  --radius-card: 20px;
+  --radius-plan: 22px;
+  --radius-panel: 26px;
+  --radius-feature: 28px;
+  --radius-panel-lg: 32px;
+  --radius-header: 40px;
+  --radius-pill: 9999px;
+
+  /* Shadows / glows ------------------------------------------------------- */
+  --shadow-lime-glow: 0 4px 16px rgb(194 240 74 / 0.45); /* hero chips */
+  --shadow-lime-glow-strong: 0 0 18.63px rgb(194 239 75 / 0.5); /* send button */
+  --shadow-orange-glow: 0 0 40px rgb(255 106 0 / 0.3); /* featured plan */
+  --shadow-orange-glow-strong: 0 0 20px rgb(255 107 0 / 0.55); /* "Скоро" badge */
+  --shadow-control: 0 8px 24px rgb(10 5 3 / 0.35); /* carousel arrows */
+  --shadow-card: 0 20px 44px -10px rgb(0 0 0 / 0.35); /* small feature cards */
+
+  /* Layout ---------------------------------------------------------------- */
+  --container-content: 1280px; /* 80px side margins at 1440 */
+}
+
+:root {
+  --page-width: 1440px; /* Figma frame width */
+  --page-gutter-min: 24px; /* keeps content off the edge on narrower windows */
+  --section-gap: 80px; /* vertical rhythm between all v3 sections */
+
+  /* Recurring gradients (Figma stops, left → right unless noted) */
+  --gradient-orange-button: linear-gradient(90deg, #ff7a1a 0%, #d8330e 100%);
+  --gradient-plan-button: linear-gradient(180deg, #ff7a1a 0%, #e0350c 50%, #8a1210 100%);
+  --gradient-badge: linear-gradient(90deg, #ff6a00 0%, #e91518 100%);
+  --gradient-scrim: linear-gradient(180deg, rgb(0 0 0 / 0) 0%, rgb(0 0 0 / 0.98) 100%);
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: var(--color-page);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100dvh;
+    margin: 0;
+    overflow-x: hidden;
+    background-color: var(--color-page);
+    color: var(--color-white);
+    font-family: var(--font-mono);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--color-lime);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-lime);
+    outline-offset: 3px;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
