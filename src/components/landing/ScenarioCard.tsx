@@ -1,66 +1,53 @@
 import Image from "next/image";
-import type { CSSProperties } from "react";
+import { ArrowUpRightIcon } from "@/components/icons";
 import type { Scenario } from "@/data/scenarios";
+import { headerActions } from "@/data/navigation";
 import { cn } from "@/lib/cn";
 import styles from "./Scenarios.module.css";
 
-type CssVars = CSSProperties & Record<`--${string}`, string | number>;
+type ScenarioCardProps = {
+  scenario: Scenario;
+  /** Marquee copies are aria-hidden; their links are also inert (not focusable or clickable). */
+  duplicate?: boolean;
+};
 
-/** One scenario preview card: image, bottom scrim, pill, title and description. */
-export function ScenarioCard({ scenario }: { scenario: Scenario }) {
-  const { image, scrim, text } = scenario;
-  const sizes = `${Math.ceil(scenario.width)}px`;
-  const scrimStyle: CssVars = {
-    left: scrim.left,
-    top: scrim.top,
-    width: scrim.width,
-    height: scrim.height,
-    "--scrim-from": scrim.from,
-    "--scrim-to": scrim.to,
-  };
+/** One 340×250 scenario card: raster, category / format pills, title, meta and open link. */
+export function ScenarioCard({ scenario, duplicate = false }: ScenarioCardProps) {
+  const { image } = scenario;
+  const title = scenario.title.replace("\n", " ");
 
   return (
-    <article
-      className={styles.card}
-      style={{ width: scenario.width, height: scenario.height }}
-      data-figma-node={scenario.id}
-    >
-      {image.crop ? (
+    <article className={styles.card} data-figma-node={scenario.id}>
+      <div className={styles.media}>
         <Image
           src={image.src}
-          alt={image.alt}
+          alt=""
           width={image.width}
           height={image.height}
-          sizes={sizes}
-          className={styles.crop}
-          style={{ top: `${image.crop.top}%`, height: `${image.crop.height}%` }}
+          sizes="340px"
+          className={styles.image}
+          style={{ top: image.top }}
         />
-      ) : (
-        <Image src={image.src} alt={image.alt} fill sizes={sizes} className={styles.cover} />
-      )}
+      </div>
 
-      <div className={styles.scrim} style={scrimStyle} aria-hidden="true" />
-
-      <div
-        className={styles.text}
-        style={{ left: text.left, top: text.top, width: text.width, height: text.height }}
-      >
-        <span
-          className={styles.pill}
-          style={{ background: scenario.pill.background, color: scenario.pill.color }}
-        >
-          {scenario.pill.label}
-        </span>
-        <div className={styles.textGroup}>
-          <h3
-            className={cn(styles.title, scenario.titleUppercase && styles.uppercase)}
-            style={{ height: scenario.titleHeight }}
-          >
-            {scenario.title}
-          </h3>
-          <p className={styles.description} style={{ width: scenario.descriptionWidth }}>
-            {scenario.description}
-          </p>
+      <div className={styles.content}>
+        <div className={styles.topRow}>
+          <span className={cn(styles.pill, styles.category)}>{scenario.category}</span>
+          <span className={cn(styles.pill, styles.format)}>{scenario.format}</span>
+        </div>
+        <div className={styles.bottom}>
+          <h3 className={styles.title}>{scenario.title}</h3>
+          <div className={styles.metaRow}>
+            <p className={styles.meta}>{scenario.meta}</p>
+            <a
+              href={headerActions.cta.href}
+              className={styles.open}
+              aria-label={`Открыть сценарий: ${title}`}
+              inert={duplicate}
+            >
+              <ArrowUpRightIcon className={styles.openIcon} />
+            </a>
+          </div>
         </div>
       </div>
     </article>

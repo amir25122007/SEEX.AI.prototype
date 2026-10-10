@@ -1,158 +1,303 @@
 /*
- * "Готовые сценарии" — Figma "Main page v3" › templates block (1394:3439), 1280×645.
- * Card geometry comes from src/data/scenarios.ts.
+ * "Готовые сценарии" — Figma "Main page v4" › templates block (design-refs/v4/scenarios.svg).
+ * Frame 1440×1190 at page y 850, overlapping the Hero (0–1500). Coordinates below are
+ * Figma px relative to the frame; the 1440 canvas is centred, backgrounds are full-bleed.
  */
 
+/*
+ * The box ends at the bottom of row 2 (y 1013): Features follows after the usual
+ * 80px gap (v4: Features header at y 1943 = 850 + 1013 + 80).
+ * Decoration and the overlap with the Hero must not catch the pointer.
+ */
 .section {
   position: relative;
-  margin-top: var(--section-gap); /* hero ends at y=1040, section starts at y=1120 */
-}
-
-/* glowLayer 1398:3417 — exported SVG (2360×1190), placed at -80,-260 minus its filter bleed. */
-.glow {
-  position: absolute;
-  left: -520px;
-  top: -270px;
-  width: 2360px;
-  height: 1190px;
-  max-width: none;
+  height: 1013px;
+  margin-top: -650px; /* Hero is 1500 tall, the frame starts at y 850 */
   pointer-events: none;
 }
 
-/* ---------- Carousel ------------------------------------------------------ */
-
-.carousel {
-  position: relative;
+/* glowLayer — SVG viewBox −440 0 2360 1190 (the union of the five filter regions). */
+.glow {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 1160px);
+  width: 2360px;
+  height: 1190px;
+  max-width: none;
 }
 
-/* Row 1 1394:3448 — 5 cards (1606.6px) centred in 1280px, so it overflows both sides. */
-.row {
+/*
+ * Frame 268: heading hugs its 898px width and is centred (x 271). Druk 60/110 %,
+ * cap top at y 283.64 → line box at y 269.3; description 18/135 % wraps at 898.
+ */
+.heading {
+  position: absolute;
+  top: 269.3px;
+  left: calc(50% - 449px);
+  width: 898px;
+  pointer-events: auto;
+}
+
+/* ---------- Rows ---------------------------------------------------------- */
+
+/*
+ * scenarioRows mask: rect y 443, 620 tall, alpha 0 → 1 (16 %) → 1 (84 %) → 0.
+ * Full-bleed: the fades stay 230.4px wide at the viewport edges on wider screens.
+ */
+.rows {
+  position: absolute;
+  top: 443px;
+  right: 0;
+  left: 0;
+  height: 620px;
+  overflow: clip;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 230.4px, #000 calc(100% - 230.4px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 230.4px, #000 calc(100% - 230.4px), transparent 100%);
+}
+
+/*
+ * Each track holds 5 copies of its row (period P = cards × 360). Copy 2 sits at
+ * the Figma x, so the track starts 2P to the left; moving by one P is seamless
+ * and 2 spare copies on each side cover windows up to 2560px.
+ */
+.track {
+  position: absolute;
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 12px;
-  height: 394px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  animation: row-in 240ms ease-out;
+  gap: 20px;
+  width: max-content;
+  pointer-events: auto;
 }
 
-@keyframes row-in {
-  from {
-    opacity: 0;
+/* row1: 5 cards, P 1800, starts at x −170, runs left. */
+.row1 {
+  top: 50px;
+  left: calc(50% - 720px - 170px - 3600px);
+}
+
+/* row2: 4 cards, P 1440, starts at x 10, runs right. */
+.row2 {
+  top: 320px;
+  left: calc(50% - 720px + 10px - 2880px);
+}
+
+/* ~40 px/s, linear. Static keyframes (no var()) keep it on the compositor in Safari. */
+@media (prefers-reduced-motion: no-preference) {
+  .track {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    will-change: transform;
+  }
+
+  .row1 {
+    animation-name: scenarios-row-left;
+    animation-duration: 45s;
+  }
+
+  .row2 {
+    animation-name: scenarios-row-right;
+    animation-duration: 36s;
+  }
+
+  .track:hover,
+  .track:focus-within {
+    animation-play-state: paused;
   }
 }
 
-.arrow {
-  position: absolute;
-  top: 169px;
+@keyframes scenarios-row-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-1800px, 0, 0);
+  }
 }
 
-.arrowPrev {
-  left: -48px;
+@keyframes scenarios-row-right {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(1440px, 0, 0);
+  }
 }
 
-.arrowNext {
-  left: 1272px;
-}
-
-/* Pagination 1394:3496 */
-.pagination {
+.list {
   display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 20px;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 100px;
-  background: rgb(255 255 255 / 0.28);
-  transition:
-    width 200ms ease-out,
-    background-color 200ms ease-out;
-}
-
-.dotActive {
-  width: 26px;
-  background: var(--color-orange);
-}
-
-/* ---------- Card (Preview 1394:3449 …) ----------------------------------- */
+/* ---------- Card (340×250, padding 20) ------------------------------------ */
 
 .card {
   position: relative;
-  flex-shrink: 0;
+  width: 340px;
+  height: 250px;
+  border-radius: 20px;
+}
+
+.media {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
-  border: 3px solid var(--color-lime);
-  border-radius: var(--radius-card);
+  border-radius: inherit;
 }
 
-.cover {
-  object-fit: cover;
-}
-
-/* Figma CROP: full width, stretched height, shifted up. */
-.crop {
+/* Raster at full card width, shifted up (Figma pattern transform). */
+.image {
   position: absolute;
   left: 0;
   width: 100%;
   max-width: none;
+  height: auto;
 }
 
-.scrim {
+/* #0A0402 0 → 30 % (45 %) → 92 % (100 %). */
+.media::after {
+  content: "";
   position: absolute;
-  background: linear-gradient(180deg, rgb(0 0 0 / var(--scrim-from)) 0%, rgb(0 0 0 / var(--scrim-to)) 100%);
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(10 4 2 / 0) 0%,
+    rgb(10 4 2 / 0.3) 45%,
+    rgb(10 4 2 / 0.92) 100%
+  );
 }
 
-.text {
+/* 1px white 14 % inside stroke. */
+.card::before,
+.card::after {
+  content: "";
   position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.card::before {
+  border: 1px solid rgb(255 255 255 / 0.14);
+}
+
+/* Hover (cardResumeAHover): 2px lime inside stroke + lime drop shadow, stdDeviation 14 @ 45 %. */
+.card::after {
+  border: 2px solid var(--color-lime);
+  box-shadow: 0 0 28px rgb(194 239 75 / 0.45);
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+.content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   justify-content: space-between;
-  overflow: hidden;
+  padding: 20px;
 }
 
-/* "Link row" pill — SF Pro 17.4 / 18.85 (Inter on the web). */
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 26px;
+}
+
+/* Category / Format pills: 26 tall, SF Pro (Inter) Semibold 12, uppercase. */
 .pill {
-  padding: 2.9px 8.7px;
-  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 12px;
+  border-radius: 13px;
   font-family: var(--font-sans);
-  font-size: 17.4px;
-  line-height: 18.85px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
-.textGroup {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+.category {
+  background: var(--color-lime);
+  color: var(--color-ink);
 }
 
-/* Druk Text Wide Cyr Medium 21, line-height normal. */
+.format {
+  margin-left: auto;
+  background: rgb(255 255 255 / 0.16);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.34);
+  color: var(--color-white);
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Druk 18 / 22, lime. */
 .title {
-  width: 100%;
   margin: 0;
   font-family: var(--font-druk);
-  font-size: 21px;
+  font-size: 18px;
   font-weight: 500;
-  line-height: normal;
+  line-height: 22px;
+  letter-spacing: -0.2px;
+  text-transform: uppercase;
+  white-space: pre-line;
   color: var(--color-lime);
 }
 
-.uppercase {
-  text-transform: uppercase;
+.metaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
 }
 
-.description {
-  width: 100%;
+.meta {
   margin: 0;
   font-family: var(--font-sans);
-  font-size: 17.4px;
-  line-height: 18.85px;
-  color: var(--color-white);
-  white-space: pre-line;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #ffe0c8;
+}
+
+/* openButton: 40px lime circle, lime glow stdDeviation 9 @ 45 %. */
+.open {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background: var(--color-lime);
+  box-shadow: 0 0 18px rgb(194 240 74 / 0.45);
+  color: var(--color-ink);
+}
+
+.open:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 3px;
+}
+
+.openIcon {
+  width: 10px;
+  height: 10px;
 }
