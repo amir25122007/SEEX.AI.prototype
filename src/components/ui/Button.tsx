@@ -25,7 +25,7 @@ type ButtonAsButton = CommonProps & {
 export type ButtonProps = ButtonAsLink | ButtonAsButton;
 
 const base =
-  "inline-flex items-center justify-center gap-[10px] rounded-pill font-mono font-medium uppercase whitespace-nowrap transition-[background-color,box-shadow,opacity] duration-200 disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex items-center justify-center gap-[10px] rounded-pill font-sans font-medium uppercase whitespace-nowrap transition-[background-color,box-shadow,opacity] duration-200 disabled:pointer-events-none disabled:opacity-50";
 
 const variants: Record<ButtonVariant, string> = {
   lime: "bg-lime text-ink hover:brightness-105",
@@ -33,9 +33,9 @@ const variants: Record<ButtonVariant, string> = {
   outline: "border border-border-strong bg-transparent text-white",
 };
 
-/** Sizes taken from Figma: header CTA (44px) and section CTAs (55px). */
+/** Sizes taken from Figma: header CTA (45px) and section CTAs (55px). */
 const sizes: Record<ButtonSize, string> = {
-  md: "h-11 px-[25px] text-nav-18",
+  md: "h-[45px] px-[25px] text-nav-18",
   lg: "h-[55px] py-2 pr-[7px] pl-[23px] text-nav-18",
 };
 

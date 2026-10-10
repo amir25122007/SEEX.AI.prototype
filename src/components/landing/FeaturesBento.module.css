@@ -1,325 +1,408 @@
 /*
- * Features bento — Figma "Main page v3" › Frame 267 (1394:3355), 1280×838.
- * Absolute coordinates are Figma px relative to the section / card padding box.
+ * "От идеи до готового результата" — Figma final › Frame 267
+ * (design-refs/final/raw/Main page v4.svg). Section box: page y 1891.54 (heading
+ * line box) – 2841.16 (strip bottom); coordinates are relative to it and to the
+ * centred 1440 canvas.
+ *
+ * Single-line texts use line-height 1.2109 (Inter's content area), so
+ * top = Figma baseline − 0.96875 × font-size.
  */
-
 .section {
-  position: relative; /* no z-index: the screen-blended glows must reach the page background */
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 40px;
-  margin-top: var(--section-gap); /* Scenarios ends at y=1765, Features starts at y=1845 */
+  position: relative; /* no z-index: the SCREEN glows must reach the page background */
+  height: 949.62px;
+  margin-top: 99.54px; /* Scenarios' row 2 ends at y 1792 */
 }
 
-/* ---------- Background glows (1394:3356) ---------------------------------
- * Exported SVGs (blur bleed included), rotated -3.61° around the centre of
- * their Figma bounding boxes: (1157.70, 396.19) for the outer two,
- * (1157.07, 386.26) for the inner one.
- */
+.canvas {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 720px);
+  width: 1440px;
+  height: 100%;
+}
 
 .glow {
   position: absolute;
   max-width: none;
-  transform: rotate(-3.61deg);
   pointer-events: none;
 }
 
-.glowBack {
-  left: 238.24px;
-  top: -364.14px;
-  width: 1838.92px;
-  height: 1520.65px;
-}
-
-.glowMid {
-  left: 427.58px;
-  top: -214.58px;
-  width: 1460.24px;
-  height: 1221.53px;
+.screen {
   mix-blend-mode: screen;
 }
 
-.glowFront {
-  left: 596.4px;
-  top: -94.84px;
-  width: 1121.33px;
-  height: 962.196px;
-  mix-blend-mode: screen;
+/* ---------- Header row ----------------------------------------------------- */
+
+.heading {
+  position: absolute;
+  top: 0;
+  left: 340px;
+  width: max-content;
 }
 
-/* ---------- Header (1394:3360) ------------------------------------------- */
-
-.header {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  gap: 86px;
+/* SF Pro Text 22/30 → Inter; first baseline at page 2128.34. */
+.description {
+  margin-top: 11.48px;
+  font-size: 22px;
+  line-height: 30px;
+  white-space: pre-line;
 }
 
-/* ---------- Grid (1394:3372) --------------------------------------------- */
-
-.grid {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  width: 100%;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  width: 628px;
-}
-
-.row {
+/* btn: 266×55 lime at x 1116, text 18 (SF semibold → Inter 500, as in the header CTA), arrow 14px. */
+.cta {
+  position: absolute;
+  top: 219.46px;
+  left: 1116px;
   display: flex;
   align-items: center;
-  gap: 24px;
+  justify-content: space-between;
+  width: 266px;
+  height: 55px;
+  padding: 0 19.5px 0 23px;
+  border-radius: 27.5px;
+  background: var(--color-lime);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-ink);
+  transition: filter 200ms ease-out;
 }
 
-/* ---------- Shared pieces ------------------------------------------------ */
+.cta:hover {
+  filter: brightness(1.05);
+}
 
-/* "tag" — IBM Plex Mono Medium 12, ls 6 %, glass pill. */
-.tag {
+.cta:focus-visible,
+.cardArrow:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 3px;
+}
+
+/* ---------- Idea cards (410.667×481.16, gap 24) ----------------------------- */
+
+.cards {
+  position: absolute;
+  top: 314.46px;
+  left: 80px;
   display: flex;
-  flex-shrink: 0;
-  align-items: flex-end;
-  justify-content: center;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card,
+.strip {
+  position: relative;
   overflow: hidden;
-  padding: 8px 14px;
-  border: 1px solid rgb(255 255 255 / 0.18);
-  border-radius: 999px;
-  background: rgb(16 16 16 / 0.32);
-  font-family: var(--font-mono);
+  border-radius: 28px;
+  background: rgb(16 16 16 / 0.17);
+}
+
+/* 1px white 20 % inside stroke, drawn over the glows. */
+.card::after,
+.strip::after,
+.previewText::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.card {
+  flex-shrink: 0;
+  width: 410.667px;
+  height: 481.16px;
+}
+
+/* "ИДЕЯ" / "РЕЗУЛЬТАТ": 12 / 500, ls 0.8, #FFC9A5. */
+.label {
+  position: absolute;
+  left: 21px;
   font-size: 12px;
   font-weight: 500;
-  line-height: normal;
-  letter-spacing: 0.72px;
+  line-height: 1.2109;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #ffc9a5;
+}
+
+.labelIdea {
+  top: 22.38px;
+}
+
+.labelResult {
+  top: 111.54px;
+}
+
+/* promptBubble: white 368.667×47.16, r 16; text 15 / 500 #141018. */
+.prompt {
+  position: absolute;
+  top: 45px;
+  left: 21px;
+  width: 368.667px;
+  height: 47.16px;
+  border-radius: 16px;
+  background: var(--color-white);
+}
+
+.promptText {
+  position: absolute;
+  top: 14.05px;
+  left: 16.3px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2109;
+  white-space: nowrap;
+  color: #141018;
+}
+
+/* sendDot: 31.16px lime circle. */
+.send {
+  position: absolute;
+  top: 8px;
+  left: 329.507px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 31.16px;
+  height: 31.16px;
+  border-radius: 50%;
+  background: var(--color-lime);
+  color: #0d0805;
+}
+
+/* resultPreview: 368.667×232, r 20. */
+.preview {
+  position: absolute;
+  top: 134.16px;
+  left: 21px;
+  overflow: hidden;
+  width: 368.667px;
+  height: 232px;
+  border-radius: 20px;
+}
+
+/* Raster at full width, shifted up (Figma pattern transform). */
+.previewImage {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  max-width: none;
+  height: auto;
+}
+
+.previewText {
+  background: rgb(255 255 255 / 0.07);
+}
+
+.previewText::after {
+  border-color: rgb(255 255 255 / 0.16);
+}
+
+/* tag: #101010 32 %, 1px white 18 %, 12 / 500. */
+.tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  border-radius: 16px;
+  background: rgb(16 16 16 / 0.32);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;
   color: var(--color-white);
 }
 
-.textGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+/* playButton: 54px orange gradient circle with the si:play-fill glyph. */
+.play {
+  position: absolute;
+  top: 89px;
+  left: 157px;
+  width: 54px;
+  height: 54px;
+  border-radius: 27px;
+  background: var(--gradient-orange-button);
+}
+
+.playIcon {
+  position: absolute;
+  top: 18.54px;
+  left: 19.93px;
+  width: 15.3px;
+  height: 16.95px;
+}
+
+/* postMock: white 336.667×133, r 14. */
+.post {
+  position: absolute;
+  top: 54px;
+  left: 16px;
+  width: 336.667px;
+  height: 133px;
+  border-radius: 14px;
+  background: var(--color-white);
+}
+
+.postTitle,
+.postText,
+.postTags {
+  position: absolute;
+  left: 16.3px;
+  margin: 0;
+  white-space: pre-line;
+}
+
+/* 16 / 700 #141018, baseline 29. */
+.postTitle {
+  top: 13.5px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2109;
+  color: #141018;
+}
+
+/* 13/18 #5C5C70, first baseline 55. */
+.postText {
+  top: 41.28px;
+  font-size: 13px;
+  line-height: 18px;
+  color: #5c5c70;
+}
+
+/* 13 #D4460E, baseline 116. */
+.postTags {
+  top: 103.41px;
+  left: 15.9px;
+  font-size: 13px;
+  line-height: 1.2109;
+  color: #d4460e;
+}
+
+/* Druk 22, white; cap top at 391.53. */
+.cardTitle {
+  position: absolute;
+  top: 387.39px;
+  left: 21px;
+  margin: 0;
+  font-family: var(--font-druk);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 22px;
+  text-transform: uppercase;
   color: var(--color-white);
 }
 
-.title {
+/* 15 / 20.28, white 82 %; first baseline 436.2; the text column ends at the arrow button (x 341.67). */
+.cardText {
+  position: absolute;
+  top: 420.6px;
+  left: 20.85px;
+  max-width: 320.8px;
   margin: 0;
-  font-family: var(--font-druk);
-  font-weight: 500;
-  line-height: 1.35;
-  text-transform: uppercase;
+  font-size: 15px;
+  line-height: 20.28px;
   white-space: pre-line;
+  color: rgb(255 255 255 / 0.82);
 }
 
-.title22 {
-  font-size: 22px;
-}
-
-.title20 {
-  font-size: 20px;
-}
-
-.text {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 16px;
-  line-height: 1.35;
-  white-space: pre-line;
-}
-
-.arrow {
-  flex-shrink: 0;
-}
-
-/* ---------- Image card (1394:3373) --------------------------------------- */
-
-.imageCard {
-  position: relative;
-  flex-shrink: 0;
-  width: 628px;
-  height: 524px;
-  border-radius: var(--radius-feature);
-  background: var(--gradient-orange-button);
-}
-
-/* Photo export (1394:3375) already contains Figma's Bloom shader. */
-.imagePhoto,
-.imageOverlay {
+/* arrowButton: 48px, gradient #FF7A1A → #D8330E, white 2.2px arrow. */
+.cardArrow {
   position: absolute;
-  left: 7px;
-  top: 6px;
-  width: 614px;
-  height: 512px;
-  border-radius: 25px;
-}
-
-.imageOverlay {
-  padding: 20px;
-  background: linear-gradient(180deg, rgb(20 10 5 / 0) 32%, rgb(13 8 5 / 0.95) 100%);
-}
-
-.imageStack {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 335px;
-  width: 573px;
-}
-
-.imageText {
-  display: flex;
-  align-items: flex-end;
-  gap: 39px;
-  width: 100%;
-}
-
-/* ---------- Video card (1394:3387) --------------------------------------- */
-
-.videoCard {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: 280px;
-  border-radius: var(--radius-feature);
-  background: rgb(16 16 16 / 0.38);
-}
-
-.videoContent {
-  position: absolute;
-  left: calc(50% + 0.5px);
-  top: calc(50% + 0.5px);
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  transform: translate(-50%, -50%);
-}
-
-.videoInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 69px;
-  width: 284px;
-}
-
-.videoPreview {
-  position: relative;
-  flex-shrink: 0;
-  width: 283px;
-  height: 253px;
-}
-
-.videoImage {
-  border-radius: 25px;
-}
-
-/* "click" 1394:3403 — decorative play badge. */
-.play {
-  position: absolute;
-  left: 115px;
-  top: 100px;
+  top: 412.16px;
+  left: 341.667px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 54px;
-  height: 54px;
-  border-radius: 55.385px;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
   background: var(--gradient-orange-button);
+  color: var(--color-white);
+  transition: filter 200ms ease-out;
 }
 
-/* ---------- Small cards (1394:3407, 1394:3422) --------------------------- */
-
-.smallCard {
-  position: relative;
-  flex-shrink: 0;
-  overflow: hidden;
-  width: 302px;
-  height: 220px;
-  border: 1px solid rgb(255 120 55 / 0.3);
-  border-radius: var(--radius-feature);
-  background: linear-gradient(180deg, #0b0706 0%, #130a07 55%, #211009 100%);
-  box-shadow: var(--shadow-card);
+.cardArrow:hover {
+  filter: brightness(1.08);
 }
 
-/* glow 268.06×242 at 16,17 + export bleed (-30.15 % / -27.22 %). */
-.cardGlow {
+/* ---------- toolsStrip (1280×130) ------------------------------------------ */
+
+.strip {
   position: absolute;
-  left: -56.97px;
-  top: -55.96px;
-  width: 414.006px;
-  height: 374.542px;
-  max-width: none;
-  pointer-events: none;
+  top: 819.62px;
+  left: 80px;
+  width: 1280px;
+  height: 130px;
 }
 
-.textsContent {
+/* Druk 20, lines 24.74 apart; cap top of line 2 at 58.88. */
+.stripTitle {
   position: absolute;
-  left: 50%;
-  top: calc(50% + 0.5px);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 43px;
-  width: 268px;
-  transform: translate(-50%, -50%);
+  top: 28px;
+  left: 30px;
+  margin: 0;
+  font-family: var(--font-druk);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24.74px;
+  text-transform: uppercase;
+  white-space: pre-line;
+  color: var(--color-white);
 }
 
-.textsRow {
-  display: flex;
-  align-items: flex-end;
-  gap: 37px;
-  width: 100%;
-}
-
-.textsGroup {
-  flex-shrink: 0;
-  width: 177px;
-  height: 84px;
-}
-
-.toolsContent {
+/* 16 / 400, baseline 100. */
+.stripText {
   position: absolute;
-  left: 16px;
-  top: calc(50% + 0.5px);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 15px;
-  width: 268px;
-  transform: translateY(-50%);
+  top: 84.5px;
+  left: 30px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.2109;
+  color: var(--color-white);
 }
 
-/* Overlapping model badges (1394:3429): 45.91 circles at x 0 / 29 / 55. */
-.tools {
-  position: relative;
-  width: 100.913px;
-  height: 45.913px;
+.logos {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.tool {
+/* modelLogo: 56px orange gradient circle, icon 43.27px at 5.94. */
+.logo {
   position: absolute;
-  top: 0;
-  overflow: hidden;
-  width: 45.913px;
-  height: 45.913px;
-  border: 1px solid rgb(255 255 255 / 0.6);
+  top: 34.31px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: var(--gradient-orange-button);
 }
 
-.toolImage {
+.logoRotated {
+  transform: rotate(5.80111deg);
+  transform-origin: 0 0;
+}
+
+.logoImage {
   position: absolute;
-  left: 3.87px;
-  top: 3.87px;
-  width: 35.479px;
-  height: 35.479px;
-  object-fit: cover;
+  top: 5.939px;
+  left: 5.939px;
+  width: 43.2727px;
+  height: 43.2727px;
+  max-width: none;
+}
+
+.stripArrow {
+  top: 41px;
+  left: 1203px;
 }

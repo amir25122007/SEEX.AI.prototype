@@ -17,7 +17,10 @@ export function ScenarioCard({ scenario, duplicate = false }: ScenarioCardProps)
   const title = scenario.title.replace("\n", " ");
 
   return (
-    <article className={styles.card} data-figma-node={scenario.id}>
+    <article
+      className={cn(styles.card, scenario.accent === "orange" ? styles.orange : styles.lime)}
+      data-figma-node={scenario.id}
+    >
       <div className={styles.media}>
         <Image
           src={image.src}

@@ -1,18 +1,17 @@
 /*
- * "Готовые сценарии" — Figma "Main page v4" › templates block (design-refs/v4/scenarios.svg).
- * Frame 1440×1190 at page y 850, overlapping the Hero (0–1500). Coordinates below are
- * Figma px relative to the frame; the 1440 canvas is centred, backgrounds are full-bleed.
+ * "Готовые сценарии" — Figma final › templates block (design-refs/final/raw/Main page v4.svg).
+ * Frame at page y 755, overlapping the Hero (0–1500). Coordinates below are Figma px
+ * relative to the frame; the 1440 canvas is centred, backgrounds are full-bleed.
  */
 
 /*
- * The box ends at the bottom of row 2 (y 1013): Features follows after the usual
- * 80px gap (v4: Features header at y 1943 = 850 + 1013 + 80).
+ * The box ends at the bottom of row 2 (frame y 1037 = page 1792); Features follows.
  * Decoration and the overlap with the Hero must not catch the pointer.
  */
 .section {
   position: relative;
-  height: 1013px;
-  margin-top: -650px; /* Hero is 1500 tall, the frame starts at y 850 */
+  height: 1037px;
+  margin-top: -745px; /* Hero is 1500 tall, the frame starts at y 755 */
   pointer-events: none;
 }
 
@@ -38,15 +37,24 @@
   pointer-events: auto;
 }
 
+/* Inter 22/30, centred in the 898px block (baseline 23px below the line top). */
+.description {
+  margin-top: 12.7px;
+  font-size: 22px;
+  line-height: 30px;
+  text-align: center;
+  white-space: pre-line;
+}
+
 /* ---------- Rows ---------------------------------------------------------- */
 
 /*
- * scenarioRows mask: rect y 443, 620 tall, alpha 0 → 1 (16 %) → 1 (84 %) → 0.
+ * scenarioRows mask: rect y 467 (page 1222), 620 tall, alpha 0 → 1 (16 %) → 1 (84 %) → 0.
  * Full-bleed: the fades stay 230.4px wide at the viewport edges on wider screens.
  */
 .rows {
   position: absolute;
-  top: 443px;
+  top: 467px;
   right: 0;
   left: 0;
   height: 620px;
@@ -124,7 +132,7 @@
   );
 }
 
-/* 1px white 14 % inside stroke. */
+/* 2px stroke (centred on the 338×248 image rect), lime or orange. */
 .card::before,
 .card::after {
   content: "";
@@ -136,15 +144,26 @@
 }
 
 .card::before {
-  border: 1px solid rgb(255 255 255 / 0.14);
+  border: 2px solid var(--accent);
 }
 
-/* Hover (cardResumeAHover): 2px lime inside stroke + lime drop shadow, stdDeviation 14 @ 45 %. */
+/* Hover (v4 cardResumeAHover): drop shadow stdDeviation 14 @ 45 % in the card's accent. */
 .card::after {
-  border: 2px solid var(--color-lime);
-  box-shadow: 0 0 28px rgb(194 239 75 / 0.45);
+  box-shadow: 0 0 28px var(--accent-glow);
   opacity: 0;
   transition: opacity 200ms ease-out;
+}
+
+.lime {
+  --accent: var(--color-lime);
+  --accent-glow: rgb(194 239 75 / 0.45);
+  --accent-ink: var(--color-ink);
+}
+
+.orange {
+  --accent: var(--color-orange);
+  --accent-glow: rgb(255 106 0 / 0.45);
+  --accent-ink: var(--color-white);
 }
 
 .card:hover::after {
@@ -234,7 +253,7 @@
   color: #ffe0c8;
 }
 
-/* openButton: 40px lime circle, lime glow stdDeviation 9 @ 45 %. */
+/* openButton: 40px circle in the accent, glow stdDeviation 8 @ 45 %. */
 .open {
   display: flex;
   flex-shrink: 0;
@@ -243,9 +262,9 @@
   width: 40px;
   height: 40px;
   border-radius: 9999px;
-  background: var(--color-lime);
-  box-shadow: 0 0 18px rgb(194 240 74 / 0.45);
-  color: var(--color-ink);
+  background: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
+  color: var(--accent-ink);
 }
 
 .open:focus-visible {

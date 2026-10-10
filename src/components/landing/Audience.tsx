@@ -1,15 +1,6 @@
-import Link from "next/link";
 import type { CSSProperties } from "react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import {
-  type AudienceCard,
-  type AudienceGlow,
-  audienceCardGlows,
-  audienceCards,
-  audienceIntro,
-  audienceSideGlows,
-} from "@/data/audience";
-import { headerActions } from "@/data/navigation";
+import { type AudienceGlow, audienceIntro, audienceSideGlows, audienceStats } from "@/data/audience";
 import { cn } from "@/lib/cn";
 import styles from "./Audience.module.css";
 
@@ -26,63 +17,17 @@ function Glow({ glow, style }: { glow: AudienceGlow; style: CSSProperties }) {
   );
 }
 
-/** ✳ bullet: three 1px lime strokes, 7.8×9 plus the round caps (Frame 285). */
-function PointStar() {
-  return (
-    <svg className={styles.star} width="8.8" height="10" viewBox="107.6 844.7 8.8 10" fill="none" aria-hidden="true" focusable="false">
-      <path d="M112 845.202V854.202" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M115.898 847.452L108.104 851.952" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M108.104 847.452L115.898 851.952" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-/** CTA arrow (1.8px stroke, 14.1×11.3). */
-function CtaArrow() {
-  return (
-    <svg className={styles.ctaArrow} width="16" height="13.2" viewBox="293.1 1015.1 16 13.2" fill="none" aria-hidden="true" focusable="false">
-      <path d="M294 1021.67L308.142 1021.73M302.46 1027.37L308.142 1021.73L302.511 1016.05" stroke="currentColor" strokeWidth="1.8" />
-    </svg>
-  );
-}
-
-function Card({ card, glows, className }: { card: AudienceCard; glows: AudienceGlow[]; className?: string }) {
-  return (
-    <li className={cn(styles.card, className)}>
-      {glows.map((glow) => (
-        <Glow key={glow.src} glow={glow} style={{ left: glow.x, top: glow.y }} />
-      ))}
-      <span className={styles.number} aria-hidden="true">
-        {card.number}
-      </span>
-      <span className={styles.tag}>{card.tag}</span>
-      <h3 className={styles.title}>{card.title}</h3>
-      <ul className={styles.points}>
-        {card.points.map((point) => (
-          <li key={point} className={styles.point}>
-            <PointStar />
-            {point}
-          </li>
-        ))}
-      </ul>
-      <p className={styles.note}>{card.note}</p>
-      <Link href={headerActions.cta.href} className={styles.cta}>
-        {card.cta}
-        <CtaArrow />
-      </Link>
-    </li>
-  );
-}
-
 /**
- * "SeexAI подойдёт, даже если вы только начинаете" — Figma "Main page v4" › Frame 295,
- * 1440×1561 at page y 4648. The frame has no background; its top 288px lie under
- * Learning, so the section starts at y 4936 and only the edge glows reach above / below.
+ * "SeexAI подойдёт, даже если вы только начинаете" — Figma final › Frame 295.
+ * Heading, one-line subtitle and four stat cards; the frame also carries the
+ * warm backdrop behind Pricing (pricingBackdrop, page y 5147.76–6387.76).
  */
 export function Audience() {
   return (
     <section id="audience" aria-labelledby="audience-title" className={styles.section}>
-      <div className={styles.sideGlows} aria-hidden="true">
+      <div className={styles.decor} aria-hidden="true">
+        {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG with blur filters */}
+        <img src="/images/audience/backdrop.svg" alt="" className={styles.backdrop} />
         {audienceSideGlows.right.map((glow) => (
           <Glow key={glow.src} glow={glow} style={{ right: glow.x, top: glow.y }} />
         ))}
@@ -96,8 +41,7 @@ export function Audience() {
           id="audience-title"
           size="60-tight"
           className={styles.heading}
-          // +3px: the measured first text row of the reference (5223) vs the baseline estimate.
-          descriptionClassName="mt-[3px] whitespace-pre-line"
+          descriptionClassName={styles.description}
           lines={[
             { text: audienceIntro.title[0] },
             { text: audienceIntro.title[1] },
@@ -106,11 +50,18 @@ export function Audience() {
           description={audienceIntro.text}
         />
 
-        <ul className={styles.cards}>
-          <Card card={audienceCards[0]} glows={audienceCardGlows[0]} className={styles.card1} />
-          <Card card={audienceCards[1]} glows={audienceCardGlows[1]} className={styles.card2} />
+        <ul className={styles.stats}>
+          {audienceStats.map((stat) => (
+            <li key={stat.label} className={styles.stat}>
+              {stat.glows.map((glow) => (
+                <Glow key={glow.src} glow={glow} style={{ left: glow.x, top: glow.y }} />
+              ))}
+              <p className={styles.value}>{stat.value}</p>
+              <p className={styles.label}>{stat.label}</p>
+              <p className={styles.text}>{stat.text}</p>
+            </li>
+          ))}
         </ul>
-        <span className={styles.divider} aria-hidden="true" />
       </div>
     </section>
   );

@@ -1,13 +1,13 @@
-<svg width="902.133" height="1220.53" viewBox="-488.067 88.6357 902.133 1220.53" fill="none" xmlns="http://www.w3.org/2000/svg">
-<!-- Frame 295 › glow_6 (design-refs/v4/audience.svg) -->
-<g id="glow_6" opacity="0.6" filter="url(#filter5_f_1431_4135)">
-<ellipse cx="-37" cy="698.902" rx="199" ry="358.2" fill="#4A0A0A"/>
+<svg width="631.493" height="854.373" viewBox="-352.746 4897.57 631.493 854.373" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- Ellipse_53 from design-refs/final/raw/Main page v4.svg -->
+<g opacity="0.6" filter="url(#filter147_f_1479_3423)">
+<ellipse cx="-36.9998" cy="5324.76" rx="139.3" ry="250.74" fill="#4A0A0A"/>
 </g>
 <defs>
-<filter id="filter5_f_1431_4135" x="-488.067" y="88.6357" width="902.133" height="1220.53" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter147_f_1479_3423" x="-352.746" y="4897.57" width="631.493" height="854.373" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="126.033" result="effect1_foregroundBlur_1431_4135"/>
+<feGaussianBlur stdDeviation="88.2233" result="effect1_foregroundBlur_1479_3423"/>
 </filter>
 </defs>
 </svg>

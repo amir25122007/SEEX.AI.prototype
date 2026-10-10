@@ -1,6 +1,6 @@
 /**
- * "Обучение" — Figma "Main page v4" › learning block (design-refs/v4/learning.svg).
- * Texts transcribed from learning-ref@1x.png; "\n" = Figma line break.
+ * "Обучение" — Figma final › learning block (design-refs/final/raw/Main page v4.svg).
+ * Texts from the layer names / texts-from-pdf.txt; "\n" = line break as in the final PNG.
  */
 
 /** One marquee copy; every phrase is followed by the ✳ star (period 1136px). */
@@ -10,12 +10,12 @@ export const learningIntro = {
   badge: "Курс по нейросетям",
   soon: "Скоро",
   title: ["От знакомства", "до реальной", "практики"],
-  text: "Короткие уроки, практика\nи поддержка помогут разобраться\nв AI и начать применять его\nв реальных задачах.",
+  text: "Короткие уроки, практика и поддержка\nпомогут разобраться в AI и начать применять\nего в реальных задачах.",
   cta: "Следить за запуском",
 };
 
 export const learningCards = {
-  levels: { icon: "AI", label: "Для всех уровней", title: "AI для каждого", meta: ["Beginner", "Advanced"] },
+  levels: { icon: "AI", label: "Для всех уровней", title: "AI для каждого", meta: "Beginner → Advanced" },
   waitlist: { label: "Лист ожидания", value: "1 200+", caption: "уже записались" },
 };
 
@@ -26,21 +26,21 @@ export const learningFeatures: LearningFeature[] = [
   {
     number: "[01]",
     title: "Видео и сценарии",
-    text: "Короткие уроки и понятные\nпримеры применения AI\nв реальных задачах.",
+    text: "Короткие уроки и понятные примеры\nприменения AI в реальных задачах.",
     x: 980,
     y: 120,
   },
   {
     number: "[02]",
     title: "Практика и задания",
-    text: "Закрепляйте знания внутри\nплатформы и сразу пробуйте\nинструменты.",
+    text: "Закрепляйте знания внутри платформы\nи сразу пробуйте инструменты.",
     x: 890,
     y: 322,
   },
   {
     number: "[03]",
     title: "Куратор и поддержка",
-    text: "Куратор поможет разобраться\nв сложных моментах и двигаться\nдальше без остановок.",
+    text: "Куратор поможет разобраться в\nсложных моментах и двигаться дальше\nбез остановок.",
     x: 980,
     y: 524,
   },

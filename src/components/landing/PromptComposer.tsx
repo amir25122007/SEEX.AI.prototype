@@ -98,13 +98,13 @@ export function PromptComposer({ className }: PromptComposerProps) {
         </div>
       </form>
 
-      <ul className="mt-[41.34px] flex h-[36.98px] w-[722px] items-center justify-between">
+      <ul className="mt-[43.35px] flex h-[37.98px] w-[722px] items-center justify-center gap-[14.05px]">
         {quickPrompts.map((label) => (
           <li key={label}>
             <button
               type="button"
               onClick={() => setPrompt(label)}
-              className="flex h-[36.98px] items-center rounded-full bg-lime px-[18.88px] font-mono text-[14.39px] leading-normal font-medium whitespace-nowrap text-ink shadow-[0_4px_16px_rgb(194_240_74/0.45)] transition-[filter] duration-200 hover:brightness-105"
+              className="flex h-[37.98px] items-center rounded-full bg-lime px-[18.88px] text-[15px] leading-normal font-normal whitespace-nowrap text-ink shadow-[0_4px_16px_rgb(194_240_74/0.45)] transition-[filter] duration-200 hover:brightness-105"
             >
               {label}
             </button>

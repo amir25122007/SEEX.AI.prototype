@@ -4,15 +4,14 @@ import { howItWorksSteps } from "@/data/howItWorks";
 import { cn } from "@/lib/cn";
 import styles from "./HowItWorks.module.css";
 
-/** Group 17: three rotated, blurred ellipses (exported with their filter regions). */
+/** Group 17: two rotated, blurred ellipses (exported with their filter regions). */
 const GLOWS = [
   { src: "/images/how-it-works/glow-back.svg", className: styles.glowBack },
   { src: "/images/how-it-works/glow-mid.svg", className: styles.glowMid },
-  { src: "/images/how-it-works/glow-front.svg", className: styles.glowFront },
 ];
 
 /**
- * "Путь к результату" — Figma "Main page v4" › how it works, 1440×1581 at page y 2441.
+ * "Путь к результату" — Figma final › how it works, 1440×1560 at page y 2521.45.
  * Heading, three steps and the screens carousel; the frame overlaps the bottom of Features.
  */
 export function HowItWorks() {
@@ -27,7 +26,7 @@ export function HowItWorks() {
         id="how-it-works-title"
         size="56"
         className={styles.heading}
-        descriptionClassName="whitespace-pre-line"
+        descriptionClassName={styles.description}
         lines={[
           { text: "Путь к результату" },
           { text: "всего за 3 шага", tone: "orange", className: "-mt-[0.4px] ml-[229.5px]" },

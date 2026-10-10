@@ -33,7 +33,7 @@ function MarqueeRow({
 }
 
 /**
- * "Готовые сценарии" — Figma "Main page v4" › templates block, 1440×1190 at y 850.
+ * "Готовые сценарии" — Figma final › templates block, frame at page y 755.
  * The frame overlaps the Hero (0–1500); two marquee rows of 340×250 cards
  * run in opposite directions under an edge mask.
  */
@@ -49,9 +49,11 @@ export function Scenarios() {
         className={styles.heading}
         lines={[
           { text: "Готовые сценарии" },
-          { text: "под вашу задачу", tone: "orange", className: "-mt-[7px] ml-[0.5px]" },
+          { text: "под вашу задачу", tone: "lime", className: "-mt-[7px] ml-[0.5px]" },
         ]}
-        description="Не нужно начинать с нуля, выберите шаблон, добавьте свой контент и получите результат за несколько шагов."
+        // SF Pro Text 22/30 → Inter, centred; first baseline at page 1195 (frame 440).
+        descriptionClassName={styles.description}
+        description={"Не нужно начинать с нуля: выберите сценарий,\nдобавьте свой контент и получите результат за несколько шагов."}
       />
 
       <div className={styles.rows}>

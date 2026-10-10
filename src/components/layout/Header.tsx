@@ -8,7 +8,7 @@ type HeaderProps = {
 };
 
 /**
- * Desktop header — Figma "Main page v3" › header (1394:4361), 1280×66.
+ * Desktop header — Figma final › header, 1280×66 (SF Pro Text → Inter: nav 18 / 400, CTA 18 / 590).
  *
  * Lives inside the Hero: absolutely positioned, 36px from the top,
  * horizontally centred (80px side margins at 1440px). The Hero must be
@@ -40,7 +40,7 @@ export function Header({ className }: HeaderProps) {
             <li key={item.href}>
               <a
                 href={item.href}
-                className="block font-mono text-nav-18 font-medium text-white uppercase transition-opacity duration-200 hover:opacity-80"
+                className="block text-nav-18 font-normal text-white uppercase transition-opacity duration-200 hover:opacity-80"
               >
                 {item.label}
               </a>
@@ -49,15 +49,15 @@ export function Header({ className }: HeaderProps) {
         </ul>
       </nav>
 
-      {/* Figma "actions": fixed 186px, space-between → 15px between login and CTA. */}
-      <div className="flex w-[186px] items-center justify-between">
+      {/* Figma "actions": login, 16.5px, CTA 122×45. */}
+      <div className="flex items-center gap-[16.5px]">
         <a
           href={headerActions.login.href}
-          className="font-mono text-nav-18 font-medium tracking-[0] text-white uppercase transition-opacity duration-200 hover:opacity-80"
+          className="text-nav-18 font-normal text-white uppercase transition-opacity duration-200 hover:opacity-80"
         >
           {headerActions.login.label}
         </a>
-        <Button href={headerActions.cta.href} variant="lime" size="md" className="w-[117px]">
+        <Button href={headerActions.cta.href} variant="lime" size="md" className="w-[122px]">
           {headerActions.cta.label}
         </Button>
       </div>

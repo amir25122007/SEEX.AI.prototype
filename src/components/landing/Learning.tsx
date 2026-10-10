@@ -6,16 +6,16 @@ import { learningCards, learningFeatures, learningIntro, learningTicker } from "
 import { cn } from "@/lib/cn";
 import styles from "./Learning.module.css";
 
-/** One ticker copy: 4 phrases + 4 stars = 1136px (phrases advance 21px per glyph at 35px). */
-const TICKER_PERIOD = 1136;
+/** One ticker copy: 4 phrases (Inter 36) + 4 × 78px star slots ≈ 1223px (Figma, SF Pro: 1131). */
+const TICKER_PERIOD = 1223;
 
-/** ✳ from runLine › Frame: three 2px strokes, centred in a 74px slot (x 37, y 33.01). */
+/** ✳ from runLine › Frame: three 2px strokes, centred in a 78px slot (x 39, y 34.01). */
 function TickerStar() {
   return (
-    <svg className={styles.star} width="74" height="65" viewBox="0 0 74 65" fill="none" aria-hidden="true" focusable="false">
-      <path d="M37 24.5115V41.5115" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M44.361 28.7615L29.639 37.2615" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M29.639 28.7615L44.361 37.2615" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <svg className={styles.star} width="78" height="65" viewBox="0 0 78 65" fill="none" aria-hidden="true" focusable="false">
+      <path d="M39 25.51V42.51" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M46.361 29.76L31.639 38.26" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M31.639 29.76L46.361 38.26" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -37,23 +37,6 @@ function Ticker({ direction, className, hidden }: { direction: "left" | "right";
         )}
       </Marquee>
     </div>
-  );
-}
-
-/**
- * "→" of "BEGINNER → ADVANCED", cut from the outlined Figma text: the web subsets of
- * IBM Plex Mono have no arrows. One 7.46px monospace cell (12px + 0.26 tracking);
- * the transform undoes the card's −4° so the glyph sits in the card's own frame.
- */
-function LevelsArrow() {
-  return (
-    <svg className={styles.levelsArrow} width="7.46" height="15.6" viewBox="91.14 112.48 7.46 15.6" fill="none" aria-hidden="true" focusable="false">
-      <path
-        transform="rotate(4) translate(-80 -544.954)"
-        d="M183.758 661.077L183.143 660.543L184.101 659.441L184.664 658.897L184.65 658.862L183.506 659.014L179.483 659.295L179.426 658.481L183.449 658.2L184.603 658.191L184.612 658.155L183.979 657.694L182.877 656.736L183.412 656.121L186.063 658.426L183.758 661.077Z"
-        fill="currentColor"
-      />
-    </svg>
   );
 }
 
@@ -105,16 +88,17 @@ export function Learning() {
           <span className={styles.badge}>{learningIntro.badge}</span>
           <span className={styles.soon}>
             {/* Dashed inside stroke (dash 8 / gap 8) — CSS dashes cannot be sized. */}
-            <svg className={styles.soonStroke} width="95" height="38" viewBox="0 0 95 38" fill="none" aria-hidden="true" focusable="false">
-              <rect x="0.5" y="0.5" width="94" height="37" rx="18.5" stroke="white" strokeDasharray="8 8" />
+            <svg className={styles.soonStroke} width="100" height="39" viewBox="0 0 100 39" fill="none" aria-hidden="true" focusable="false">
+              <rect x="0.5" y="0.5" width="99" height="38" rx="19" stroke="white" strokeDasharray="8 8" />
             </svg>
             {learningIntro.soon}
           </span>
         </div>
 
         <h2 id="learning-title" className={styles.title}>
-          {learningIntro.title.map((line) => (
-            <span key={line} className="block">
+          {learningIntro.title.map((line, index) => (
+            // Final design: lines 2–3 are lime.
+            <span key={line} className={cn("block", index > 0 && "text-lime")}>
               {line}
             </span>
           ))}
@@ -133,7 +117,7 @@ export function Learning() {
           <span className={styles.levelsLabel}>{levels.label}</span>
           <p className={styles.levelsTitle}>{levels.title}</p>
           <p className={styles.levelsMeta}>
-            {levels.meta[0]} <LevelsArrow /><span className="sr-only">→</span> {levels.meta[1]}
+            {levels.meta}
           </p>
         </div>
 

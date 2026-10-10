@@ -1,18 +1,18 @@
 /*
- * "Путь к результату" — Figma "Main page v4" › how it works (design-refs/v4/how-it-works.svg).
- * Frame 1440×1581 at page y 2441; coordinates below are Figma px relative to the frame,
+ * "Путь к результату" — Figma final › how it works (design-refs/final/raw/Main page v4.svg).
+ * Frame at page y 2521.45, 1560.31 tall (Learning starts at y 4081.76); coordinates below are Figma px relative to the frame,
  * the 1440 canvas is centred, glows and the slide strip are full-bleed.
  */
 
 /*
- * The frame starts 340.45px above the bottom of Features (Features ends at
- * y 2781.45 in the build, the frame starts at y 2441). Only text and controls
+ * The frame starts 319.71px above the bottom of Features (Features ends at
+ * y 2841.16, the frame starts at y 2521.45). Only text and controls
  * catch the pointer, so the overlap never blocks Features.
  */
 .section {
   position: relative; /* no z-index: the SCREEN glows must reach the page background */
-  height: 1581px;
-  margin-top: -340.45px;
+  height: 1560.31px;
+  margin-top: -319.71px;
   pointer-events: none;
 }
 
@@ -38,37 +38,37 @@
   mix-blend-mode: screen;
 }
 
-.glowFront {
-  top: 120.618px;
-  left: calc(50% - 720px - 416.159px);
-  width: 857.553px;
-  height: 852.373px;
-  mix-blend-mode: screen;
-}
-
 /* ---------- Heading (Frame 269) ------------------------------------------- */
 
 /*
- * Druk 56/104 %: cap top of line 1 at y 430.54 → line box at y 418.87, x 280;
- * line 2 at x +229.5, 57.84px lower (−0.4px). Description 18/135 %, explicit break.
+ * Druk 56/104 %: cap top of line 1 at y 430.54 → line box at y 418.87, x 262.75;
+ * line 2 at x +229.5, 57.84px lower (−0.4px).
  */
 .heading {
   position: absolute;
   top: 418.87px;
-  left: calc(50% - 720px + 280px);
+  left: calc(50% - 720px + 262.75px);
   width: max-content;
   pointer-events: auto;
+}
+
+/* SF Pro Text 22/30 → Inter, 2 lines; first baseline at frame y 580.05. */
+.description {
+  margin-top: 12.1px;
+  font-size: 22px;
+  line-height: 30px;
+  white-space: pre-line;
 }
 
 /* ---------- Steps (Frame 275) --------------------------------------------- */
 
 /*
- * Rows: 20px above the content, 28px below, then the 1px white 15 % line
- * (lines at y 787.21 / 915.21). The description column starts at x 952.5.
+ * Rows: 20.5px above the content, 28.5px below, then the 1px white 15 % line
+ * (lines at frame y 785.21 / 887.21). The description column starts at x 952.5.
  */
 .steps {
   position: absolute;
-  top: 633.6px;
+  top: 657.67px;
   left: calc(50% - 640px);
   width: 1280px;
   margin: 0;
@@ -81,7 +81,7 @@
   display: grid;
   grid-template-columns: 1fr 407.5px;
   align-items: center;
-  padding: 20px 0 28px;
+  padding: 20.5px 0 28.5px;
   border-bottom: 1px solid rgb(255 255 255 / 0.15);
 }
 
@@ -95,15 +95,16 @@
   top: -1.1px;
   display: flex;
   align-items: center;
-  gap: 24px;
 }
 
-/* IBM Plex Mono Medium 20, lime. */
+/* SF Pro Text Light 20, ls 1.6 → Inter, lime; the title starts at x 141 (61px slot). */
 .stepNumber {
-  font-family: var(--font-mono);
+  flex-shrink: 0;
+  width: 61px;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 300;
   line-height: 1.3;
+  letter-spacing: 1.6px;
   color: var(--color-lime);
 }
 
@@ -119,22 +120,22 @@
   color: var(--color-white);
 }
 
-/* IBM Plex Mono 18/146 %. */
+/* SF Pro Text 18/26 → Inter. Lines are the Figma ones (`pre`): Inter is ≈5 % wider, so the
+   longest line may run up to ~20px into the right margin instead of wrapping into a 3rd line. */
 .stepText {
   margin: 0;
-  font-family: var(--font-mono);
   font-size: 18px;
-  line-height: 1.46;
-  white-space: pre-line;
+  line-height: 26px;
+  white-space: pre;
   color: var(--color-white);
 }
 
 /* ---------- Carousel (Frame 374) ------------------------------------------ */
 
-/* From the top of the slides' outer edge (y 1053.72) to the bottom of the dots (y 1514.31). */
+/* From the top of the slides' outer edge (y 999.72) to the bottom of the dots (y 1460.31). */
 .carousel {
   position: absolute;
-  top: 1053.72px;
+  top: 999.72px;
   right: 0;
   left: 0;
   height: 460.6px;

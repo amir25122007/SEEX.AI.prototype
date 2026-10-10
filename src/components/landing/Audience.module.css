@@ -1,20 +1,32 @@
 /*
- * "SeexAI подойдёт…" — Figma "Main page v4" › Frame 295 (design-refs/v4/audience.svg).
- * The frame (1440×1561) starts at page y 4648, 288px under the opaque Learning block;
- * the section box starts at y 4936 (frame y 288) and ends at the bottom of card 02
- * (frame y 1141.7, 80px above Pricing). Coordinates below are relative to the section.
+ * "SeexAI подойдёт…" — Figma final › Frame 295 (design-refs/final/raw/Main page v4.svg).
+ * Section box: page y 4981.76 (bottom of Learning) – 5567.76 (bottom of the stat cards);
+ * coordinates below are relative to it and to the centred 1440 canvas.
  */
 .section {
   position: relative; /* no z-index: the SCREEN glows must reach the page background */
-  height: 853.702px;
+  height: 586px;
 }
 
-/* ---------- Glows ------------------------------------------------------------ */
+/* ---------- Decor ------------------------------------------------------------ */
 
-.sideGlows {
+.decor {
   position: absolute;
   inset: 0;
   pointer-events: none;
+}
+
+/*
+ * pricingBackdrop: 6 blurred ellipses (normal blend) clipped to page y 5147.76–6387.76;
+ * the SVG spans x −800…2240 so wide windows get the same glow without side edges.
+ */
+.backdrop {
+  position: absolute;
+  top: 166px;
+  left: calc(50% - 1520px);
+  width: 3040px;
+  height: 1240px;
+  max-width: none;
 }
 
 .glow {
@@ -37,252 +49,84 @@
   height: 100%;
 }
 
-/* Druk 60/106 %: line 2 cap top at frame y 444.4 → block top at frame y 367.7. */
+/* Druk 60/106 %: heading line box at page y 5081.76. */
 .heading {
   position: absolute;
-  top: 79.7px;
+  top: 100px;
   left: 260px;
   width: max-content;
 }
 
-.cards {
+/* SF Pro Text 22/30 → Inter, one line; baseline at page 5318.76. */
+.description {
+  margin-top: 13.2px;
+  font-size: 22px;
+  line-height: 30px;
+}
+
+/* statsRow: 4 × 302×198 at page y 5369.76, gap 24. */
+.stats {
+  position: absolute;
+  top: 388px;
+  left: 80px;
+  display: flex;
+  gap: 24px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-/* scenario card: #101010 17 %, r 20, 1px white 40 % inside stroke, glows clipped inside. */
-.card {
-  position: absolute;
+/* statCard: #101010 17 %, r 24, 1px white 20 % inside stroke, glows clipped inside. */
+.stat {
+  position: relative;
   overflow: hidden;
-  border-radius: 20px;
+  width: 302px;
+  height: 198px;
+  border-radius: 24px;
   background: rgb(16 16 16 / 0.17);
-  color: var(--color-white);
 }
 
-.card::after {
+.stat::after {
   content: "";
   position: absolute;
   inset: 0;
-  border: 1px solid rgb(255 255 255 / 0.4);
+  border: 1px solid rgb(255 255 255 / 0.2);
   border-radius: inherit;
   pointer-events: none;
 }
 
-.card1 {
-  top: 400.202px;
-  left: 80px;
-  width: 543px;
-  height: 360px;
-}
-
-.card2 {
-  top: 429.702px;
-  left: 705px;
-  width: 654px;
-  height: 424px;
-}
-
-/* Line 4: x 664.5, frame y 723.7–1012.7, #FF6A00 20 % → 100 % → 20 % at 50 %. */
-.divider {
+.value,
+.label,
+.text {
   position: absolute;
-  top: 435.702px;
-  left: 664px;
-  width: 1px;
-  height: 289px;
-  border-radius: 1px;
-  background: linear-gradient(180deg, rgb(255 106 0 / 0.2) 0%, #ff6a00 50%, rgb(255 106 0 / 0.2) 100%);
-  opacity: 0.5;
-}
-
-/*
- * ---------- Card content (card-relative) ----------
- * Placed by Figma baselines, then corrected by the measured glyph rows of the
- * reference (the outlined text bboxes include the ascender of «б»).
- */
-
-/* Druk 44, white 92 %. */
-.number {
-  position: absolute;
-  font-family: var(--font-druk);
-  font-size: 44px;
-  font-weight: 500;
-  line-height: 44px;
-  color: rgb(255 255 255 / 0.92);
-}
-
-/* tag: #101010 32 %, 1px white 18 %, IBM Plex Mono Medium 14, ls 6 %. */
-.tag {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 34px;
-  border: 1px solid rgb(255 255 255 / 0.18);
-  border-radius: 17px;
-  background: rgb(16 16 16 / 0.32);
-  font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: 0.84px;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-/* Druk 26/33. */
-.title {
-  position: absolute;
+  left: 25px;
   margin: 0;
-  font-family: var(--font-druk);
-  font-size: 26px;
-  font-weight: 500;
-  line-height: 33px;
-  text-transform: uppercase;
   white-space: pre-line;
 }
 
-/* Rows 33px apart; the ✳ sits 5.5px above the text baseline. */
-.points {
-  position: absolute;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8.7px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.point {
-  position: relative;
-  font-family: var(--font-mono);
-  font-size: 18px;
-  line-height: 24.3px;
-  white-space: nowrap;
-}
-
-.star {
-  position: absolute;
-  top: 8.49px;
+/* Druk 52, lime; cap top at 35.5. */
+.value {
+  top: 25.75px;
+  font-family: var(--font-druk);
+  font-size: 52px;
+  font-weight: 500;
+  line-height: 52px;
   color: var(--color-lime);
 }
 
-/* IBM Plex Mono 18/27, white 77 %. */
-.note {
-  position: absolute;
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 18px;
-  line-height: 27px;
-  white-space: pre-line;
-  color: rgb(255 255 255 / 0.77);
+/* SF Pro Text 20 / 590 → Inter 600, white; baseline 113. */
+.label {
+  top: 93.63px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2109;
+  color: var(--color-white);
 }
 
-/* IBM Plex Mono Medium 16, ls 3 %, lime + arrow. */
-.cta {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  font-family: var(--font-mono);
+/* SF Pro Text 16/22 → Inter, white 78 %; first baseline 144.24. */
+.text {
+  top: 127.43px;
   font-size: 16px;
-  font-weight: 500;
-  line-height: 20.8px;
-  letter-spacing: 0.48px;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: var(--color-lime);
-}
-
-.cta:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-.cta:focus-visible {
-  outline: 2px solid var(--color-white);
-  outline-offset: 4px;
-  border-radius: 4px;
-}
-
-.ctaArrow {
-  margin-left: 10.8px;
-}
-
-/* Card 01 (543×360). */
-.card1 .number {
-  top: 41.1px;
-  left: 24px;
-}
-
-.card1 .tag {
-  top: 46.5px;
-  left: 332px;
-  width: 189px;
-}
-
-.card1 .title {
-  top: 101.95px;
-  left: 24px;
-}
-
-.card1 .points {
-  top: 151px;
-}
-
-.card1 .point {
-  padding-left: 46px;
-}
-
-.card1 .star {
-  left: 27.6px;
-}
-
-.card1 .note {
-  top: 254.44px;
-  left: 23px;
-}
-
-.card1 .cta {
-  top: 323.6px;
-  left: 31px;
-}
-
-/* Card 02 (654×424). */
-.card2 .number {
-  top: 47.1px;
-  left: 27px;
-}
-
-.card2 .tag {
-  top: 52.5px;
-  left: 464px;
-  width: 163px;
-}
-
-.card2 .title {
-  top: 107.95px;
-  left: 26px;
-}
-
-.card2 .points {
-  top: 189px;
-}
-
-.card2 .point {
-  padding-left: 49px;
-}
-
-.card2 .star {
-  left: 30.6px;
-}
-
-.card2 .note {
-  top: 293.76px;
-  left: 26px;
-}
-
-.card2 .cta {
-  top: 362.6px;
-  left: 26px;
+  line-height: 22px;
+  color: rgb(255 255 255 / 0.78);
 }

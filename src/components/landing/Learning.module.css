@@ -11,7 +11,7 @@
   z-index: 1; /* opaque frame above the next frame's top 288px (Audience edge glows), as in Figma */
   isolation: isolate; /* the SCREEN halo blends with the frame only */
   height: 900px;
-  margin-top: 14px;
+  margin-top: 0; /* How it works ends exactly at y 4081.76 */
   overflow: hidden;
   overflow: clip;
   background: linear-gradient(180deg, #220c06 0%, #ff6a00 20%, #e03514 66%, #4a0f12 100%);
@@ -108,23 +108,26 @@
   top: 835px;
 }
 
-/* Copy 2 starts at the Figma x (top −15, bottom −66), 2 periods (2 × 1136) to the right. */
+/*
+ * Copy 2 starts at the Figma x (top −15, bottom −66), 2 copies to the right
+ * (a copy is ≈ 1223px in Inter: 4 phrases + 4 × 78px star slots).
+ */
 .bandTop .ticker {
-  margin-left: calc(50% - 720px - 15px - 2272px);
+  margin-left: calc(50% - 720px - 15px - 2446px);
 }
 
 .bandBottom .ticker {
-  margin-left: calc(50% - 720px - 66px - 2272px);
+  margin-left: calc(50% - 720px - 66px - 2446px);
 }
 
-/* IBM Plex Mono Medium 35, #160C08; a copy is exactly 1136px wide. */
+/* SF Pro Text 36 / 400 → Inter, #160C08; baseline 47px below the band top. */
 .tickerCopy {
   display: flex;
+  height: 65px;
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 35px;
-  font-weight: 500;
-  line-height: 65px;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 67.84px;
   text-transform: uppercase;
   white-space: nowrap;
   color: #160c08;
@@ -164,33 +167,31 @@
   gap: 30px;
 }
 
-/* Pills: IBM Plex Mono Medium 14, ls 4 %, centred; 197×38 and 95×38. */
+/* Pills: SF Pro Text 14 / 500 → Inter, centred; 202×39 and 100×39. */
 .badge,
 .soon {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 38px;
-  border-radius: 19px;
-  font-family: var(--font-mono);
+  height: 39px;
+  border-radius: 19.5px;
   font-size: 14px;
   font-weight: 500;
   line-height: 1;
-  letter-spacing: 0.56px;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
 .badge {
-  width: 197px;
+  width: 202px;
   border: 1px solid var(--color-lime);
   background: rgb(0 0 0 / 0.6);
   color: var(--color-lime);
 }
 
 .soon {
-  width: 95px;
+  width: 100px;
   background: var(--color-orange);
   box-shadow: var(--shadow-orange-glow-strong);
   color: var(--color-white);
@@ -216,37 +217,34 @@
   color: var(--color-white);
 }
 
-/* IBM Plex Mono 18/24; first baseline at y 351. */
+/* SF Pro Text 22/30 → Inter, 3 lines; first baseline at frame y 355.99. */
 .text {
   position: absolute;
-  top: 332.16px;
+  top: 332.99px;
   left: 80px;
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 22px;
+  line-height: 30px;
   white-space: pre-line;
   color: var(--color-white);
 }
 
-/* btn: 350×59 lime, IBM Plex Mono Medium 23, ls 2 %; arrow 14px at x 396.5. */
+/* btn: 361×59 lime at frame y 443, SF Pro Text 24 / 400 → Inter; arrow 14px. */
 .cta {
   position: absolute;
-  top: 448px;
+  top: 443px;
   left: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 350px;
+  width: 361px;
   height: 59px;
   padding: 0 19.5px 0 23px;
   border-radius: 29.5px;
   background: var(--color-lime);
-  font-family: var(--font-mono);
-  font-size: 23px;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 400;
   line-height: 1;
-  letter-spacing: 0.46px;
   text-transform: uppercase;
   white-space: nowrap;
   color: var(--color-ink);
@@ -300,16 +298,14 @@
   color: #160c08;
 }
 
-/* IBM Plex Mono Medium 14, ls 6 %, lime; baseline 50.98. */
+/* SF Pro Text 14 / 500 → Inter, lime; baseline 51.12. */
 .levelsLabel {
   position: absolute;
-  top: 36.63px;
-  left: 78.8px;
-  font-family: var(--font-mono);
+  top: 37.56px;
+  left: 79px;
   font-size: 14px;
   font-weight: 500;
-  line-height: 18.2px;
-  letter-spacing: 0.84px;
+  line-height: 1.2109;
   text-transform: uppercase;
   white-space: nowrap;
   color: var(--color-lime);
@@ -331,24 +327,17 @@
   color: var(--color-white);
 }
 
-/* IBM Plex Mono 12, ls 2 %, white 65 %; baseline 124.78. */
+/* SF Pro Text 12 / 400 → Inter, white 65 %; baseline 124.96. */
 .levelsMeta {
   position: absolute;
-  top: 112.48px;
+  top: 113.34px;
   left: 24px;
   margin: 0;
-  font-family: var(--font-mono);
   font-size: 12px;
-  line-height: 15.6px;
-  letter-spacing: 0.26px;
+  line-height: 1.2109;
   text-transform: uppercase;
   white-space: nowrap;
   color: rgb(255 255 255 / 0.65);
-}
-
-.levelsArrow {
-  display: inline-block;
-  vertical-align: top;
 }
 
 /* ---------- card1: "Лист ожидания" (rotate 3° around its top-left) --------- */
@@ -356,9 +345,9 @@
 .waitlistCard {
   position: absolute;
   top: 614px;
-  left: 343.322px;
+  left: 343.374px;
   width: 286.047px;
-  height: 159px;
+  height: 160px;
   border-radius: 18.9725px;
   background: #f7f5ed;
   color: #000;
@@ -366,16 +355,14 @@
   transform-origin: 0 0;
 }
 
-/* IBM Plex Mono Medium 14, ls 6 %, black 55 %; baseline 49. */
+/* SF Pro Text 14 / 500 → Inter, black 55 %; baseline 49.23. */
 .waitlistLabel {
   position: absolute;
-  top: 34.65px;
+  top: 35.67px;
   left: 24px;
-  font-family: var(--font-mono);
   font-size: 14px;
   font-weight: 500;
-  line-height: 18.2px;
-  letter-spacing: 0.84px;
+  line-height: 1.2109;
   text-transform: uppercase;
   white-space: nowrap;
   opacity: 0.55;
@@ -415,16 +402,14 @@
   white-space: nowrap;
 }
 
-/* IBM Plex Mono 14, ls 1 %, black 55 %; baseline 131. */
+/* SF Pro Text 14 / 400 → Inter, black 55 %; baseline 132.78. */
 .waitlistCaption {
   position: absolute;
-  top: 116.65px;
+  top: 119.22px;
   left: 24px;
   margin: 0;
-  font-family: var(--font-mono);
   font-size: 14px;
-  line-height: 18.2px;
-  letter-spacing: 0.14px;
+  line-height: 1.2109;
   white-space: nowrap;
   opacity: 0.55;
 }
@@ -480,26 +465,25 @@
   white-space: nowrap;
 }
 
-/* IBM Plex Mono 18/24; first baseline at 66.49. */
+/* SF Pro Text 18/24 → Inter; first baseline at 66.49. */
 .featureText {
   position: absolute;
-  top: 47.65px;
+  top: 47.95px;
   left: 17px;
   margin: 0;
-  font-family: var(--font-mono);
   font-size: 18px;
   line-height: 24px;
   white-space: pre-line;
 }
 
-/* IBM Plex Mono 18, ls 4 %, lime, in the bottom-right tab; baseline 146.36. */
+/* SF Pro Text Light 18, ls 1.1 → Inter, lime, right-aligned in the bottom-right tab (brackets 128.9–148.8). */
 .featureNumber {
   position: absolute;
-  top: 130.52px;
-  left: 312.67px;
-  font-family: var(--font-mono);
+  top: 126.76px;
+  right: 22px;
   font-size: 18px;
-  line-height: 18px;
-  letter-spacing: 0.72px;
+  font-weight: 300;
+  line-height: 1.2109;
+  letter-spacing: 1.1px;
   color: var(--color-lime);
 }

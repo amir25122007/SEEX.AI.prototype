@@ -58,7 +58,6 @@
   --color-border-orange: rgb(255 106 0 / 0.35); /* FAQ rows */
 
   /* Fonts ----------------------------------------------------------------- */
-  --font-mono: var(--font-ibm-plex-mono), ui-monospace, monospace;
   --font-sans: var(--font-inter), system-ui, sans-serif; /* replaces SF Pro */
   --font-archivo: var(--font-archivo-google), system-ui, sans-serif;
   --font-unbounded: var(--font-unbounded-google), system-ui, sans-serif;
@@ -80,7 +79,6 @@
   --text-body-16--line-height: 1.35;
   --text-nav-18: 18px;
   --text-nav-18--line-height: 1.35;
-  --text-nav-18--letter-spacing: 0.02em;
 
   /* Radius ---------------------------------------------------------------- */
   --radius-faq: 14px;
@@ -138,7 +136,8 @@
     overflow-x: hidden;
     background-color: var(--color-page);
     color: var(--color-white);
-    font-family: var(--font-mono);
+    /* Final design: all text is SF Pro Text (→ Inter); Plex Mono is kept for the [01] numbers only. */
+    font-family: var(--font-sans);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

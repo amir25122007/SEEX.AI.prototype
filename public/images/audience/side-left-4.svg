@@ -1,13 +1,13 @@
-<svg width="285.233" height="530.667" viewBox="-179.618 433.569 285.233 530.667" fill="none" xmlns="http://www.w3.org/2000/svg">
-<!-- Frame 295 › glow_9 (design-refs/v4/audience.svg); SCREEN is applied in CSS -->
-<g id="glow_9" opacity="0.85" filter="url(#filter8_f_1431_4135)">
-<ellipse cx="-37.0009" cy="698.902" rx="63.0167" ry="185.733" fill="#FF9A30"/>
+<svg width="199.663" height="371.467" viewBox="-136.832 5139.03 199.663 371.467" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- Ellipse_56 from design-refs/final/raw/Main page v4.svg; SCREEN is applied in CSS -->
+<g opacity="0.85" filter="url(#filter150_f_1479_3423)">
+<ellipse cx="-37.0006" cy="5324.76" rx="44.1117" ry="130.013" fill="#FF9A30"/>
 </g>
 <defs>
-<filter id="filter8_f_1431_4135" x="-179.618" y="433.569" width="285.233" height="530.667" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter150_f_1479_3423" x="-136.832" y="5139.03" width="199.663" height="371.467" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="39.8" result="effect1_foregroundBlur_1431_4135"/>
+<feGaussianBlur stdDeviation="27.86" result="effect1_foregroundBlur_1479_3423"/>
 </filter>
 </defs>
 </svg>

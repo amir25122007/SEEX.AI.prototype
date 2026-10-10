@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 export type HeadingSize = "60" | "60-tight" | "56" | "41";
-export type HeadingTone = "white" | "orange";
+export type HeadingTone = "white" | "orange" | "lime";
 
 export type HeadingLine = {
   text: ReactNode;
@@ -32,6 +32,7 @@ const sizes: Record<HeadingSize, string> = {
 const tones: Record<HeadingTone, string> = {
   white: "text-white",
   orange: "text-orange",
+  lime: "text-lime",
 };
 
 /**
