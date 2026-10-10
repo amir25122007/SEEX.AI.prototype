@@ -1,0 +1,18 @@
+<svg width="1013" height="1050" viewBox="-24 7732.76 1013 1050" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- Final CTA + Footer › green rim light (Rectangle_10); SCREEN is applied in CSS -->
+<g filter="url(#filter195_f_1479_3423)">
+<rect y="7756.76" width="965" height="1002" fill="url(#paint56_linear_1479_3423)"/>
+</g>
+<defs>
+<filter id="filter195_f_1479_3423" x="-24" y="7732.76" width="1013" height="1050" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="12" result="effect1_foregroundBlur_1479_3423"/>
+</filter>
+<linearGradient id="paint56_linear_1479_3423" x1="0" y1="8257.76" x2="965" y2="8257.76" gradientUnits="userSpaceOnUse">
+<stop stop-color="#C2EF4B" stop-opacity="0.34"/>
+<stop offset="0.55" stop-color="#C2EF4B" stop-opacity="0.06"/>
+<stop offset="1" stop-color="#C2EF4B" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

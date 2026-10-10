@@ -37,7 +37,7 @@ export function Header({ className }: HeaderProps) {
       <nav aria-label="Основная навигация">
         <ul className="flex items-center gap-[26px]">
           {headerNav.map((item) => (
-            <li key={item.href}>
+            <li key={item.label}>
               <a
                 href={item.href}
                 className="block text-nav-18 font-normal text-white uppercase transition-opacity duration-200 hover:opacity-80"

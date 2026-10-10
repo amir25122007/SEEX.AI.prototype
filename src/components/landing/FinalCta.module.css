@@ -1,0 +1,177 @@
+/*
+ * "Начните создавать с AI уже сегодня" + footer — Figma final › Final CTA + Footer
+ * (design-refs/final/raw/Main page v4.svg). Frame 1440×779 at page y 7756.76 (100px under
+ * FAQ), clipped like in Figma; the page ends with it. Coordinates are relative to the frame
+ * and to the centred 1440 canvas; decoration is full-bleed.
+ */
+.frame {
+  position: relative; /* no z-index: the SCREEN glows must reach the page background */
+  height: 779px;
+  margin-top: 100px;
+  overflow: hidden;
+  overflow: clip;
+}
+
+.decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.layer {
+  position: absolute;
+  max-width: none;
+}
+
+.screen {
+  mix-blend-mode: screen;
+}
+
+/* "SeexAI" watermark: outlined text, white 80 % × 85 %, cut by the frame bottom. */
+.watermark {
+  top: 584.68px;
+  left: calc(50% - 720px + 103.21px);
+  width: 1220.87px;
+  height: 251.28px;
+}
+
+/* image 22 (490×805 at 475, 197): full width, shifted up 8.22 % → 490×870.65 at y 130.83. */
+.character {
+  top: 130.83px;
+  left: calc(50% - 720px + 475px);
+  width: 490px;
+  height: 870.65px;
+}
+
+/*
+ * Green rim light: #C2EF4B 34 % → 6 % → 0 left → right, blur 24, SCREEN; fades in at the top.
+ * In Figma it starts at the frame edge; on wider windows it is anchored to the viewport's
+ * left edge and stretched horizontally, so no vertical edge appears (1440: exactly 1013px).
+ */
+.rim {
+  top: -24px;
+  left: -24px;
+  width: calc(50% - 720px + 1013px);
+  height: 1050px;
+  mix-blend-mode: screen;
+  -webkit-mask-image: linear-gradient(180deg, transparent 24px, #000 72px);
+  mask-image: linear-gradient(180deg, transparent 24px, #000 72px);
+}
+
+/* ---------- CTA ------------------------------------------------------------ */
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 720px);
+  width: 1440px;
+  height: 100%;
+  pointer-events: none;
+}
+
+.canvas > * {
+  pointer-events: auto;
+}
+
+/* Druk 56/104 %, line 2 lime; cap top at page 7807.42 → line box at frame y 38.99. */
+.heading {
+  position: absolute;
+  top: 38.99px;
+  left: 80px;
+  width: max-content;
+}
+
+/* SF Pro Text 22/30 → Inter, 3 lines; first baseline at page 7957.43. */
+.description {
+  margin-top: 12.44px;
+  font-size: 22px;
+  line-height: 30px;
+  white-space: pre-line;
+}
+
+/* btn: 317×55 lime at (1060.5, 213), 24 / 400, arrow 14px. */
+.cta {
+  position: absolute;
+  top: 213px;
+  left: 1060.5px;
+  width: 317px;
+}
+
+/* ---------- Footer ---------------------------------------------------------- */
+
+/* From the nav (frame y 505.69) to the bottom; the dark tab gradient covers y 639–779. */
+.footer {
+  position: absolute;
+  top: 505.69px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 140px;
+  background: linear-gradient(180deg, rgb(0 0 0 / 0) 0%, #000 82.94%);
+  pointer-events: none;
+}
+
+.canvasFooter {
+  position: absolute;
+  left: calc(50% - 720px);
+  width: 1440px;
+  padding: 0 80px;
+}
+
+/* Tabs: SF Pro Text 22 / 400 uppercase, spread across 80–1360; baseline at frame y 527. */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navLink,
+.legalLink {
+  transition: opacity 200ms ease-out;
+}
+
+.navLink {
+  font-size: 22px;
+  line-height: 1.2109;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+
+.navLink:hover,
+.legalLink:hover {
+  opacity: 0.8;
+}
+
+.navLink:focus-visible,
+.legalLink:focus-visible {
+  outline: 2px solid var(--color-lime);
+  outline-offset: 3px;
+}
+
+/* 18 / 400; baseline at frame y 745. */
+.legal {
+  top: 221.87px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  line-height: 1.2109;
+}
+
+.copyright {
+  margin: 0;
+  color: var(--color-white);
+}
+
+.legalLink {
+  color: var(--color-white);
+}

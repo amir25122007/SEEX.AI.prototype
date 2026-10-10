@@ -3,7 +3,7 @@ import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 export type ButtonVariant = "lime" | "dark" | "outline";
-export type ButtonSize = "md" | "lg";
+export type ButtonSize = "md" | "lg" | "xl";
 
 type CommonProps = {
   variant?: ButtonVariant;
@@ -25,7 +25,7 @@ type ButtonAsButton = CommonProps & {
 export type ButtonProps = ButtonAsLink | ButtonAsButton;
 
 const base =
-  "inline-flex items-center justify-center gap-[10px] rounded-pill font-sans font-medium uppercase whitespace-nowrap transition-[background-color,box-shadow,opacity] duration-200 disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex items-center gap-[10px] rounded-pill font-sans uppercase whitespace-nowrap transition-[background-color,box-shadow,opacity] duration-200 disabled:pointer-events-none disabled:opacity-50";
 
 const variants: Record<ButtonVariant, string> = {
   lime: "bg-lime text-ink hover:brightness-105",
@@ -33,10 +33,14 @@ const variants: Record<ButtonVariant, string> = {
   outline: "border border-border-strong bg-transparent text-white",
 };
 
-/** Sizes taken from Figma: header CTA (45px) and section CTAs (55px). */
+/**
+ * Sizes taken from Figma: header CTA (45px), section CTA with a round icon (55px) and
+ * the final CTA (55px, 24 / 400, text left and arrow right).
+ */
 const sizes: Record<ButtonSize, string> = {
-  md: "h-[45px] px-[25px] text-nav-18",
-  lg: "h-[55px] py-2 pr-[7px] pl-[23px] text-nav-18",
+  md: "h-[45px] justify-center px-[25px] text-nav-18 font-medium",
+  lg: "h-[55px] justify-center py-2 pr-[7px] pl-[23px] text-nav-18 font-medium",
+  xl: "h-[55px] justify-between pr-[19.5px] pl-[24px] text-[24px] leading-none font-normal",
 };
 
 /**

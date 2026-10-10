@@ -1,6 +1,7 @@
 import { Audience } from "@/components/landing/Audience";
 import { Faq } from "@/components/landing/Faq";
 import { FeaturesBento } from "@/components/landing/FeaturesBento";
+import { FinalCta } from "@/components/landing/FinalCta";
 import { Hero } from "@/components/landing/Hero";
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { Learning } from "@/components/landing/Learning";
@@ -9,17 +10,21 @@ import { Scenarios } from "@/components/landing/Scenarios";
 
 export default function Home() {
   return (
-    // Clip full-bleed overflow (scenario row, glow) at the viewport like the 1440 Figma frame.
-    // One full-bleed underlay for the whole page: sections have no opaque backgrounds of their own.
-    <main className="overflow-x-clip bg-(image:--gradient-page)">
-      <Hero />
-      <Scenarios />
-      <FeaturesBento />
-      <HowItWorks />
-      <Learning />
-      <Audience />
-      <Pricing />
-      <Faq />
-    </main>
+    <>
+      {/* Clip full-bleed overflow (scenario row, glow) at the viewport like the 1440 Figma frame.
+          One full-bleed underlay for the whole page: sections have no opaque backgrounds of their own. */}
+      <main className="overflow-x-clip bg-(image:--gradient-page)">
+        <Hero />
+        <Scenarios />
+        <FeaturesBento />
+        <HowItWorks />
+        <Learning />
+        <Audience />
+        <Pricing />
+        <Faq />
+      </main>
+      {/* Final CTA + <footer> share one Figma frame; outside <main> so the footer is the page's contentinfo. */}
+      <FinalCta />
+    </>
   );
 }

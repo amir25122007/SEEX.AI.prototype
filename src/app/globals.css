@@ -165,6 +165,36 @@
     max-width: 100%;
   }
 
+  /* Anchor navigation (header / footer): smooth unless reduced motion is requested. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /*
+   * Anchor targets land with their heading ≈ 60px below the viewport top. Section boxes
+   * start at different depths above their headings (overlapping Figma frames), hence the
+   * per-section values (negative = scroll past the top of the box).
+   */
+  #scenarios {
+    scroll-margin-top: -209px; /* heading 269px below the box top */
+  }
+
+  #features,
+  #pricing,
+  #faq {
+    scroll-margin-top: 60px; /* the box starts at the heading */
+  }
+
+  #how-it-works {
+    scroll-margin-top: -359px; /* heading 419px below the box top */
+  }
+
+  #audience {
+    scroll-margin-top: -40px; /* heading 100px below the box top */
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
