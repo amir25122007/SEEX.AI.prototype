@@ -9,19 +9,23 @@ import styles from "./Hero.module.css";
 /**
  * Desktop Hero — Figma "Main page v3" › heroWrap (1404:3413), 1440×1040.
  * DOM order follows the Figma layer order (bottom → top), so no z-index juggling.
+ * Content sits in centred 1440 canvases; background layers are full-bleed
+ * (`.bleed`) so wide windows show no seams. Only the section clips (1500 tall).
  */
 export function Hero() {
   return (
     <section className={styles.hero} aria-labelledby="hero-title">
       <div className={styles.base} aria-hidden="true" />
 
-      <div className={styles.canvas}>
-        {/* Glow ellipses + side darkening */}
-        <div className={cn(styles.ellipse, styles.glowLeft)} aria-hidden="true" />
-        <div className={cn(styles.ellipse, styles.glowRight)} aria-hidden="true" />
-        <div className={cn(styles.layer, styles.sideRight)} aria-hidden="true" />
-        <div className={cn(styles.layer, styles.sideLeft)} aria-hidden="true" />
+      {/* Glow ellipses + side darkening — full-bleed, anchored to the viewport edges. */}
+      <div className={styles.bleed} aria-hidden="true">
+        <div className={cn(styles.ellipse, styles.glowLeft)} />
+        <div className={cn(styles.ellipse, styles.glowRight)} />
+        <div className={cn(styles.layer, styles.sideRight)} />
+        <div className={cn(styles.layer, styles.sideLeft)} />
+      </div>
 
+      <div className={styles.canvas}>
         <p className={styles.watermark} aria-hidden="true">
           SEEX
         </p>
@@ -46,13 +50,15 @@ export function Hero() {
         </div>
 
         <HeroCardLayer cards={heroCardsNear} />
+      </div>
 
-        {/* Lower domes */}
-        <div className={cn(styles.ellipse, styles.ember)} aria-hidden="true" />
-        <div className={cn(styles.ellipse, styles.hotRim)} aria-hidden="true" />
-        <div className={cn(styles.ellipse, styles.lightHaze)} aria-hidden="true" />
-        <div className={cn(styles.ellipse, styles.burgundy)} aria-hidden="true" />
-        <div className={cn(styles.ellipse, styles.darkDome)} aria-hidden="true" />
+      {/* Lower domes — full-bleed, widened by the extra viewport width beyond 1440. */}
+      <div className={styles.bleed} aria-hidden="true">
+        <div className={cn(styles.ellipse, styles.ember)} />
+        <div className={cn(styles.ellipse, styles.hotRim)} />
+        <div className={cn(styles.ellipse, styles.lightHaze)} />
+        <div className={cn(styles.ellipse, styles.burgundy)} />
+        <div className={cn(styles.ellipse, styles.darkDome)} />
       </div>
 
       <div className={styles.fade} aria-hidden="true" />
@@ -61,9 +67,13 @@ export function Hero() {
         <div className={styles.composer}>
           <PromptComposer />
         </div>
+      </div>
 
-        <div className={cn(styles.layer, styles.titleBand)} aria-hidden="true" />
+      <div className={styles.bleed} aria-hidden="true">
+        <div className={cn(styles.layer, styles.titleBand)} />
+      </div>
 
+      <div className={styles.canvas}>
         <h1 id="hero-title" className={styles.title}>
           <span className={cn(styles.titleLine, styles.titleLime)}>Презентация</span>
           <span className={cn(styles.titleLine, styles.titleWhite)}>за пару минут</span>

@@ -1,15 +1,16 @@
 /*
- * Hero composition — Figma "Main page v3" › heroWrap (1404:3413) › hero block (1394:4162).
+ * Hero composition — Figma "Main page v4" › heroWrap › hero block (design-refs/v4/hero.svg).
  * Coordinates are Figma hero-block pixels. Layer blur R → CSS blur(R / 2)
  * (verified against Figma's SVG export: blur 180 → stdDeviation 90).
  */
 
 .hero {
   position: relative;
-  height: 1040px;
-  /* The hero block is 1500px tall and fades into #101010 under the next section. */
-  overflow-x: clip;
-  overflow-y: visible;
+  /* v4 hero block: 1440×1500, ends in the warm #4A100E transition. */
+  height: 1500px;
+  /* Clip at the section box only: viewport-wide and 1500 tall. */
+  overflow: hidden;
+  overflow: clip;
   isolation: isolate;
 }
 
@@ -26,7 +27,7 @@
   pointer-events: none;
 }
 
-/* 1440×1500 design canvas, centred; clips like the Figma hero block. */
+/* 1440×1500 design canvas, centred. Not clipped: cards may run to the viewport edge. */
 .canvas {
   position: absolute;
   top: 0;
@@ -34,7 +35,20 @@
   width: 1440px;
   height: 1500px;
   margin-left: -720px;
-  overflow: hidden;
+  pointer-events: none;
+}
+
+/*
+ * Full-bleed background layer (viewport-wide × 1500). Children are anchored to
+ * its left / right edges or widened by --extra, so at 1440 they sit exactly
+ * where they did on the canvas.
+ */
+.bleed {
+  --extra: max(0px, 100% - 1440px);
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1500px;
   pointer-events: none;
 }
 
@@ -60,7 +74,7 @@
 }
 
 .glowRight {
-  left: 940px;
+  right: -300px; /* canvas x 940, width 800 */
   top: 720px;
   width: 800px;
   height: 540px;
@@ -89,7 +103,8 @@
 }
 
 .sideRight {
-  left: 1440px;
+  right: 0;
+  scale: -1 1;
   filter: blur(12px);
 }
 
@@ -134,67 +149,71 @@
   height: auto;
 }
 
-/* Lower domes — emberHaze, hotRim, lightHaze, burgundyDome, darkDome. */
+/*
+ * Lower domes — emberHaze, hotRim, lightHaze, burgundyDome, darkDome.
+ * On the bleed layer: widened by --extra so they stay centred and cover wide
+ * windows; below 1440 they follow the centred canvas.
+ */
 .ember {
-  left: -580px;
+  left: calc(-580px + min(0px, 50% - 720px));
   top: 870px;
-  width: 2600px;
+  width: calc(2600px + var(--extra));
   height: 900px;
   background: rgb(233 21 24 / 0.25);
   filter: blur(95px);
 }
 
 .hotRim {
-  left: -380px;
+  left: calc(-380px + min(0px, 50% - 720px));
   top: 900px;
-  width: 2200px;
+  width: calc(2200px + var(--extra));
   height: 900px;
   background: rgb(255 122 26 / 0.6);
   filter: blur(60px);
 }
 
 .lightHaze {
-  left: -380px;
+  left: calc(-380px + min(0px, 50% - 720px));
   top: 940px;
-  width: 2200px;
+  width: calc(2200px + var(--extra));
   height: 900px;
   background: rgb(255 214 188 / 0.2);
   filter: blur(55px);
 }
 
 .burgundy {
-  left: -330px;
+  left: calc(-330px + min(0px, 50% - 720px));
   top: 1030px;
-  width: 2100px;
+  width: calc(2100px + var(--extra));
   height: 900px;
-  background: rgb(58 12 12 / 0.9);
-  filter: blur(65px);
+  background: rgb(154 30 16 / 0.85);
+  filter: blur(70px);
 }
 
 .darkDome {
-  left: -280px;
-  top: 1075px;
-  width: 2000px;
+  left: calc(-280px + min(0px, 50% - 720px));
+  top: 1080px;
+  width: calc(2000px + var(--extra));
   height: 900px;
-  background: #101010;
-  filter: blur(75px);
+  background: #5a1410;
+  filter: blur(80px);
 }
 
-/* transitionFade 1407:3418 — full-bleed so wide windows also end in #101010. */
+/* transitionFade — #4A100E 0 → 65 % → 100 %, full-bleed for wide windows. */
 .fade {
   position: absolute;
   inset-inline: 0;
   top: 1220px;
   height: 280px;
-  background: linear-gradient(180deg, rgb(16 16 16 / 0) 0%, #101010 65%, #101010 100%);
+  background: linear-gradient(180deg, rgb(74 16 14 / 0) 0%, #4a100e 65%, #4a100e 100%);
   pointer-events: none;
 }
 
-/* Rectangle 37 1394:4360 — contrast band behind the title, black 31 %, blur 100. */
+/* Rectangle 37 — contrast band behind the title, black 31 %, blur 100; full-bleed (1442 at 1440). */
 .titleBand {
   left: 0;
+  right: -2px;
   top: 439px;
-  width: 1442px;
   height: 192px;
   background: rgb(0 0 0 / 0.31);
   filter: blur(50px);

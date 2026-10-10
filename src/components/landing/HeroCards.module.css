@@ -4,10 +4,110 @@
  * so each card keeps the exact proportions of its Figma instance.
  */
 
+/* Position wrapper (Figma x/y/size) + horizontal float. */
+.floatX {
+  position: absolute;
+}
+
+/* Vertical float. */
+.floatY {
+  position: absolute;
+  inset: 0;
+}
+
 .card {
   position: absolute;
+  inset: 0;
   overflow: hidden;
   isolation: isolate;
+}
+
+/*
+ * Barely visible idle float: X and Y are independent sine waves (2 keyframes,
+ * alternate, sine easing) with unrelated periods, so cards drift without ever
+ * stopping in sync. Amplitude by depth: far ±2.5, mid ±4, near ±6 px (X uses
+ * 70 % of it). Static keyframes (no var()) keep it on the compositor in Safari.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .floatX,
+  .floatY {
+    animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+    animation-iteration-count: infinite;
+    will-change: transform;
+  }
+
+  .floatXFar {
+    animation-name: float-x-far;
+  }
+  .floatXMid {
+    animation-name: float-x-mid;
+  }
+  .floatXNear {
+    animation-name: float-x-near;
+  }
+  .floatYFar {
+    animation-name: float-y-far;
+  }
+  .floatYMid {
+    animation-name: float-y-mid;
+  }
+  .floatYNear {
+    animation-name: float-y-near;
+  }
+}
+
+@keyframes float-x-far {
+  from {
+    transform: translate3d(-1.75px, 0, 0);
+  }
+  to {
+    transform: translate3d(1.75px, 0, 0);
+  }
+}
+
+@keyframes float-x-mid {
+  from {
+    transform: translate3d(-2.8px, 0, 0);
+  }
+  to {
+    transform: translate3d(2.8px, 0, 0);
+  }
+}
+
+@keyframes float-x-near {
+  from {
+    transform: translate3d(-4.2px, 0, 0);
+  }
+  to {
+    transform: translate3d(4.2px, 0, 0);
+  }
+}
+
+@keyframes float-y-far {
+  from {
+    transform: translate3d(0, -2.5px, 0);
+  }
+  to {
+    transform: translate3d(0, 2.5px, 0);
+  }
+}
+
+@keyframes float-y-mid {
+  from {
+    transform: translate3d(0, -4px, 0);
+  }
+  to {
+    transform: translate3d(0, 4px, 0);
+  }
+}
+
+@keyframes float-y-near {
+  from {
+    transform: translate3d(0, -6px, 0);
+  }
+  to {
+    transform: translate3d(0, 6px, 0);
+  }
 }
 
 /* Inside stroke drawn above the content, like Figma's INSIDE stroke. */

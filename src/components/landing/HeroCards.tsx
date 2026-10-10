@@ -13,13 +13,45 @@ import styles from "./HeroCards.module.css";
 
 type CssVars = CSSProperties & Record<`--${string}`, string | number>;
 
+/** Stable per-card hash so periods / phases differ but never change between renders. */
+function hash(value: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < value.length; i++) h = Math.imul(h ^ value.charCodeAt(i), 16777619);
+  return h >>> 0;
+}
+
+type FloatAxis = { duration: number; delay: number; reverse: boolean };
+
+/**
+ * Idle float timing: X 9–14 s, Y 7–11 s, never an integer ratio (no repeating
+ * Lissajous loop), negative delays for a random phase, random start direction.
+ */
+function floatTiming(card: HeroCard): { x: FloatAxis; y: FloatAxis } {
+  const h = hash(card.id);
+  const y = 7 + ((h >>> 8) % 41) / 10;
+  let x = 9 + (h % 51) / 10;
+  const ratio = x / y;
+  if (Math.abs(ratio - Math.round(ratio)) < 0.08) x = x >= 13.5 ? x - 0.7 : x + 0.7;
+  return {
+    x: { duration: x, delay: -(((h >>> 4) % 1000) / 1000) * x, reverse: ((h >>> 20) & 1) === 1 },
+    y: { duration: y, delay: -(((h >>> 14) % 1000) / 1000) * y, reverse: ((h >>> 24) & 1) === 1 },
+  };
+}
+
+function axisStyle(axis: FloatAxis): CSSProperties {
+  return {
+    animationDuration: `${axis.duration}s`,
+    animationDelay: `${axis.delay.toFixed(3)}s`,
+    animationDirection: axis.reverse ? "alternate-reverse" : "alternate",
+  };
+}
+
+const FLOAT_X = { far: styles.floatXFar, mid: styles.floatXMid, near: styles.floatXNear };
+const FLOAT_Y = { far: styles.floatYFar, mid: styles.floatYMid, near: styles.floatYNear };
+
 /** Absolute geometry + Figma effects shared by every card. */
 function cardStyle(card: HeroCard): CssVars {
   return {
-    left: card.x,
-    top: card.y,
-    width: card.width,
-    height: card.height,
     borderRadius: card.radius,
     opacity: card.opacity,
     // Figma layer blur R ≈ CSS blur(R / 2).
@@ -144,28 +176,40 @@ function PhotoCard({ card }: { card: HeroPhotoCard }) {
   );
 }
 
-/** One decorative floating card (aria-hidden: purely visual composition). */
+/**
+ * One decorative floating card (aria-hidden: purely visual composition).
+ * Two wrappers carry the idle float (X and Y, independent sine waves) so the
+ * card itself — with its blur filter and glow — is never repainted per frame.
+ */
 export function HeroFloatingCard({ card }: { card: HeroCard }) {
+  const timing = floatTiming(card);
   return (
     <div
-      className={cn(
-        styles.card,
-        card.kind !== "photo" && styles.app,
-        card.kind === "presentation" && styles.presentation,
-        card.stroke.align === "inside" ? styles.strokeInside : styles.strokeOutside,
-      )}
-      style={cardStyle(card)}
-      data-figma-node={card.id}
+      className={cn(styles.floatX, FLOAT_X[card.layer])}
+      style={{ left: card.x, top: card.y, width: card.width, height: card.height, ...axisStyle(timing.x) }}
     >
-      <CardImage image={card.image} width={card.width} />
-      {card.kind === "app" && <AppCard card={card} />}
-      {card.kind === "presentation" && <PresentationCard card={card} />}
-      {card.kind === "photo" && <PhotoCard card={card} />}
+      <div className={cn(styles.floatY, FLOAT_Y[card.layer])} style={axisStyle(timing.y)}>
+        <div
+          className={cn(
+            styles.card,
+            card.kind !== "photo" && styles.app,
+            card.kind === "presentation" && styles.presentation,
+            card.stroke.align === "inside" ? styles.strokeInside : styles.strokeOutside,
+          )}
+          style={cardStyle(card)}
+          data-figma-node={card.id}
+        >
+          <CardImage image={card.image} width={card.width} />
+          {card.kind === "app" && <AppCard card={card} />}
+          {card.kind === "presentation" && <PresentationCard card={card} />}
+          {card.kind === "photo" && <PhotoCard card={card} />}
+        </div>
+      </div>
     </div>
   );
 }
 
-/** A full-canvas layer (1440×1040, like Figma's cardsFar / cardsMid / cardsNear). */
+/** A full-canvas layer (like Figma's cardsFar / cardsMid / cardsNear). */
 export function HeroCardLayer({ cards, className }: { cards: HeroCard[]; className?: string }) {
   return (
     <div className={cn("absolute inset-x-0 top-0 h-[1040px]", className)} aria-hidden="true">
