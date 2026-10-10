@@ -395,6 +395,3 @@ export const heroCardsNear: HeroCard[] = [
     description: "Структура и текст слайдов",
   },
 ];
-
-export const heroCardCount =
-  heroCardsFar.length + heroCardsMid.length + heroCardsPresentation.length + heroCardsNear.length;

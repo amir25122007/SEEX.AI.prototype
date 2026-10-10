@@ -18,7 +18,13 @@ function MarqueeRow({
   className?: string;
 }) {
   return (
-    <Marquee direction={direction} period={cards.length * CARD_STEP} className={cn(styles.track, className)}>
+    <Marquee
+      direction={direction}
+      period={cards.length * CARD_STEP}
+      className={cn(styles.track, className)}
+      // Keep a focused card clear of the 230.4px edge fades.
+      focusInset={240}
+    >
       {({ index, duplicate }) => (
         <ul key={index} className={styles.list} aria-hidden={duplicate || undefined}>
           {cards.map((scenario) => (

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { MarqueeFocusGuard } from "@/components/ui/MarqueeFocusGuard";
 import { cn } from "@/lib/cn";
 import styles from "./Marquee.module.css";
 
@@ -14,6 +15,11 @@ type MarqueeProps = {
   speed?: number;
   /** Positions the track; place it 2 periods left of the design x so copy 2 lands on it. */
   className?: string;
+  /**
+   * For tracks with focusable content: keyboard focus shifts the track so the focused
+   * item stays this many px inside the visible edges (see MarqueeFocusGuard).
+   */
+  focusInset?: number;
   /** Renders one copy; `duplicate` copies must hide themselves from assistive tech. */
   children: (copy: { index: number; duplicate: boolean }) => ReactNode;
 };
@@ -23,7 +29,7 @@ type MarqueeProps = {
  * (20 % of the track) per cycle. Pauses on hover and keyboard focus; static
  * with reduced motion. Only `transform` is animated.
  */
-export function Marquee({ direction, period, speed = 40, className, children }: MarqueeProps) {
+export function Marquee({ direction, period, speed = 40, className, focusInset, children }: MarqueeProps) {
   return (
     <div
       className={cn(styles.track, direction === "left" ? styles.left : styles.right, className)}
@@ -32,6 +38,7 @@ export function Marquee({ direction, period, speed = 40, className, children }: 
       {Array.from({ length: MARQUEE_COPIES }, (_, index) =>
         children({ index, duplicate: index !== MARQUEE_REAL_COPY }),
       )}
+      {focusInset !== undefined ? <MarqueeFocusGuard period={period} inset={focusInset} /> : null}
     </div>
   );
 }

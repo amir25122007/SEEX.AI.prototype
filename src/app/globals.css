@@ -2,31 +2,12 @@
 
 /*
  * SeexAI desktop landing — design tokens.
- * Source of truth: Figma "Main page v3" (node 1394:3268), 1440px.
+ * Source of truth: Figma final (design-refs/final), 1440px.
  * Only recurring values live here; one-off glow colours stay next to their section.
  */
 
-/* ---------------------------------------------------------------------------
- * Local brand fonts (licensed files are not in the repo yet).
- * Drop the files into /public/fonts with exactly these names and every
- * component using `font-druk` / `font-neuropol` picks them up automatically.
- * Browsers only request a face when an element actually uses it.
- * ------------------------------------------------------------------------- */
-@font-face {
-  font-family: "Druk Text Wide Cyr";
-  src: url("/fonts/DrukTextWideCyr-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Neuropol";
-  src: url("/fonts/Neuropol-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+/* Local brand fonts (Druk Text Wide Cyr, Neuropol): @font-face is injected by
+   src/lib/brandFonts.ts only when the .woff2 files exist in /public/fonts. */
 
 @theme static {
   /* Colors ---------------------------------------------------------------- */

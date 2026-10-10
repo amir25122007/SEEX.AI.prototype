@@ -1,6 +1,6 @@
 /**
  * "Путь к результату" — Figma final › how it works (design-refs/final/raw/Main page v4.svg).
- * Step texts from texts-from-pdf.txt (the layer names are stale), line breaks from the PNG.
+ * Step texts from texts-from-pdf.txt (the layer names are stale); they wrap inside their column.
  */
 
 export type HowItWorksStep = {
@@ -14,17 +14,17 @@ export const howItWorksSteps: HowItWorksStep[] = [
   {
     number: "[01]",
     title: "Выберите задачу",
-    description: "Презентация, карточка товара, обработка\nфото, резюме или отчёт. Пять готовых\nсценариев, и список растёт.",
+    description: "Презентация, карточка товара, обработка фото, резюме или отчёт. Пять готовых сценариев, и список растёт.",
   },
   {
     number: "[02]",
     title: "Ответьте на пару вопросов",
-    description: "Тема, аудитория, тон или площадка. Без\nпромптов и настроек, всё уже подобрано.",
+    description: "Тема, аудитория, тон или площадка. Без промптов и настроек, всё уже подобрано.",
   },
   {
     number: "[03]",
     title: "Заберите готовый файл",
-    description: "PPTX, PDF, JPG или XLSX. Посмотрите\nрезультат, докрутите парой правок и скачайте.",
+    description: "PPTX, PDF, JPG или XLSX. Посмотрите результат, докрутите парой правок и скачайте.",
   },
 ];
 

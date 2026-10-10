@@ -120,13 +120,11 @@
   color: var(--color-white);
 }
 
-/* SF Pro Text 18/26 → Inter. Lines are the Figma ones (`pre`): Inter is ≈5 % wider, so the
-   longest line may run up to ~20px into the right margin instead of wrapping into a 3rd line. */
+/* SF Pro Text 18/26 → Inter; wraps inside the 407.5px column (right edge = container 1360). */
 .stepText {
   margin: 0;
   font-size: 18px;
   line-height: 26px;
-  white-space: pre;
   color: var(--color-white);
 }
 
