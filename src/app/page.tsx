@@ -3,6 +3,7 @@ import { FeaturesBento } from "@/components/landing/FeaturesBento";
 import { Hero } from "@/components/landing/Hero";
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { Learning } from "@/components/landing/Learning";
+import { Pricing } from "@/components/landing/Pricing";
 import { Scenarios } from "@/components/landing/Scenarios";
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
       <HowItWorks />
       <Learning />
       <Audience />
+      <Pricing />
     </main>
   );
 }

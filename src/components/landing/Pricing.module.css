@@ -1,0 +1,333 @@
+/*
+ * "Выберите свой формат доступа" — Figma final › pricing (design-refs/final/raw/Main page v4.svg).
+ * Section box: page y 5666.75 (heading line box) – 6518.76 (bottom of PRO); coordinates are
+ * relative to it and to the centred 1440 canvas. The backdrop glow is Audience's pricingBackdrop.
+ *
+ * Plan content is a vertical flow measured from Figma baselines (Inter: ascent 0.969,
+ * single lines use line-height 1.2109). PRO is the same flow, 25px lower (popular badge).
+ */
+.section {
+  position: relative;
+  height: 852.01px;
+  margin-top: 98.99px; /* Audience's stat cards end at y 5567.76 */
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 720px);
+  width: 1440px;
+  height: 100%;
+}
+
+/* Druk 56/104 %: line 1 cap top at page 5678.42, line 2 lime, 58px below. */
+.heading {
+  position: absolute;
+  top: 0;
+  left: 280px;
+  width: max-content;
+}
+
+/* SF Pro Text 22/30 → Inter; first baseline at page 5828.76. */
+.description {
+  margin-top: 12.77px;
+  font-size: 22px;
+  line-height: 30px;
+  white-space: pre-line;
+}
+
+/* ---------- Plans ------------------------------------------------------------ */
+
+/* START 80 / PRO 519 / MAX 950: PRO starts at page y 5905.76, the others 20px lower. */
+.plans {
+  position: absolute;
+  top: 239.01px;
+  left: 80px;
+  display: flex;
+  align-items: flex-start;
+  gap: 29px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 22px;
+}
+
+/* START / MAX: 410×573, #FF5A00 → #F8440A → #E0190F, 0.94px white 28 % inside stroke,
+   drop shadow dy 16.94, blur 28.24 (spread −5.65) rgb(255 75 0 / 38 %). */
+.planOrange {
+  --plan-text: rgb(255 255 255 / 0.95);
+  --plan-muted: rgb(255 255 255 / 0.88);
+  --plan-strong: var(--color-white);
+  --plan-accent-bg: var(--color-lime);
+  --plan-accent-fg: #101010;
+  --plan-divider: rgb(255 255 255 / 0.3);
+  --plan-star: var(--color-lime);
+  --plan-old: var(--color-white);
+  width: 410px;
+  height: 573px;
+  margin-top: 20px;
+  padding: 35.45px 0 0 34px;
+  background: linear-gradient(125.6deg, #ff5a00 0%, #f8440a 50%, #e0190f 100%);
+  box-shadow:
+    inset 0 0 0 0.94px rgb(255 255 255 / 0.28),
+    0 16.94px 56.47px -5.65px rgb(255 75 0 / 0.38);
+}
+
+/* PRO: 402×613 lime, lime glow stdDeviation 32.94 @ 30 %. */
+.planLime {
+  --plan-text: rgb(10 8 5 / 0.88);
+  --plan-muted: rgb(10 8 5 / 0.76);
+  --plan-strong: #0a0805;
+  --plan-accent-bg: #0a0805;
+  --plan-accent-fg: var(--color-lime);
+  --plan-divider: rgb(10 8 5 / 0.16);
+  --plan-star: #e0350c;
+  --plan-old: #454545;
+  width: 402px;
+  height: 613px;
+  padding: 60.37px 0 0 30px;
+  background: var(--color-lime);
+  box-shadow: 0 0 65.88px rgb(194 239 75 / 0.3);
+}
+
+/* "ПОПУЛЯРНЫЙ": 132×29 at x 135, y 20, #FF6A00 → #E91518; 14 / 600. */
+.popular {
+  position: absolute;
+  top: 20px;
+  left: 135px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 132px;
+  height: 29px;
+  border-radius: 14.5px;
+  background: var(--gradient-badge);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+
+/* discount: 53–55×28, r 14, 12 / 500; right-aligned with the content. */
+.discount {
+  position: absolute;
+  top: 36.5px;
+  right: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 53px;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 14px;
+  background: var(--plan-accent-bg);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--plan-accent-fg);
+}
+
+.planLime .discount {
+  top: 61.5px;
+  right: 30px;
+  min-width: 55px;
+}
+
+/* Druk 26/116 %. */
+.name {
+  margin: 0;
+  font-family: var(--font-druk);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 30.16px;
+  text-transform: uppercase;
+  color: var(--plan-strong);
+}
+
+/* 16 / 400. */
+.subtitle {
+  margin: 2.64px 0 0;
+  font-size: 16px;
+  line-height: 1.2109;
+  color: var(--plan-text);
+}
+
+/* 26 / 300, the ₽ 16px raised 4.4px; 2px strike line at page y 6041 (START). */
+.oldPrice {
+  margin: 13.32px 0 0;
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 1.2109;
+  color: var(--plan-old);
+}
+
+.oldPrice s {
+  position: relative;
+  text-decoration: none;
+}
+
+.oldPrice s::after {
+  content: "";
+  position: absolute;
+  top: 13.29px;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: currentColor;
+}
+
+.rub {
+  margin-left: 5px;
+  font-size: 16px;
+  vertical-align: 4.38px;
+}
+
+.priceRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 5.57px 0 0;
+}
+
+/* Price box 126–143×48, r 10; Druk 30. */
+.price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  border-radius: 10px;
+  background: var(--plan-accent-bg);
+  font-family: var(--font-druk);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--plan-accent-fg);
+}
+
+/* "₽ / мес" 20 / 400, baseline 42px below the box top. */
+.perMonth {
+  margin-top: 22.63px;
+  font-size: 20px;
+  line-height: 1.2109;
+  color: var(--plan-muted);
+}
+
+/* 14 / 400. */
+.period {
+  margin: 11.44px 0 0;
+  font-size: 14px;
+  line-height: 1.2109;
+  color: var(--plan-muted);
+}
+
+/* "Выбрать тариф": 342×49, r 24.5, 16 / 500. */
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 342px;
+  height: 49px;
+  margin-top: 16.61px;
+  border-radius: 24.5px;
+  background: var(--plan-accent-bg);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--plan-accent-fg);
+  transition:
+    filter 200ms ease-out,
+    background-color 200ms ease-out;
+}
+
+.planOrange .cta:hover {
+  filter: brightness(1.05);
+}
+
+.planLime .cta:hover {
+  background: #2a2620;
+}
+
+.cta:focus-visible {
+  outline: 2px solid var(--plan-strong);
+  outline-offset: 3px;
+}
+
+.divider {
+  width: 342px;
+  height: 1px;
+  margin: 20px 0 0;
+  border: 0;
+  background: var(--plan-divider);
+}
+
+/* ✷ 22.14px + "≈ N генераций/мес" 16 / 400. */
+.generations {
+  display: flex;
+  gap: 12.93px;
+  height: 22.14px;
+  margin: 20.93px 0 0;
+  padding-left: 0.93px;
+  font-size: 16px;
+  line-height: 22.14px;
+  color: var(--plan-strong);
+}
+
+.star {
+  flex-shrink: 0;
+  color: var(--plan-star);
+}
+
+/* "ВОЗМОЖНОСТИ" / "ДОСТУП К МОДЕЛЯМ": 16 / 500, ls 0.8. */
+.groupTitle {
+  margin: 14.43px 0 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2109;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--plan-text);
+}
+
+.groupTitleModels {
+  margin-top: 13.01px;
+}
+
+/* Rows 29px apart: 24px check + 10px gap + 16 / 400 text. */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 11.36px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.groupTitleModels + .list {
+  margin-top: 11.61px;
+}
+
+.item {
+  display: flex;
+  gap: 10px;
+  height: 24px;
+  font-size: 16px;
+  line-height: 24px;
+  white-space: nowrap;
+  color: var(--plan-text);
+}
+
+.check {
+  flex-shrink: 0;
+  color: var(--plan-strong);
+}
