@@ -1,0 +1,13 @@
+<svg width="1236.89" height="1229.8" viewBox="-536.752 40.7581 1236.89 1229.8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- how it works › Group 17 › glow_2 (design-refs/v4/how-it-works.svg); SCREEN blend is applied in CSS -->
+<g id="glow_2" opacity="0.6" filter="url(#filter1_f_1431_3794)">
+<ellipse cx="81.693" cy="655.656" rx="496.648" ry="195.112" transform="rotate(-44.6326 81.693 655.656)" fill="#E02A0C"/>
+</g>
+<defs>
+<filter id="filter1_f_1431_3794" x="-536.752" y="40.7581" width="1236.89" height="1229.8" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="119.632" result="effect1_foregroundBlur_1431_3794"/>
+</filter>
+</defs>
+</svg>

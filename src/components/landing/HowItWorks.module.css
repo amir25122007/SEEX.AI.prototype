@@ -1,0 +1,222 @@
+/*
+ * "Путь к результату" — Figma "Main page v4" › how it works (design-refs/v4/how-it-works.svg).
+ * Frame 1440×1581 at page y 2441; coordinates below are Figma px relative to the frame,
+ * the 1440 canvas is centred, glows and the slide strip are full-bleed.
+ */
+
+/*
+ * The frame starts 340.45px above the bottom of Features (Features ends at
+ * y 2781.45 in the build, the frame starts at y 2441). Only text and controls
+ * catch the pointer, so the overlap never blocks Features.
+ */
+.section {
+  position: relative; /* no z-index: the SCREEN glows must reach the page background */
+  height: 1581px;
+  margin-top: -340.45px;
+  pointer-events: none;
+}
+
+/* ---------- Group 17 glows (SVG viewBox = Figma filter region) ------------ */
+
+.glow {
+  position: absolute;
+  max-width: none;
+}
+
+.glowBack {
+  top: 0;
+  left: calc(50% - 720px - 633.024px);
+  width: 1589.1px;
+  height: 1580.25px;
+}
+
+.glowMid {
+  top: 40.758px;
+  left: calc(50% - 720px - 536.752px);
+  width: 1236.89px;
+  height: 1229.8px;
+  mix-blend-mode: screen;
+}
+
+.glowFront {
+  top: 120.618px;
+  left: calc(50% - 720px - 416.159px);
+  width: 857.553px;
+  height: 852.373px;
+  mix-blend-mode: screen;
+}
+
+/* ---------- Heading (Frame 269) ------------------------------------------- */
+
+/*
+ * Druk 56/104 %: cap top of line 1 at y 430.54 → line box at y 418.87, x 280;
+ * line 2 at x +229.5, 57.84px lower (−0.4px). Description 18/135 %, explicit break.
+ */
+.heading {
+  position: absolute;
+  top: 418.87px;
+  left: calc(50% - 720px + 280px);
+  width: max-content;
+  pointer-events: auto;
+}
+
+/* ---------- Steps (Frame 275) --------------------------------------------- */
+
+/*
+ * Rows: 20px above the content, 28px below, then the 1px white 15 % line
+ * (lines at y 787.21 / 915.21). The description column starts at x 952.5.
+ */
+.steps {
+  position: absolute;
+  top: 633.6px;
+  left: calc(50% - 640px);
+  width: 1280px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: auto;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 1fr 407.5px;
+  align-items: center;
+  padding: 20px 0 28px;
+  border-bottom: 1px solid rgb(255 255 255 / 0.15);
+}
+
+.step:last-child {
+  border-bottom: 0;
+}
+
+/* Number + title sit 1.1px above the description's centre in Figma. */
+.stepHead {
+  position: relative;
+  top: -1.1px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* IBM Plex Mono Medium 20, lime. */
+.stepNumber {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-lime);
+}
+
+/* Druk 26/116 %, −1 %. */
+.stepTitle {
+  margin: 0;
+  font-family: var(--font-druk);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: -0.26px;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+
+/* IBM Plex Mono 18/146 %. */
+.stepText {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  line-height: 1.46;
+  white-space: pre-line;
+  color: var(--color-white);
+}
+
+/* ---------- Carousel (Frame 374) ------------------------------------------ */
+
+/* From the top of the slides' outer edge (y 1053.72) to the bottom of the dots (y 1514.31). */
+.carousel {
+  position: absolute;
+  top: 1053.72px;
+  right: 0;
+  left: 0;
+  height: 460.6px;
+}
+
+.viewport {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 432.6px;
+  overflow-x: clip;
+}
+
+/* Slides are centred vertically (centre y 1270); the transform is set inline. */
+.strip {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 720px);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: max-content;
+  height: 100%;
+}
+
+.stripAnimated {
+  transition: transform 400ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stripAnimated {
+    transition: none;
+  }
+}
+
+.slide {
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* image 24 / 27: r 19.425, 3.15px lime stroke centred on the rect. */
+.slideRaster {
+  margin-inline: 1.575px;
+  border-radius: 19.425px;
+  outline: 3.15px solid var(--color-lime);
+  outline-offset: -1.575px;
+}
+
+/* Frame 373: the SVG carries its own white base, clip and inside stroke. */
+.slideMock {
+  border-radius: 17.9493px;
+}
+
+/* Cover, anchored to the top (Figma pattern: full width, bottom cropped). */
+.slideImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Arrows 56px at x 32 / 1352, y 1241.71. */
+.arrow {
+  position: absolute;
+  top: 187.99px;
+  pointer-events: auto;
+}
+
+.arrowPrev {
+  left: calc(50% - 720px + 32px);
+}
+
+.arrowNext {
+  left: calc(50% - 720px + 1352px);
+}
+
+/* Pagination at x 675, y 1506.31. */
+.pagination {
+  position: absolute;
+  top: 452.59px;
+  left: calc(50% - 720px + 675px);
+  pointer-events: auto;
+}

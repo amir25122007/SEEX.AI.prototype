@@ -1,5 +1,6 @@
 import { FeaturesBento } from "@/components/landing/FeaturesBento";
 import { Hero } from "@/components/landing/Hero";
+import { HowItWorks } from "@/components/landing/HowItWorks";
 import { Scenarios } from "@/components/landing/Scenarios";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <Scenarios />
       <FeaturesBento />
+      <HowItWorks />
     </main>
   );
 }
