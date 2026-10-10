@@ -1,0 +1,168 @@
+/*
+ * "Часто задаваемые вопросы" — Figma final › Frame 341 (design-refs/final/raw/Main page v4.svg).
+ * Flow layout (rows expand): heading at page y 6618.06, rows from y 6865.76; the canvas
+ * is the centred 1440 frame.
+ */
+.section {
+  position: relative;
+  margin-top: 99.3px; /* Pricing ends at y 6518.76 */
+}
+
+.canvas {
+  width: 1440px;
+  margin: 0 auto;
+}
+
+/* Druk 60/110 %, like Scenarios: line 2 orange, 59px below; block at x 267. */
+.heading2 {
+  width: max-content;
+  margin-left: 267px;
+}
+
+/* SF Pro Text 22/30 → Inter; first baseline at page 6788.76. */
+.description {
+  margin-top: 12.7px;
+  font-size: 22px;
+  line-height: 30px;
+  white-space: pre-line;
+}
+
+/* ---------- Accordion (1280 wide, rows 14px apart) ---------------------------- */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 1280px;
+  margin: 40px 0 0 80px;
+  padding: 0;
+  list-style: none;
+}
+
+/*
+ * Row: glows → #101010 40 % fill → 1.2px #FF6A00 35 % inside stroke → content (Figma order).
+ * Closed 108px, open 181px: question button 87.68 + answer panel + 20.32 bottom padding.
+ */
+.item {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 20.32px;
+  border-radius: 14px;
+}
+
+.item::before,
+.item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* The fill is painted over the glows (z 1), the stroke over everything (z 3). */
+.item::before {
+  z-index: 1;
+  background: rgb(16 16 16 / 0.4);
+}
+
+.item::after {
+  z-index: 3;
+  border: 1.2px solid rgb(255 106 0 / 0.35);
+}
+
+.glow {
+  position: absolute;
+  max-width: none;
+  pointer-events: none;
+}
+
+.screen {
+  mix-blend-mode: screen;
+}
+
+.heading {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+}
+
+/* Question: SF Pro Text 22 / 400 → Inter, uppercase; baseline 62px below the row top. */
+.question {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  height: 87.68px;
+  padding: 40.69px 43.5px 0 35px;
+  border: 0;
+  border-radius: 14px;
+  background: none;
+  font: inherit;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 26.64px;
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+.question:focus-visible {
+  outline: 2px solid var(--color-lime);
+  outline-offset: -4px;
+}
+
+/* plus / minus: 19px strokes centred 54px below the row top, 44.5px from the right. */
+.icon {
+  flex-shrink: 0;
+  margin-top: 2.81px;
+  color: var(--color-lime);
+}
+
+.iconVertical {
+  transform-origin: center;
+  transition:
+    transform 250ms ease-out,
+    opacity 250ms ease-out;
+}
+
+.iconVerticalHidden {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+/* Height animation: grid rows 0fr → 1fr. */
+.panel {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 250ms ease-out;
+}
+
+.itemOpen .panel {
+  grid-template-rows: 1fr;
+}
+
+.panelInner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Answer: 18/29, white; the first line starts at the bottom of the question button. */
+.answer {
+  max-width: 1155px;
+  margin: 0;
+  padding: 0 0 15px 35px;
+  font-size: 18px;
+  line-height: 29px;
+  color: var(--color-white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .iconVertical {
+    transition: none;
+  }
+}

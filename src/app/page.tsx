@@ -1,4 +1,5 @@
 import { Audience } from "@/components/landing/Audience";
+import { Faq } from "@/components/landing/Faq";
 import { FeaturesBento } from "@/components/landing/FeaturesBento";
 import { Hero } from "@/components/landing/Hero";
 import { HowItWorks } from "@/components/landing/HowItWorks";
@@ -18,6 +19,7 @@ export default function Home() {
       <Learning />
       <Audience />
       <Pricing />
+      <Faq />
     </main>
   );
 }
