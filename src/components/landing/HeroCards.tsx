@@ -23,15 +23,15 @@ function hash(value: string): number {
 type FloatAxis = { duration: number; delay: number; reverse: boolean };
 
 /**
- * Idle float timing: X 9–14 s, Y 7–11 s, never an integer ratio (no repeating
+ * Idle float timing: X 7–10 s, Y 5.5–8 s, never an integer ratio (no repeating
  * Lissajous loop), negative delays for a random phase, random start direction.
  */
 function floatTiming(card: HeroCard): { x: FloatAxis; y: FloatAxis } {
   const h = hash(card.id);
-  const y = 7 + ((h >>> 8) % 41) / 10;
-  let x = 9 + (h % 51) / 10;
+  const y = 5.5 + ((h >>> 8) % 251) / 100;
+  let x = 7 + ((h >>> 7) % 301) / 100;
   const ratio = x / y;
-  if (Math.abs(ratio - Math.round(ratio)) < 0.08) x = x >= 13.5 ? x - 0.7 : x + 0.7;
+  if (Math.abs(ratio - Math.round(ratio)) < 0.08) x = x >= 9.5 ? x - 0.5 : x + 0.5;
   return {
     x: { duration: x, delay: -(((h >>> 4) % 1000) / 1000) * x, reverse: ((h >>> 20) & 1) === 1 },
     y: { duration: y, delay: -(((h >>> 14) % 1000) / 1000) * y, reverse: ((h >>> 24) & 1) === 1 },
@@ -40,7 +40,7 @@ function floatTiming(card: HeroCard): { x: FloatAxis; y: FloatAxis } {
 
 function axisStyle(axis: FloatAxis): CSSProperties {
   return {
-    animationDuration: `${axis.duration}s`,
+    animationDuration: `${axis.duration.toFixed(2)}s`,
     animationDelay: `${axis.delay.toFixed(3)}s`,
     animationDirection: axis.reverse ? "alternate-reverse" : "alternate",
   };

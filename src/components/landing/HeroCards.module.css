@@ -25,7 +25,7 @@
 /*
  * Barely visible idle float: X and Y are independent sine waves (2 keyframes,
  * alternate, sine easing) with unrelated periods, so cards drift without ever
- * stopping in sync. Amplitude by depth: far ±2.5, mid ±4, near ±6 px (X uses
+ * stopping in sync. Amplitude by depth: far ±3.5, mid ±5.5, near ±8.5 px (X uses
  * 70 % of it). Static keyframes (no var()) keep it on the compositor in Safari.
  */
 @media (prefers-reduced-motion: no-preference) {
@@ -58,55 +58,55 @@
 
 @keyframes float-x-far {
   from {
-    transform: translate3d(-1.75px, 0, 0);
+    transform: translate3d(-2.45px, 0, 0);
   }
   to {
-    transform: translate3d(1.75px, 0, 0);
+    transform: translate3d(2.45px, 0, 0);
   }
 }
 
 @keyframes float-x-mid {
   from {
-    transform: translate3d(-2.8px, 0, 0);
+    transform: translate3d(-3.85px, 0, 0);
   }
   to {
-    transform: translate3d(2.8px, 0, 0);
+    transform: translate3d(3.85px, 0, 0);
   }
 }
 
 @keyframes float-x-near {
   from {
-    transform: translate3d(-4.2px, 0, 0);
+    transform: translate3d(-5.95px, 0, 0);
   }
   to {
-    transform: translate3d(4.2px, 0, 0);
+    transform: translate3d(5.95px, 0, 0);
   }
 }
 
 @keyframes float-y-far {
   from {
-    transform: translate3d(0, -2.5px, 0);
+    transform: translate3d(0, -3.5px, 0);
   }
   to {
-    transform: translate3d(0, 2.5px, 0);
+    transform: translate3d(0, 3.5px, 0);
   }
 }
 
 @keyframes float-y-mid {
   from {
-    transform: translate3d(0, -4px, 0);
+    transform: translate3d(0, -5.5px, 0);
   }
   to {
-    transform: translate3d(0, 4px, 0);
+    transform: translate3d(0, 5.5px, 0);
   }
 }
 
 @keyframes float-y-near {
   from {
-    transform: translate3d(0, -6px, 0);
+    transform: translate3d(0, -8.5px, 0);
   }
   to {
-    transform: translate3d(0, 6px, 0);
+    transform: translate3d(0, 8.5px, 0);
   }
 }
 

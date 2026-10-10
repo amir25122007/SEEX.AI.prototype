@@ -30,7 +30,7 @@
 
 @theme static {
   /* Colors ---------------------------------------------------------------- */
-  --color-page: #101010; /* page background below the hero */
+  --color-page: #230f01; /* v4 page background below the hero */
   --color-ink: #0a0805; /* text on lime, deepest surface */
   --color-lime: #c2ef4b; /* brand accent */
   --color-orange: #ff6a00; /* second heading line, active states */
@@ -115,6 +115,9 @@
   --gradient-plan-button: linear-gradient(180deg, #ff7a1a 0%, #e0350c 50%, #8a1210 100%);
   --gradient-badge: linear-gradient(90deg, #ff6a00 0%, #e91518 100%);
   --gradient-scrim: linear-gradient(180deg, rgb(0 0 0 / 0) 0%, rgb(0 0 0 / 0.98) 100%);
+  /* Page underlay: the hero's last colour (#4A100E at y 1500) fades into the page
+     colour by y 2400, measured on page-ref@1x.png; keeps section joins seamless. */
+  --gradient-page: linear-gradient(180deg, #4a100e 1500px, var(--color-page) 2400px);
 }
 
 @layer base {
