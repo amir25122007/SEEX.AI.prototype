@@ -15,6 +15,12 @@
   inset: 0;
 }
 
+/* Slow tilt (mid and near cards only). */
+.floatR {
+  position: absolute;
+  inset: 0;
+}
+
 .card {
   position: absolute;
   inset: 0;
@@ -23,14 +29,16 @@
 }
 
 /*
- * Barely visible idle float: X and Y are independent sine waves (2 keyframes,
- * alternate, sine easing) with unrelated periods, so cards drift without ever
- * stopping in sync. Amplitude by depth: far ±3.5, mid ±5.5, near ±8.5 px (X uses
- * 70 % of it). Static keyframes (no var()) keep it on the compositor in Safari.
+ * Idle float: X and Y are independent sine waves (2 keyframes, alternate, sine
+ * easing) with unrelated periods, so cards drift without ever stopping in sync.
+ * Amplitude by depth: far ±6, mid ±10, near ±15 px (X uses 70 % of it); mid and
+ * near also tilt ±0.6° on a third, slower axis. Static keyframes (no var()) keep
+ * it on the compositor in Safari.
  */
 @media (prefers-reduced-motion: no-preference) {
   .floatX,
-  .floatY {
+  .floatY,
+  .floatR {
     animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
     animation-iteration-count: infinite;
     will-change: transform;
@@ -54,59 +62,71 @@
   .floatYNear {
     animation-name: float-y-near;
   }
+  .floatR {
+    animation-name: float-tilt;
+  }
 }
 
 @keyframes float-x-far {
   from {
-    transform: translate3d(-2.45px, 0, 0);
+    transform: translate3d(-4.2px, 0, 0);
   }
   to {
-    transform: translate3d(2.45px, 0, 0);
+    transform: translate3d(4.2px, 0, 0);
   }
 }
 
 @keyframes float-x-mid {
   from {
-    transform: translate3d(-3.85px, 0, 0);
+    transform: translate3d(-7px, 0, 0);
   }
   to {
-    transform: translate3d(3.85px, 0, 0);
+    transform: translate3d(7px, 0, 0);
   }
 }
 
 @keyframes float-x-near {
   from {
-    transform: translate3d(-5.95px, 0, 0);
+    transform: translate3d(-10.5px, 0, 0);
   }
   to {
-    transform: translate3d(5.95px, 0, 0);
+    transform: translate3d(10.5px, 0, 0);
   }
 }
 
 @keyframes float-y-far {
   from {
-    transform: translate3d(0, -3.5px, 0);
+    transform: translate3d(0, -6px, 0);
   }
   to {
-    transform: translate3d(0, 3.5px, 0);
+    transform: translate3d(0, 6px, 0);
   }
 }
 
 @keyframes float-y-mid {
   from {
-    transform: translate3d(0, -5.5px, 0);
+    transform: translate3d(0, -10px, 0);
   }
   to {
-    transform: translate3d(0, 5.5px, 0);
+    transform: translate3d(0, 10px, 0);
   }
 }
 
 @keyframes float-y-near {
   from {
-    transform: translate3d(0, -8.5px, 0);
+    transform: translate3d(0, -15px, 0);
   }
   to {
-    transform: translate3d(0, 8.5px, 0);
+    transform: translate3d(0, 15px, 0);
+  }
+}
+
+@keyframes float-tilt {
+  from {
+    transform: rotate(-0.6deg);
+  }
+  to {
+    transform: rotate(0.6deg);
   }
 }
 

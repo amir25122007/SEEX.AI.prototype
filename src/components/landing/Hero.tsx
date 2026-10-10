@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Header } from "@/components/layout/Header";
 import { HeroCardLayer } from "@/components/landing/HeroCards";
+import { HeroScenarioProvider, HeroTitle } from "@/components/landing/HeroTitle";
 import { PromptComposer } from "@/components/landing/PromptComposer";
 import { heroCardsFar, heroCardsMid, heroCardsNear, heroCardsPresentation } from "@/data/heroCards";
 import { cn } from "@/lib/cn";
@@ -63,22 +64,22 @@ export function Hero() {
 
       <div className={styles.fade} aria-hidden="true" />
 
-      <div className={styles.canvas}>
-        <div className={styles.composer}>
-          <PromptComposer />
+      {/* Title and chips share the current scenario (the chip of the shown word is lit). */}
+      <HeroScenarioProvider>
+        <div className={styles.canvas}>
+          <div className={styles.composer}>
+            <PromptComposer />
+          </div>
         </div>
-      </div>
 
-      <div className={styles.bleed} aria-hidden="true">
-        <div className={cn(styles.layer, styles.titleBand)} />
-      </div>
+        <div className={styles.bleed} aria-hidden="true">
+          <div className={cn(styles.layer, styles.titleBand)} />
+        </div>
 
-      <div className={styles.canvas}>
-        <h1 id="hero-title" className={styles.title}>
-          <span className={cn(styles.titleLine, styles.titleLime)}>Презентация</span>
-          <span className={cn(styles.titleLine, styles.titleWhite)}>за пару минут</span>
-        </h1>
-      </div>
+        <div className={styles.canvas}>
+          <HeroTitle />
+        </div>
+      </HeroScenarioProvider>
 
       <Header />
     </section>

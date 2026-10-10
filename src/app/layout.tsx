@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { brandFontFaces } from "@/lib/brandFonts";
+import { preload } from "react-dom";
+import { brandFontFaces, brandFontPreloads } from "@/lib/brandFonts";
 import { fontVariables } from "@/lib/fonts";
 import { ALLOW_INDEXING, site } from "@/lib/site";
 import "./globals.css";
@@ -37,6 +38,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   const fontFaces = brandFontFaces();
+  for (const href of brandFontPreloads()) {
+    preload(href, { as: "font", type: "font/woff2", crossOrigin: "anonymous" });
+  }
   return (
     <html lang="ru" className={fontVariables}>
       <head>{fontFaces ? <style dangerouslySetInnerHTML={{ __html: fontFaces }} /> : null}</head>

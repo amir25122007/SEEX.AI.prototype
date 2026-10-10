@@ -248,6 +248,85 @@
   color: var(--color-lime);
 }
 
+/* Visual title (aria-hidden): shrink-wraps the white line, so hover = the text, not the band. */
+.titleVisual {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*
+ * Rotating first line: a fixed 90px box (height reserved, nothing below moves); words are
+ * stacked absolutely and centred, so a word wider than the white line never shifts the layout.
+ */
+.titleRotator {
+  position: relative;
+  align-self: stretch;
+}
+
+.titleWord {
+  position: absolute;
+  inset: 0;
+  /* Shrunk words (font-size set inline) stay vertically centred in the 90px line. */
+  line-height: 90px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Off-screen ruler at the line's base size, for the width cap in HeroTitle.tsx. */
+.titleMeasure {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/*
+ * Word swap, 600 ms in total: the old word leaves up with fade + blur (0–420 ms), the new
+ * one comes from below (180–600 ms), so the two never sit on top of each other fully opaque.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .titleWordOut {
+    animation: title-word-out 420ms cubic-bezier(0.37, 0, 0.63, 1) both;
+  }
+
+  .titleWordIn {
+    animation: title-word-in 420ms cubic-bezier(0.22, 0.8, 0.3, 1) 180ms both;
+  }
+}
+
+.titleWordOut {
+  opacity: 0;
+}
+
+@keyframes title-word-out {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, -36px, 0);
+    filter: blur(6px);
+  }
+}
+
+@keyframes title-word-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 36px, 0);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: blur(0);
+  }
+}
+
 .titleWhite {
   height: 95px;
   font-size: 79.39px;

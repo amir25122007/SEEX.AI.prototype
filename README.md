@@ -29,22 +29,37 @@ Desktop landing page for SeexAI.
 
 | Font | Source | Usage |
 |---|---|---|
-| IBM Plex Mono | `next/font/google` | body, navigation, buttons, labels, marquee, FAQ |
+| SF Pro Text → Inter | system font on Apple devices; Inter via `next/font/google` elsewhere | all body text (`font-sans`) |
 | Archivo | `next/font/google` | logo, SEEX / SeexAI watermarks |
 | Unbounded | `next/font/google` | accents ("AI для каждого", "1 200+") |
-| Inter | `next/font/google` | replaces SF Pro (composer, mockups, legal text) |
-| Druk Text Wide Cyr | local, licensed | section headings |
-| Neuropol | local, licensed | hero title |
+| Druk Text Wide Cyr Medium | local, licensed | section headings (`font-druk`) |
+| Neuropol | local, licensed | hero title (`font-neuropol`) |
 
-The licensed fonts are not in the repository yet. Add them as:
+`font-sans` is `-apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, system-ui, sans-serif`.
+SF Pro files are **never** added to the repo or served (Apple licence): Apple devices use the
+installed system font.
 
-```
-public/fonts/DrukTextWideCyr-Medium.woff2
-public/fonts/Neuropol-Regular.woff2
-```
+### Adding Druk and Neuropol
 
-They are already declared with `@font-face` in `globals.css` and exposed as
-`font-druk` / `font-neuropol`, so no component changes are needed.
+The licensed files are not in the repository. To enable them:
+
+1. Get the licensed fonts and convert them to WOFF2 if needed (outside the project, e.g.
+   `pip install fonttools brotli` in a temp venv, then
+   `fonttools ttLib.woff2 compress -o Neuropol-Regular.woff2 Neuropol.otf`).
+2. Put them into `public/fonts/` with exactly these names:
+
+   ```
+   public/fonts/DrukTextWideCyr-Medium.woff2
+   public/fonts/Neuropol-Regular.woff2
+   ```
+
+3. Rebuild (`pnpm build`). `src/lib/brandFonts.ts` checks the files at build time and only then
+   emits `@font-face` (`font-display: swap`) and `<link rel="preload">` for each one. Without the
+   files nothing is requested (no 404s) and the fallback stack is used. No component changes
+   are needed.
+
+After adding them, compare the sections with `design-refs/final/` — some positions were tuned
+for the fallback fonts (see `docs/PROJECT_CONTEXT.md`).
 
 ## Structure
 

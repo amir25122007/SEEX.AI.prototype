@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { ArrowUpRightIcon } from "@/components/icons";
 import type {
   HeroAppCard,
@@ -22,19 +22,47 @@ function hash(value: string): number {
 
 type FloatAxis = { duration: number; delay: number; reverse: boolean };
 
+/** Bumps `value` by ±0.4 s (staying inside [min, max]) while value / other is near an integer. */
+function avoidIntegerRatio(value: number, other: number, min: number, max: number): number {
+  let v = value;
+  for (let i = 0; i < 4; i++) {
+    const ratio = v / other;
+    if (Math.abs(ratio - Math.round(ratio)) >= 0.08) break;
+    v = v + 0.4 <= max ? v + 0.4 : Math.max(min, v - 0.4);
+  }
+  return v;
+}
+
 /**
- * Idle float timing: X 7–10 s, Y 5.5–8 s, never an integer ratio (no repeating
- * Lissajous loop), negative delays for a random phase, random start direction.
+ * Idle float timing: X 6–8 s, Y 4.5–6.5 s, tilt 9–12 s, never an integer ratio
+ * (no repeating Lissajous loop), negative delays for a random phase, random start direction.
  */
-function floatTiming(card: HeroCard): { x: FloatAxis; y: FloatAxis } {
+function floatTiming(card: HeroCard): {
+  x: FloatAxis;
+  y: FloatAxis;
+  r: FloatAxis;
+} {
   const h = hash(card.id);
-  const y = 5.5 + ((h >>> 8) % 251) / 100;
-  let x = 7 + ((h >>> 7) % 301) / 100;
-  const ratio = x / y;
-  if (Math.abs(ratio - Math.round(ratio)) < 0.08) x = x >= 9.5 ? x - 0.5 : x + 0.5;
+  const h2 = hash(`${card.id}:tilt`);
+  const y = 4.5 + ((h >>> 8) % 201) / 100;
+  const x = avoidIntegerRatio(6 + ((h >>> 7) % 201) / 100, y, 6, 8);
+  const r = avoidIntegerRatio(avoidIntegerRatio(9 + (h2 % 301) / 100, x, 9, 12), y, 9, 12);
   return {
-    x: { duration: x, delay: -(((h >>> 4) % 1000) / 1000) * x, reverse: ((h >>> 20) & 1) === 1 },
-    y: { duration: y, delay: -(((h >>> 14) % 1000) / 1000) * y, reverse: ((h >>> 24) & 1) === 1 },
+    x: {
+      duration: x,
+      delay: -(((h >>> 4) % 1000) / 1000) * x,
+      reverse: ((h >>> 20) & 1) === 1,
+    },
+    y: {
+      duration: y,
+      delay: -(((h >>> 14) % 1000) / 1000) * y,
+      reverse: ((h >>> 24) & 1) === 1,
+    },
+    r: {
+      duration: r,
+      delay: -(((h2 >>> 10) % 1000) / 1000) * r,
+      reverse: ((h2 >>> 22) & 1) === 1,
+    },
   };
 }
 
@@ -46,8 +74,16 @@ function axisStyle(axis: FloatAxis): CSSProperties {
   };
 }
 
-const FLOAT_X = { far: styles.floatXFar, mid: styles.floatXMid, near: styles.floatXNear };
-const FLOAT_Y = { far: styles.floatYFar, mid: styles.floatYMid, near: styles.floatYNear };
+const FLOAT_X = {
+  far: styles.floatXFar,
+  mid: styles.floatXMid,
+  near: styles.floatXNear,
+};
+const FLOAT_Y = {
+  far: styles.floatYFar,
+  mid: styles.floatYMid,
+  near: styles.floatYNear,
+};
 
 /** Absolute geometry + Figma effects shared by every card. */
 function cardStyle(card: HeroCard): CssVars {
@@ -178,33 +214,59 @@ function PhotoCard({ card }: { card: HeroPhotoCard }) {
 
 /**
  * One decorative floating card (aria-hidden: purely visual composition).
- * Two wrappers carry the idle float (X and Y, independent sine waves) so the
- * card itself — with its blur filter and glow — is never repainted per frame.
+ * Wrappers carry the idle float (X, Y and — for mid / near — tilt, independent sine
+ * waves) so the card itself — with its blur filter and glow — is never repainted per frame.
  */
 export function HeroFloatingCard({ card }: { card: HeroCard }) {
   const timing = floatTiming(card);
   return (
     <div
       className={cn(styles.floatX, FLOAT_X[card.layer])}
-      style={{ left: card.x, top: card.y, width: card.width, height: card.height, ...axisStyle(timing.x) }}
+      style={{
+        left: card.x,
+        top: card.y,
+        width: card.width,
+        height: card.height,
+        ...axisStyle(timing.x),
+      }}
     >
       <div className={cn(styles.floatY, FLOAT_Y[card.layer])} style={axisStyle(timing.y)}>
-        <div
-          className={cn(
-            styles.card,
-            card.kind !== "photo" && styles.app,
-            card.kind === "presentation" && styles.presentation,
-            card.stroke.align === "inside" ? styles.strokeInside : styles.strokeOutside,
-          )}
-          style={cardStyle(card)}
-          data-figma-node={card.id}
-        >
-          <CardImage image={card.image} width={card.width} />
-          {card.kind === "app" && <AppCard card={card} />}
-          {card.kind === "presentation" && <PresentationCard card={card} />}
-          {card.kind === "photo" && <PhotoCard card={card} />}
-        </div>
+        <FloatTilt card={card} axis={timing.r}>
+          <div
+            className={cn(
+              styles.card,
+              card.kind !== "photo" && styles.app,
+              card.kind === "presentation" && styles.presentation,
+              card.stroke.align === "inside" ? styles.strokeInside : styles.strokeOutside,
+            )}
+            style={cardStyle(card)}
+            data-figma-node={card.id}
+          >
+            <CardImage image={card.image} width={card.width} />
+            {card.kind === "app" && <AppCard card={card} />}
+            {card.kind === "presentation" && <PresentationCard card={card} />}
+            {card.kind === "photo" && <PhotoCard card={card} />}
+          </div>
+        </FloatTilt>
       </div>
+    </div>
+  );
+}
+
+/** Third float axis: a slow ±0.6° tilt, mid and near cards only (far cards just drift). */
+function FloatTilt({
+  card,
+  axis,
+  children,
+}: {
+  card: HeroCard;
+  axis: FloatAxis;
+  children: ReactNode;
+}) {
+  if (card.layer === "far") return children;
+  return (
+    <div className={styles.floatR} style={axisStyle(axis)}>
+      {children}
     </div>
   );
 }

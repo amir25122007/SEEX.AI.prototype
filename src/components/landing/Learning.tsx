@@ -6,7 +6,10 @@ import { learningCards, learningFeatures, learningIntro, learningTicker } from "
 import { cn } from "@/lib/cn";
 import styles from "./Learning.module.css";
 
-/** One ticker copy: 4 phrases (Inter 36) + 4 × 78px star slots ≈ 1223px (Figma, SF Pro: 1131). */
+/**
+ * Animation distance basis: one copy is 4 phrases + 4 × 78px star slots ≈ 1223px in Inter
+ * (SF Pro: 1169). The loop itself is width-independent (−20 % of the track per cycle).
+ */
 const TICKER_PERIOD = 1223;
 
 /** ✳ from runLine › Frame: three 2px strokes, centred in a 78px slot (x 39, y 34.01). */

@@ -2,6 +2,8 @@
 
 import { useId, useState, type FormEvent } from "react";
 import { AngleDownIcon, ArrowUpRightIcon, LayerGroupIcon, PaperclipIcon } from "@/components/icons";
+import { useHeroScenario } from "@/components/landing/HeroTitle";
+import { heroTitles } from "@/data/heroTitles";
 import { cn } from "@/lib/cn";
 
 export const quickPrompts = [
@@ -27,6 +29,8 @@ type PromptComposerProps = {
  */
 export function PromptComposer({ className }: PromptComposerProps) {
   const [prompt, setPrompt] = useState("");
+  const scenario = useHeroScenario();
+  const activeChip = heroTitles[scenario]?.chip;
   const inputId = useId();
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -104,7 +108,12 @@ export function PromptComposer({ className }: PromptComposerProps) {
             <button
               type="button"
               onClick={() => setPrompt(label)}
-              className="flex h-[37.98px] items-center rounded-full bg-lime px-[18.88px] text-[15px] leading-normal font-normal whitespace-nowrap text-ink shadow-[0_4px_16px_rgb(194_240_74/0.45)] transition-[filter] duration-200 hover:brightness-105"
+              // The chip of the scenario shown in the title gets the hover brightness + a soft glow.
+              className={cn(
+                "flex h-[37.98px] items-center rounded-full bg-lime px-[18.88px] text-[15px] leading-normal font-normal whitespace-nowrap text-ink shadow-[0_4px_16px_rgb(194_240_74/0.45)] transition-[filter,box-shadow] duration-200 hover:brightness-105",
+                label === activeChip &&
+                  "shadow-[0_4px_16px_rgb(194_240_74/0.45),0_0_24px_4px_rgb(194_240_74/0.55)] brightness-105 duration-[600ms]",
+              )}
             >
               {label}
             </button>

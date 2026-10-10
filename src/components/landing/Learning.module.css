@@ -109,15 +109,20 @@
 }
 
 /*
- * Copy 2 starts at the Figma x (top −15, bottom −66), 2 copies to the right
- * (a copy is ≈ 1223px in Inter: 4 phrases + 4 × 78px star slots).
+ * Copy 2 starts at the Figma x (top −15, bottom −66): the track is shifted back by
+ * 2 of its 5 copies (`translate` −40 % of its own width, composes with the animated
+ * transform), so this holds for any copy width — SF Pro ≈ 1169px, Inter ≈ 1223px.
  */
+.ticker {
+  translate: -40% 0;
+}
+
 .bandTop .ticker {
-  margin-left: calc(50% - 720px - 15px - 2446px);
+  margin-left: calc(50% - 720px - 15px);
 }
 
 .bandBottom .ticker {
-  margin-left: calc(50% - 720px - 66px - 2446px);
+  margin-left: calc(50% - 720px - 66px);
 }
 
 /* SF Pro Text 36 / 400 → Inter, #160C08; baseline 47px below the band top. */

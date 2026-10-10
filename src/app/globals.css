@@ -39,7 +39,9 @@
   --color-border-orange: rgb(255 106 0 / 0.35); /* FAQ rows */
 
   /* Fonts ----------------------------------------------------------------- */
-  --font-sans: var(--font-inter), system-ui, sans-serif; /* replaces SF Pro */
+  /* Figma: SF Pro Text. Apple devices get the real system SF Pro (files are never shipped —
+     Apple licence); everything else gets Inter. */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", var(--font-inter), system-ui, sans-serif;
   --font-archivo: var(--font-archivo-google), system-ui, sans-serif;
   --font-unbounded: var(--font-unbounded-google), system-ui, sans-serif;
   --font-druk: "Druk Text Wide Cyr", sans-serif;
@@ -117,7 +119,7 @@
     overflow-x: hidden;
     background-color: var(--color-page);
     color: var(--color-white);
-    /* Final design: all text is SF Pro Text (→ Inter); Plex Mono is kept for the [01] numbers only. */
+    /* Final design: all text is SF Pro Text (system SF Pro on Apple, Inter elsewhere). */
     font-family: var(--font-sans);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
