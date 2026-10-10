@@ -185,7 +185,7 @@
   outline-offset: -1.575px;
 }
 
-/* Frame 373: the SVG carries its own white base, clip and inside stroke. */
+/* Frame 373: the render carries its own white base, clip and inside stroke. */
 .slideMock {
   border-radius: 17.9493px;
 }

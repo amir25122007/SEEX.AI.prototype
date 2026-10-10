@@ -1,0 +1,45 @@
+/* Copies sit edge to edge, so one copy is exactly 20 % of the track. */
+.track {
+  display: flex;
+  width: max-content;
+}
+
+/* Static keyframes (no var()) keep the animation on the compositor in Safari. */
+@media (prefers-reduced-motion: no-preference) {
+  .track {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    will-change: transform;
+  }
+
+  .left {
+    animation-name: marquee-left;
+  }
+
+  .right {
+    animation-name: marquee-right;
+  }
+
+  .track:hover,
+  .track:focus-within {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-20%, 0, 0);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(20%, 0, 0);
+  }
+}

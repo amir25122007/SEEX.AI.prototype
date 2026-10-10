@@ -1,0 +1,22 @@
+<svg width="1575.08" height="327.868" viewBox="-102.9 514.396 1575.08 327.868" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- bg › orange curve — copied from design-refs/v4/learning.svg (Figma Main page v4 › learning block) -->
+<g id="Vector_2" filter="url(#filter5_dd_1431_4004)">
+<path d="M-67.1505 806.513C220.092 661.689 535.755 812.482 820.968 646.542C1070.91 505.303 1263.5 550.719 1436.43 587.371" stroke="#FF6A00" stroke-width="3.5" stroke-linecap="round"/>
+</g>
+<defs>
+<filter id="filter5_dd_1431_4004" x="-102.9" y="514.396" width="1575.08" height="327.868" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="7"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 0.416 0 0 0 0 0 0 0 0 0.8 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1431_4004"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="17"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 0.416 0 0 0 0 0 0 0 0 0.48 0"/>
+<feBlend mode="normal" in2="effect1_dropShadow_1431_4004" result="effect2_dropShadow_1431_4004"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow_1431_4004" result="shape"/>
+</filter>
+</defs>
+</svg>

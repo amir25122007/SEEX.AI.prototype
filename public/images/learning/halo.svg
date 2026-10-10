@@ -1,0 +1,18 @@
+<svg width="880" height="880" viewBox="260 -60 880 880" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- bg › halo glow (SCREEN is applied in CSS) — copied from design-refs/v4/learning.svg (Figma Main page v4 › learning block) -->
+<g id="halo glow" filter="url(#filter3_f_1431_4004)">
+<circle cx="700" cy="380" r="380" fill="url(#paint1_radial_1431_4004)"/>
+</g>
+<defs>
+<filter id="filter3_f_1431_4004" x="260" y="-60" width="880" height="880" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="30" result="effect1_foregroundBlur_1431_4004"/>
+</filter>
+<radialGradient id="paint1_radial_1431_4004" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(700 380) scale(380)">
+<stop stop-color="#FF8C2E" stop-opacity="0.85"/>
+<stop offset="0.45" stop-color="#FF6B05" stop-opacity="0.45"/>
+<stop offset="1" stop-color="#FF6B05" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>

@@ -84,7 +84,10 @@ export function HowItWorksCarousel() {
                   alt={current ? slide.alt : ""}
                   width={slide.intrinsic.width}
                   height={slide.intrinsic.height}
-                  sizes={`${Math.ceil(slide.width)}px`}
+                  // The app mock is a 2x render of fine UI text: always serve it at full size
+                  // (exact 2:1 downsampling at DPR 1 keeps it as sharp as the source SVG).
+                  sizes={slide.kind === "mock" ? `${slide.intrinsic.width}px` : `${Math.ceil(slide.width)}px`}
+                  quality={slide.kind === "mock" ? 90 : undefined}
                   className={styles.slideImage}
                 />
               </div>

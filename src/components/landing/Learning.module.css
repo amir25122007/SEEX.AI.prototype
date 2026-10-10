@@ -1,0 +1,504 @@
+/*
+ * "Обучение" — Figma "Main page v4" › learning block (design-refs/v4/learning.svg).
+ * Frame 1440×900 at page y 4036 (14px below How it works). Coordinates are Figma px
+ * relative to the frame; the 1440 canvas is centred, backgrounds are full-bleed.
+ *
+ * The frame is opaque and clips its content (Figma clip content). Its top and
+ * bottom edges are covered by the lime tickers, so it meets the page without seams.
+ */
+.section {
+  position: relative;
+  isolation: isolate; /* the SCREEN halo blends with the frame only */
+  height: 900px;
+  margin-top: 14px;
+  overflow: hidden;
+  overflow: clip;
+  background: linear-gradient(180deg, #220c06 0%, #ff6a00 20%, #e03514 66%, #4a0f12 100%);
+}
+
+/* ---------- Background (bg group) ----------------------------------------- */
+
+.decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.layer {
+  position: absolute;
+  max-width: none;
+}
+
+/* 3 blurred circles + "LEARN" (white 7 %); viewBox −580 −400 2580 1760. */
+.bgBack {
+  top: -400px;
+  left: calc(50% - 720px - 580px);
+  width: 2580px;
+  height: 1760px;
+}
+
+/* halo glow, radial #FF8C2E 85 % → #FF6B05 45 % → 0, blur 60, SCREEN. */
+.halo {
+  top: -60px;
+  left: calc(50% - 720px + 260px);
+  width: 880px;
+  height: 880px;
+  mix-blend-mode: screen;
+}
+
+/*
+ * The curves end just outside the 1440 frame (x −61.5 / 1528.8). On wider windows
+ * they fade out between the canvas edge and their end point instead of stopping
+ * with a visible cap; inside 0–1440 the masks are fully opaque.
+ */
+.curveLime {
+  top: 149.885px;
+  left: calc(50% - 720px - 97.5352px);
+  width: 1662.37px;
+  height: 485.539px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 36px, #000 97.54px, #000 1537.54px, transparent 1626.37px);
+  mask-image: linear-gradient(90deg, transparent 36px, #000 97.54px, #000 1537.54px, transparent 1626.37px);
+}
+
+/* image 22 (646×1060 at 377, 80): full width, shifted up 8.22 % → 646×1147.1 at y −7.13. */
+.character {
+  top: -7.13px;
+  left: calc(50% - 720px + 377px);
+  width: 646px;
+  height: 1147.1px;
+}
+
+/* bottom contrast: y 611–900, #0A0603 0 → #070402 90 %. */
+.bottomShade {
+  position: absolute;
+  top: 611px;
+  right: 0;
+  left: 0;
+  height: 289px;
+  background: linear-gradient(180deg, rgb(10 6 3 / 0) 0%, rgb(7 4 2 / 0.9) 100%);
+}
+
+/* Left end at x −67.15 fades like the lime curve; the right end (x 1436.4) is inside the frame. */
+.curveOrange {
+  top: 514.396px;
+  left: calc(50% - 720px - 102.9px);
+  width: 1575.08px;
+  height: 327.868px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 35.75px, #000 102.9px);
+  mask-image: linear-gradient(90deg, transparent 35.75px, #000 102.9px);
+}
+
+/* ---------- Tickers (runLine) ---------------------------------------------- */
+
+.band {
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 65px;
+  overflow: clip;
+  background: var(--color-lime);
+}
+
+.bandTop {
+  top: 0;
+}
+
+.bandBottom {
+  top: 835px;
+}
+
+/* Copy 2 starts at the Figma x (top −15, bottom −66), 2 periods (2 × 1136) to the right. */
+.bandTop .ticker {
+  margin-left: calc(50% - 720px - 15px - 2272px);
+}
+
+.bandBottom .ticker {
+  margin-left: calc(50% - 720px - 66px - 2272px);
+}
+
+/* IBM Plex Mono Medium 35, #160C08; a copy is exactly 1136px wide. */
+.tickerCopy {
+  display: flex;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 35px;
+  font-weight: 500;
+  line-height: 65px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #160c08;
+}
+
+.tickerItem {
+  display: flex;
+}
+
+.star {
+  flex-shrink: 0;
+}
+
+/* ---------- Canvas --------------------------------------------------------- */
+
+/* Lets the pointer reach the tickers under it (hover pauses them). */
+.canvas {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 720px);
+  width: 1440px;
+  height: 100%;
+  pointer-events: none;
+}
+
+.canvas > * {
+  pointer-events: auto;
+}
+
+/* ---------- Left column (Frame 343) ------------------------------------------ */
+
+.badges {
+  position: absolute;
+  top: 104px;
+  left: 80px;
+  display: flex;
+  gap: 30px;
+}
+
+/* Pills: IBM Plex Mono Medium 14, ls 4 %, centred; 197×38 and 95×38. */
+.badge,
+.soon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  border-radius: 19px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.badge {
+  width: 197px;
+  border: 1px solid var(--color-lime);
+  background: rgb(0 0 0 / 0.6);
+  color: var(--color-lime);
+}
+
+.soon {
+  width: 95px;
+  background: var(--color-orange);
+  box-shadow: var(--shadow-orange-glow-strong);
+  color: var(--color-white);
+}
+
+.soonStroke {
+  position: absolute;
+  inset: 0;
+}
+
+/* Druk 40/45, white; cap top of line 1 at y 191.4 → line box at y 181.4. */
+.title {
+  position: absolute;
+  top: 181.4px;
+  left: 80px;
+  margin: 0;
+  font-family: var(--font-druk);
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 45px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-white);
+}
+
+/* IBM Plex Mono 18/24; first baseline at y 351. */
+.text {
+  position: absolute;
+  top: 332.16px;
+  left: 80px;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  line-height: 24px;
+  white-space: pre-line;
+  color: var(--color-white);
+}
+
+/* btn: 350×59 lime, IBM Plex Mono Medium 23, ls 2 %; arrow 14px at x 396.5. */
+.cta {
+  position: absolute;
+  top: 448px;
+  left: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 350px;
+  height: 59px;
+  padding: 0 19.5px 0 23px;
+  border-radius: 29.5px;
+  background: var(--color-lime);
+  font-family: var(--font-mono);
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.46px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-ink);
+  transition: filter 200ms ease-out;
+}
+
+.cta:hover {
+  filter: brightness(1.05);
+}
+
+.cta:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 3px;
+}
+
+/* ---------- card2: "AI для каждого" (rotate −4° around its top-left) -------- */
+
+.levelsCard {
+  position: absolute;
+  top: 544.954px;
+  left: 80px;
+  width: 286.047px;
+  height: 151.783px;
+  border-radius: 18.9725px;
+  background: rgb(13 8 5 / 0.62);
+  box-shadow:
+    inset 0 0 0 0.73px rgb(255 255 255 / 0.18),
+    0 17.51px 39.4px -5.84px rgb(0 0 0 / 0.6);
+  transform: rotate(-4deg);
+  transform-origin: 0 0;
+  -webkit-backdrop-filter: blur(10.22px);
+  backdrop-filter: blur(10.22px);
+}
+
+/* Texts are placed by their Figma baselines (line box = font content area). */
+.levelsIcon {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 43.7827px;
+  height: 43.7827px;
+  border-radius: 12.4051px;
+  background: var(--color-lime);
+  font-family: var(--font-unbounded);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  color: #160c08;
+}
+
+/* IBM Plex Mono Medium 14, ls 6 %, lime; baseline 50.98. */
+.levelsLabel {
+  position: absolute;
+  top: 36.63px;
+  left: 78.8px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18.2px;
+  letter-spacing: 0.84px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-lime);
+}
+
+/* Unbounded Bold 16, ls −2 %; baseline 95.8. */
+.levelsTitle {
+  position: absolute;
+  top: 79.96px;
+  left: 24.04px;
+  margin: 0;
+  font-family: var(--font-unbounded);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19.68px;
+  letter-spacing: -0.32px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-white);
+}
+
+/* IBM Plex Mono 12, ls 2 %, white 65 %; baseline 124.78. */
+.levelsMeta {
+  position: absolute;
+  top: 112.48px;
+  left: 24px;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 15.6px;
+  letter-spacing: 0.26px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgb(255 255 255 / 0.65);
+}
+
+.levelsArrow {
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* ---------- card1: "Лист ожидания" (rotate 3° around its top-left) --------- */
+
+.waitlistCard {
+  position: absolute;
+  top: 614px;
+  left: 343.322px;
+  width: 286.047px;
+  height: 159px;
+  border-radius: 18.9725px;
+  background: #f7f5ed;
+  color: #000;
+  transform: rotate(3deg);
+  transform-origin: 0 0;
+}
+
+/* IBM Plex Mono Medium 14, ls 6 %, black 55 %; baseline 49. */
+.waitlistLabel {
+  position: absolute;
+  top: 34.65px;
+  left: 24px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18.2px;
+  letter-spacing: 0.84px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0.55;
+}
+
+/* 39px lime circle with a 1px black stroke (centred); the arrow stays axis-aligned. */
+.waitlistArrow {
+  position: absolute;
+  top: 24px;
+  left: 222.05px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  background: var(--color-lime);
+}
+
+.waitlistArrowIcon {
+  width: 13.846px;
+  height: 13.846px;
+  transform: rotate(-3deg);
+}
+
+/* Unbounded ExtraBold 35; baseline 104. */
+.waitlistValue {
+  position: absolute;
+  top: 69.35px;
+  left: 24px;
+  margin: 0;
+  font-family: var(--font-unbounded);
+  font-size: 35px;
+  font-weight: 800;
+  line-height: 43.05px;
+  white-space: nowrap;
+}
+
+/* IBM Plex Mono 14, ls 1 %, black 55 %; baseline 131. */
+.waitlistCaption {
+  position: absolute;
+  top: 116.65px;
+  left: 24px;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 18.2px;
+  letter-spacing: 0.14px;
+  white-space: nowrap;
+  opacity: 0.55;
+}
+
+/* ---------- Features (Frame 281): Union cards 380×166 --------------------- */
+
+.features {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.feature {
+  position: absolute;
+  width: 380px;
+  height: 166px;
+  color: var(--color-white);
+}
+
+/* Background blur (Figma 22 → CSS 11px) clipped to the Union shape. */
+.featureBlur {
+  position: absolute;
+  inset: 0;
+  -webkit-backdrop-filter: blur(11px);
+  backdrop-filter: blur(11px);
+  clip-path: path(
+    "M379.52 126.626C379.52 126.759 379.63 126.867 379.76 126.867C379.89 126.867 380 126.975 380 127.108V147.041C380 157.512 371.51 166 361.04 166H173.71C169.74 166 166.04 164.816 162.96 162.782C155.28 157.726 147.75 149.887 138.57 149.887H18.959C8.488 149.887 0 141.399 0 130.928V18.959C0 8.488 8.488 0 18.959 0H360.56C371.03 0 379.52 8.488 379.52 18.959V126.626Z"
+  );
+}
+
+/* Shape + inside stroke + glow/shadow; the SVG includes the 32px filter bleed. */
+.featureShape {
+  position: absolute;
+  top: -32px;
+  left: -32px;
+  width: 444px;
+  height: 238px;
+  max-width: none;
+  pointer-events: none;
+}
+
+/* Druk 20, white; cap top at 23.53. */
+.featureTitle {
+  position: absolute;
+  top: 17.76px;
+  left: 17px;
+  margin: 0;
+  font-family: var(--font-druk);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* IBM Plex Mono 18/24; first baseline at 66.49. */
+.featureText {
+  position: absolute;
+  top: 47.65px;
+  left: 17px;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  line-height: 24px;
+  white-space: pre-line;
+}
+
+/* IBM Plex Mono 18, ls 4 %, lime, in the bottom-right tab; baseline 146.36. */
+.featureNumber {
+  position: absolute;
+  top: 130.52px;
+  left: 312.67px;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  line-height: 18px;
+  letter-spacing: 0.72px;
+  color: var(--color-lime);
+}

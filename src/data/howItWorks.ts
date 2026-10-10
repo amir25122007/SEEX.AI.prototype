@@ -31,7 +31,7 @@ export const howItWorksSteps: HowItWorksStep[] = [
 
 export type HowItWorksSlide = {
   id: string;
-  /** "mock" — app screen with its own inside stroke; "raster" — framed 1254² render. */
+  /** "mock" — app screen with its own inside stroke baked in; "raster" — framed 1254² render. */
   kind: "mock" | "raster";
   src: string;
   alt: string;
@@ -44,11 +44,12 @@ export type HowItWorksSlide = {
 const scenariosScreen: HowItWorksSlide = {
   id: "scenarios",
   kind: "mock",
-  src: "/images/how-it-works/app-scenarios.svg",
+  // Rendered @2x from the "Frame 373" group of how-it-works.svg (Playwright, transparent corners).
+  src: "/images/how-it-works/app-scenarios@2x.png",
   alt: "Экран «Сценарии» в SeexAI: готовые сценарии с ценой в кредитах",
   width: 567.799,
   height: 318.6,
-  intrinsic: { width: 568, height: 319 },
+  intrinsic: { width: 1136, height: 638 },
 };
 
 // image 27 — right of the first slide in the reference.

@@ -1,29 +1,34 @@
 import { ScenarioCard } from "@/components/landing/ScenarioCard";
+import { Marquee } from "@/components/ui/Marquee";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { type Scenario, scenarioRow1, scenarioRow2 } from "@/data/scenarios";
 import { cn } from "@/lib/cn";
 import styles from "./Scenarios.module.css";
 
-/** Marquee copies per row; copy 2 is the real list, drawn at the Figma start frame. */
-const COPIES = 5;
-const REAL_COPY = 2;
+/** Card 340 + gap 20: one copy of a row is cards × 360 px. */
+const CARD_STEP = 360;
 
-function MarqueeRow({ cards, className }: { cards: Scenario[]; className?: string }) {
+function MarqueeRow({
+  cards,
+  direction,
+  className,
+}: {
+  cards: Scenario[];
+  direction: "left" | "right";
+  className?: string;
+}) {
   return (
-    <div className={cn(styles.track, className)}>
-      {Array.from({ length: COPIES }, (_, copy) => {
-        const duplicate = copy !== REAL_COPY;
-        return (
-          <ul key={copy} className={styles.list} aria-hidden={duplicate || undefined}>
-            {cards.map((scenario) => (
-              <li key={scenario.id}>
-                <ScenarioCard scenario={scenario} duplicate={duplicate} />
-              </li>
-            ))}
-          </ul>
-        );
-      })}
-    </div>
+    <Marquee direction={direction} period={cards.length * CARD_STEP} className={cn(styles.track, className)}>
+      {({ index, duplicate }) => (
+        <ul key={index} className={styles.list} aria-hidden={duplicate || undefined}>
+          {cards.map((scenario) => (
+            <li key={scenario.id}>
+              <ScenarioCard scenario={scenario} duplicate={duplicate} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </Marquee>
   );
 }
 
@@ -50,8 +55,8 @@ export function Scenarios() {
       />
 
       <div className={styles.rows}>
-        <MarqueeRow cards={scenarioRow1} className={styles.row1} />
-        <MarqueeRow cards={scenarioRow2} className={styles.row2} />
+        <MarqueeRow cards={scenarioRow1} direction="left" className={styles.row1} />
+        <MarqueeRow cards={scenarioRow2} direction="right" className={styles.row2} />
       </div>
     </section>
   );

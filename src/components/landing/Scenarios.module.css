@@ -56,15 +56,12 @@
 }
 
 /*
- * Each track holds 5 copies of its row (period P = cards × 360). Copy 2 sits at
- * the Figma x, so the track starts 2P to the left; moving by one P is seamless
- * and 2 spare copies on each side cover windows up to 2560px.
+ * Each track (ui/Marquee) holds 5 copies of its row, period P = cards × 360
+ * (40 px/s, pause on hover / focus). Copy 2 sits at the Figma x, so the track
+ * starts 2P to the left; 2 spare copies on each side cover windows up to 2560px.
  */
 .track {
   position: absolute;
-  display: flex;
-  gap: 20px;
-  width: max-content;
   pointer-events: auto;
 }
 
@@ -80,53 +77,12 @@
   left: calc(50% - 720px + 10px - 2880px);
 }
 
-/* ~40 px/s, linear. Static keyframes (no var()) keep it on the compositor in Safari. */
-@media (prefers-reduced-motion: no-preference) {
-  .track {
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    will-change: transform;
-  }
-
-  .row1 {
-    animation-name: scenarios-row-left;
-    animation-duration: 45s;
-  }
-
-  .row2 {
-    animation-name: scenarios-row-right;
-    animation-duration: 36s;
-  }
-
-  .track:hover,
-  .track:focus-within {
-    animation-play-state: paused;
-  }
-}
-
-@keyframes scenarios-row-left {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-1800px, 0, 0);
-  }
-}
-
-@keyframes scenarios-row-right {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(1440px, 0, 0);
-  }
-}
-
+/* Copies sit edge to edge: the 20px gap after the last card belongs to the copy. */
 .list {
   display: flex;
   gap: 20px;
   margin: 0;
-  padding: 0;
+  padding: 0 20px 0 0;
   list-style: none;
 }
 
