@@ -1,3 +1,4 @@
+import { Audience } from "@/components/landing/Audience";
 import { FeaturesBento } from "@/components/landing/FeaturesBento";
 import { Hero } from "@/components/landing/Hero";
 import { HowItWorks } from "@/components/landing/HowItWorks";
@@ -14,6 +15,7 @@ export default function Home() {
       <FeaturesBento />
       <HowItWorks />
       <Learning />
+      <Audience />
     </main>
   );
 }

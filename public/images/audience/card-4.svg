@@ -1,0 +1,13 @@
+<svg width="430.92" height="389.88" viewBox="134.541 416.502 430.92 389.88" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- Frame 295 › glow_14 (design-refs/v4/audience.svg); SCREEN is applied in CSS -->
+<g id="glow_14" opacity="0.7" filter="url(#filter14_f_1431_4135)">
+<ellipse cx="350.001" cy="611.442" rx="123.12" ry="102.6" fill="#FF6A00"/>
+</g>
+<defs>
+<filter id="filter14_f_1431_4135" x="134.541" y="416.502" width="430.92" height="389.88" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="46.17" result="effect1_foregroundBlur_1431_4135"/>
+</filter>
+</defs>
+</svg>

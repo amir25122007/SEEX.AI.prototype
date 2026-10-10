@@ -8,6 +8,7 @@
  */
 .section {
   position: relative;
+  z-index: 1; /* opaque frame above the next frame's top 288px (Audience edge glows), as in Figma */
   isolation: isolate; /* the SCREEN halo blends with the frame only */
   height: 900px;
   margin-top: 14px;
