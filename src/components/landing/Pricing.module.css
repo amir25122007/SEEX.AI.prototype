@@ -60,6 +60,21 @@
   align-items: flex-start;
   flex-shrink: 0;
   border-radius: 22px;
+  transition:
+    scale 250ms ease-out,
+    filter 250ms ease-out;
+}
+
+/* Hover glow: only its box-shadow outside the card is visible; hover fades it in. */
+.plan::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: var(--plan-glow);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease-out;
 }
 
 /* START / MAX: 410×573, #FF5A00 → #F8440A → #E0190F, 0.94px white 28 % inside stroke,
@@ -73,6 +88,7 @@
   --plan-divider: rgb(255 255 255 / 0.3);
   --plan-star: var(--color-lime);
   --plan-old: var(--color-white);
+  --plan-glow: 0 0 48px 6px rgb(255 75 0 / 0.6);
   width: 410px;
   height: 573px;
   margin-top: 20px;
@@ -93,6 +109,7 @@
   --plan-divider: rgb(10 8 5 / 0.16);
   --plan-star: #e0350c;
   --plan-old: #454545;
+  --plan-glow: 0 0 66px 10px rgb(194 239 75 / 0.55);
   width: 402px;
   height: 613px;
   padding: 60.37px 0 0 30px;
@@ -334,4 +351,26 @@
 .check {
   flex-shrink: 0;
   color: var(--plan-strong);
+}
+
+/* ---------- Hover / focus-within: the plan grows and brightens, the others dim ---- */
+
+/* `scale` (not transform), so nothing in the layout moves; PRO keeps its 20px lift. */
+.plan:is(:hover, :focus-within) {
+  z-index: 1;
+  filter: brightness(1.08) saturate(1.05);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .plan:is(:hover, :focus-within) {
+    scale: 1.04;
+  }
+}
+
+.plan:is(:hover, :focus-within)::before {
+  opacity: 1;
+}
+
+.plans:has(.plan:is(:hover, :focus-within)) .plan:not(:hover, :focus-within) {
+  filter: brightness(0.85) saturate(0.9);
 }

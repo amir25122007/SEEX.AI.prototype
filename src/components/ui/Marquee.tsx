@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { MarqueeFocusGuard } from "@/components/ui/MarqueeFocusGuard";
+import { MarqueePause } from "@/components/ui/MarqueePause";
 import { cn } from "@/lib/cn";
 import styles from "./Marquee.module.css";
 
@@ -26,8 +27,8 @@ type MarqueeProps = {
 
 /**
  * Infinite, seamless marquee: 5 identical copies moved by exactly one copy
- * (20 % of the track) per cycle. Pauses on hover and keyboard focus; static
- * with reduced motion. Only `transform` is animated.
+ * (20 % of the track) per cycle. Pauses on hover and focus (MarqueePause, Web
+ * Animations API); static with reduced motion. Only `transform` is animated.
  */
 export function Marquee({ direction, period, speed = 40, className, focusInset, children }: MarqueeProps) {
   return (
@@ -38,6 +39,7 @@ export function Marquee({ direction, period, speed = 40, className, focusInset, 
       {Array.from({ length: MARQUEE_COPIES }, (_, index) =>
         children({ index, duplicate: index !== MARQUEE_REAL_COPY }),
       )}
+      <MarqueePause />
       {focusInset !== undefined ? <MarqueeFocusGuard period={period} inset={focusInset} /> : null}
     </div>
   );

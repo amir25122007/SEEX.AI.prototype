@@ -112,7 +112,7 @@ export function PromptComposer({ className }: PromptComposerProps) {
               className={cn(
                 "flex h-[37.98px] items-center rounded-full bg-lime px-[18.88px] text-[15px] leading-normal font-normal whitespace-nowrap text-ink shadow-[0_4px_16px_rgb(194_240_74/0.45)] transition-[filter,box-shadow] duration-200 hover:brightness-105",
                 label === activeChip &&
-                  "shadow-[0_4px_16px_rgb(194_240_74/0.45),0_0_24px_4px_rgb(194_240_74/0.55)] brightness-105 duration-[600ms]",
+                  "shadow-[0_4px_16px_rgb(194_240_74/0.45),0_0_24px_4px_rgb(194_240_74/0.55)] brightness-105 duration-[450ms]",
               )}
             >
               {label}

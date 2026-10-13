@@ -20,7 +20,7 @@ import { cn } from "@/lib/cn";
 import styles from "./Hero.module.css";
 
 /** Duration of the word swap; matches the keyframes in Hero.module.css. */
-const SWAP_MS = 600;
+const SWAP_MS = 450;
 /**
  * A rotating word may be at most this share of the white second line. In Neuropol the white
  * line is 1027px of ink; 0.95 keeps the lime word ~20px clear of the near card on the right
@@ -30,7 +30,7 @@ const MAX_WIDTH_RATIO = 0.95;
 /** …and never wider than the content column. */
 const MAX_WIDTH_PX = 1280;
 
-/** `leaving` — the previous word while the 600 ms swap runs. */
+/** `leaving` — the previous word while the 450 ms swap runs. */
 type ScenarioState = { index: number; leaving: number | null };
 
 type HeroScenario = ScenarioState & {
@@ -59,10 +59,11 @@ export function HeroScenarioProvider({ children }: { children: ReactNode }) {
 }
 
 /**
- * 12 s cycle that pauses (keeping the remaining time) while `paused` is true or the tab is
- * hidden; off with reduced motion.
+ * 3 s cycle (HERO_TITLE_INTERVAL_MS) that pauses, keeping the remaining time, only while the
+ * tab is hidden; off with reduced motion. No hover pause: the title is large and central, so
+ * the cursor is almost always over it and the rotation would look frozen.
  */
-function useRotation(paused: boolean, advance: () => void) {
+function useRotation(advance: () => void) {
   const [reduced, setReduced] = useState(true);
   const [hidden, setHidden] = useState(false);
   const remaining = useRef(HERO_TITLE_INTERVAL_MS);
@@ -81,7 +82,7 @@ function useRotation(paused: boolean, advance: () => void) {
     };
   }, []);
 
-  const running = !reduced && !hidden && !paused;
+  const running = !reduced && !hidden;
 
   useEffect(() => {
     if (!running) return;
@@ -112,7 +113,6 @@ function useRotation(paused: boolean, advance: () => void) {
  */
 export function HeroTitle() {
   const { index, leaving, setState } = useContext(HeroScenarioContext);
-  const [hovered, setHovered] = useState(false);
   const [fontSizes, setFontSizes] = useState<Record<number, string>>({});
   const measureRef = useRef<HTMLSpanElement>(null);
   const whiteRef = useRef<HTMLSpanElement>(null);
@@ -123,7 +123,7 @@ export function HeroTitle() {
     [setState],
   );
 
-  const reduced = useRotation(hovered, advance);
+  const reduced = useRotation(advance);
   const shown = reduced ? 0 : index;
 
   useEffect(() => {
@@ -164,12 +164,7 @@ export function HeroTitle() {
   return (
     <h1 id="hero-title" className={styles.title}>
       <span className="sr-only">{heroTitleAccessible}</span>
-      <span
-        className={styles.titleVisual}
-        aria-hidden="true"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
+      <span className={styles.titleVisual} aria-hidden="true">
         <span className={cn(styles.titleLine, styles.titleLime, styles.titleRotator)}>
           {leaving !== null && !reduced ? (
             <span

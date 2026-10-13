@@ -251,7 +251,7 @@
   color: var(--color-lime);
 }
 
-/* Visual title (aria-hidden): shrink-wraps the white line, so hover = the text, not the band. */
+/* Visual title (aria-hidden): shrink-wraps the white line. */
 .titleVisual {
   display: inline-flex;
   flex-direction: column;
@@ -287,16 +287,16 @@
 }
 
 /*
- * Word swap, 600 ms in total: the old word leaves up with fade + blur (0–420 ms), the new
- * one comes from below (180–600 ms), so the two never sit on top of each other fully opaque.
+ * Word swap, 450 ms in total (SWAP_MS): the old word leaves up with fade + blur (0–315 ms),
+ * the new one comes from below (135–450 ms), so the two never sit on top of each other fully opaque.
  */
 @media (prefers-reduced-motion: no-preference) {
   .titleWordOut {
-    animation: title-word-out 420ms cubic-bezier(0.37, 0, 0.63, 1) both;
+    animation: title-word-out 315ms cubic-bezier(0.37, 0, 0.63, 1) both;
   }
 
   .titleWordIn {
-    animation: title-word-in 420ms cubic-bezier(0.22, 0.8, 0.3, 1) 180ms both;
+    animation: title-word-in 315ms cubic-bezier(0.22, 0.8, 0.3, 1) 135ms both;
   }
 }
 

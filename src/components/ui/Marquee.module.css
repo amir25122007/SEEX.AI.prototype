@@ -20,10 +20,7 @@
     animation-name: marquee-right;
   }
 
-  .track:hover,
-  .track:focus-within {
-    animation-play-state: paused;
-  }
+  /* Hover / focus pause: MarqueePause.tsx (Web Animations API, not animation-play-state). */
 }
 
 @keyframes marquee-left {

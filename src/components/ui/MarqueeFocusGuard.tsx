@@ -10,7 +10,7 @@ type MarqueeFocusGuardProps = {
 };
 
 /**
- * Keyboard focus inside a marquee track: the row is already paused (`:focus-within`);
+ * Keyboard focus inside a marquee track: the row is already paused (MarqueePause);
  * when the focused card is outside the visible area, the track is shifted (CSS `translate`)
  * so the card lands inside it. Only `:focus-visible` focus (keyboard) reacts — mouse clicks keep
  * the current behaviour. Renders an empty marker; the track is its parent element.
