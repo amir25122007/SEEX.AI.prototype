@@ -39,27 +39,20 @@ Desktop landing page for SeexAI.
 SF Pro files are **never** added to the repo or served (Apple licence): Apple devices use the
 installed system font.
 
-### Adding Druk and Neuropol
+### Druk and Neuropol
 
-The licensed files are not in the repository. To enable them:
+The licensed WOFF2 files live in `public/fonts/` (`DrukTextWideCyr-Medium.woff2`,
+`Neuropol-Regular.woff2`). The `.otf` originals are kept outside git in `design-refs/fonts/`
+and must never be put into `public/`.
 
-1. Get the licensed fonts and convert them to WOFF2 if needed (outside the project, e.g.
-   `pip install fonttools brotli` in a temp venv, then
-   `fonttools ttLib.woff2 compress -o Neuropol-Regular.woff2 Neuropol.otf`).
-2. Put them into `public/fonts/` with exactly these names:
+To replace a font: convert it outside the project (e.g. `pip install fonttools brotli` in a temp
+venv, then `fonttools ttLib.woff2 compress -o Neuropol-Regular.woff2 Neuropol-Regular.otf`), drop
+it into `public/fonts/` under the same name and rebuild. `src/lib/brandFonts.ts` checks the files
+at build time and emits `@font-face` (`font-display: swap`) plus a `<link rel="preload">` for each
+one; a missing file is simply skipped (fallback stack, no 404).
 
-   ```
-   public/fonts/DrukTextWideCyr-Medium.woff2
-   public/fonts/Neuropol-Regular.woff2
-   ```
-
-3. Rebuild (`pnpm build`). `src/lib/brandFonts.ts` checks the files at build time and only then
-   emits `@font-face` (`font-display: swap`) and `<link rel="preload">` for each one. Without the
-   files nothing is requested (no 404s) and the fallback stack is used. No component changes
-   are needed.
-
-After adding them, compare the sections with `design-refs/final/` — some positions were tuned
-for the fallback fonts (see `docs/PROJECT_CONTEXT.md`).
+Positions of the Druk / Neuropol text are calibrated against `design-refs/final/` with the real
+fonts (report 15).
 
 ## Structure
 

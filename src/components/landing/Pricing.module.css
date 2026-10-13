@@ -26,6 +26,8 @@
   top: 0;
   left: 280px;
   width: max-content;
+  /* Druk renders ~1px higher in Chrome than in Figma (measured against final refs). */
+  --druk-dy: 1px;
 }
 
 /* SF Pro Text 22/30 → Inter; first baseline at page 5828.76. */
@@ -152,6 +154,8 @@
   line-height: 30.16px;
   text-transform: uppercase;
   color: var(--plan-strong);
+  /* Druk renders ~1px higher in Chrome than in Figma (measured against final refs). */
+  translate: 0 1px;
 }
 
 /* 16 / 400. */

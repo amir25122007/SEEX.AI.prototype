@@ -50,6 +50,8 @@
   left: calc(50% - 720px + 262.75px);
   width: max-content;
   pointer-events: auto;
+  /* Druk renders ~2px higher in Chrome than in Figma (measured against final refs). */
+  --druk-dy: 2px;
 }
 
 /* SF Pro Text 22/30 → Inter, 2 lines; first baseline at frame y 580.05. */
@@ -118,6 +120,8 @@
   letter-spacing: -0.26px;
   text-transform: uppercase;
   color: var(--color-white);
+  /* Druk renders ~1px higher in Chrome than in Figma (measured against final refs). */
+  translate: 0 1px;
 }
 
 /* SF Pro Text 18/26 → Inter; wraps inside the 407.5px column (right edge = container 1360). */

@@ -79,6 +79,8 @@
   top: 38.99px;
   left: 80px;
   width: max-content;
+  /* Druk renders ~1.75px higher in Chrome than in Figma (measured against final refs). */
+  --druk-dy: 1.75px;
 }
 
 /* SF Pro Text 22/30 → Inter, 3 lines; first baseline at page 7957.43. */

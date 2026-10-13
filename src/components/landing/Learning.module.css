@@ -207,19 +207,21 @@
   inset: 0;
 }
 
-/* Druk 40/45, white; cap top of line 1 at y 191.4 → line box at y 181.4. */
+/* Druk 41/45 (glyph advances measured against the ref; 40 was fitted to the fallback), white; cap top of line 1 at y 191.4 → line box at y 181.4. */
 .title {
   position: absolute;
   top: 181.4px;
   left: 80px;
   margin: 0;
   font-family: var(--font-druk);
-  font-size: 40px;
+  font-size: 41px;
   font-weight: 500;
   line-height: 45px;
   text-transform: uppercase;
   white-space: nowrap;
   color: var(--color-white);
+  /* Druk renders ~1.5px higher in Chrome than in Figma (measured against final refs). */
+  translate: 0 1.5px;
 }
 
 /* SF Pro Text 22/30 → Inter, 3 lines; first baseline at frame y 355.99. */
@@ -466,8 +468,12 @@
   font-size: 20px;
   font-weight: 500;
   line-height: 24px;
+  /* −0.2px: glyph advances measured against the ref (14 gaps, −3px). */
+  letter-spacing: -0.01em;
   text-transform: uppercase;
   white-space: nowrap;
+  /* Druk renders ~1.25px higher in Chrome than in Figma (measured against final refs). */
+  translate: 0 1.25px;
 }
 
 /* SF Pro Text 18/24 → Inter; first baseline at 66.49. */

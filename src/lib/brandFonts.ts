@@ -2,10 +2,9 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 
 /**
- * Licensed brand fonts. They are not in the repo yet: drop the files into /public/fonts
- * with exactly these names and rebuild — every `font-druk` / `font-neuropol` element picks
- * them up. Until then no @font-face is emitted, so the browser does not request missing
- * files (no 404s) and the fallback stack is used.
+ * Licensed brand fonts in /public/fonts (WOFF2 only; the .otf originals stay in
+ * design-refs/fonts, outside git). A missing file emits no @font-face, so the browser does
+ * not request it (no 404s) and the fallback stack is used.
  */
 const BRAND_FONTS = [
   { family: "Druk Text Wide Cyr", file: "DrukTextWideCyr-Medium.woff2", weight: 500 },

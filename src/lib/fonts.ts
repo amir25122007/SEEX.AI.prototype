@@ -4,8 +4,8 @@ import { Archivo, Inter, Unbounded } from "next/font/google";
  * Google fonts used by the Figma design. Each exposes a CSS variable that
  * globals.css maps onto a Tailwind font token (font-sans, font-archivo, …).
  *
- * Druk Text Wide Cyr and Neuropol are licensed local fonts declared with
- * @font-face in globals.css (expected in /public/fonts).
+ * Druk Text Wide Cyr and Neuropol are licensed local fonts in /public/fonts; their
+ * @font-face and preload come from src/lib/brandFonts.ts.
  */
 
 /** Logo wordmark and the large SEEX / SeexAI watermarks. */

@@ -38,6 +38,8 @@
   top: 0;
   left: 340px;
   width: max-content;
+  /* Druk renders ~1px higher in Chrome than in Figma (measured against final refs). */
+  --druk-dy: 1px;
 }
 
 /* SF Pro Text 22/30 → Inter; first baseline at page 2128.34. */
@@ -301,6 +303,8 @@
   line-height: 22px;
   text-transform: uppercase;
   color: var(--color-white);
+  /* Druk renders ~1px higher in Chrome than in Figma (measured against final refs). */
+  translate: 0 1px;
 }
 
 /* 15 / 20.28, white 82 %; first baseline 436.2; the text column ends at the arrow button (x 341.67). */

@@ -37,7 +37,8 @@ const tones: Record<HeadingTone, string> = {
 
 /**
  * Two-tone stacked heading (white + orange lines) with an optional
- * IBM Plex Mono description, as used by every v3 section header.
+ * description, as used by every section header. Sections set `--druk-dy` to nudge the
+ * Druk lines down to the Figma position without moving the description below.
  */
 export function SectionHeading({
   lines,
@@ -50,7 +51,10 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div className={cn("flex flex-col gap-[10px]", className)}>
-      <Tag id={id} className={cn("font-druk font-medium uppercase", sizes[size])}>
+      <Tag
+        id={id}
+        className={cn("font-druk font-medium uppercase [translate:0_var(--druk-dy,0px)]", sizes[size])}
+      >
         {lines.map((line, index) => (
           <span key={index} className={cn("block", tones[line.tone ?? "white"], line.className)}>
             {line.text}

@@ -21,8 +21,12 @@ import styles from "./Hero.module.css";
 
 /** Duration of the word swap; matches the keyframes in Hero.module.css. */
 const SWAP_MS = 600;
-/** A rotating word may be at most this much wider than the white second line. */
-const MAX_WIDTH_RATIO = 1.1;
+/**
+ * A rotating word may be at most this share of the white second line. In Neuropol the white
+ * line is 1027px of ink; 0.95 keeps the lime word ~20px clear of the near card on the right
+ * (Figma x 1244, y 262–502) at the peak of its float.
+ */
+const MAX_WIDTH_RATIO = 0.95;
 /** …and never wider than the content column. */
 const MAX_WIDTH_PX = 1280;
 

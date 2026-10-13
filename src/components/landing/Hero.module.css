@@ -227,7 +227,6 @@
   margin: 0;
   font-family: var(--font-neuropol);
   font-weight: 400;
-  letter-spacing: 0.1em;
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
@@ -238,6 +237,10 @@
 .titleLine {
   display: block;
   line-height: 1.2;
+  /* 10 % of the line's own 75px (set here, not on the 16px h1, where em would resolve to 1.6px). */
+  letter-spacing: 0.1em;
+  /* Balances the trailing letter-spacing so the centred lines sit on the Figma axis. */
+  text-indent: 0.1em;
   /* Outside stroke of the same colour = 4px centred stroke (inner half hidden by the fill). */
   -webkit-text-stroke: 4px currentColor;
 }

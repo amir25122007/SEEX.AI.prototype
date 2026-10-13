@@ -1,5 +1,5 @@
 /**
- * Rotating Hero title: the lime first line cycles through the scenarios every 12 s,
+ * Rotating Hero title: the lime first line cycles through the scenarios every 4 s,
  * the white second line stays. `chip` is the matching quick-prompt chip under the
  * composer (highlighted while its word is shown). The first entry is the SSR frame
  * and the only one shown with reduced motion.
@@ -23,4 +23,4 @@ export const heroTitleSecondLine = "ЗА ПАРУ МИНУТ";
 /** Static h1 text for screen readers and search engines (the animated part is aria-hidden). */
 export const heroTitleAccessible = "Презентация за пару минут";
 
-export const HERO_TITLE_INTERVAL_MS = 12_000;
+export const HERO_TITLE_INTERVAL_MS = 4_000;

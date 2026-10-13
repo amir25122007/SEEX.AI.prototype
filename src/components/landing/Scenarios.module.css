@@ -35,6 +35,8 @@
   left: calc(50% - 449px);
   width: 898px;
   pointer-events: auto;
+  /* Druk renders ~1px higher in Chrome than in Figma (measured against final refs). */
+  --druk-dy: 1px;
 }
 
 /* Inter 22/30, centred in the 898px block (baseline 23px below the line top). */
@@ -232,6 +234,8 @@
   text-transform: uppercase;
   white-space: pre-line;
   color: var(--color-lime);
+  /* Druk renders ~1px higher in Chrome than in Figma (measured against final refs). */
+  translate: 0 1px;
 }
 
 .metaRow {
