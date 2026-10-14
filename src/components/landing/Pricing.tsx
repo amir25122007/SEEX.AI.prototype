@@ -29,6 +29,9 @@ function CheckIcon() {
 function Plan({ plan }: { plan: PricingPlan }) {
   return (
     <li className={cn(styles.plan, plan.tone === "lime" ? styles.planLime : styles.planOrange)}>
+      {/* Pre-rendered blurred shadows (PNG): live blur box-shadows stalled Safari while scaling. */}
+      <span aria-hidden="true" className={cn(styles.layer, styles.shadow)} />
+      <span aria-hidden="true" className={cn(styles.layer, styles.glow)} />
       {plan.popular ? <span className={styles.popular}>{plan.popular}</span> : null}
       <span className={styles.discount}>
         <span className="sr-only">Скидка </span>
